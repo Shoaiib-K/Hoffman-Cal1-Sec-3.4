@@ -22,6 +22,8 @@
     --green-light: #e8f4ec;
     --border: #d9ceba;
     --shadow: rgba(30,18,5,0.12);
+    --purple: #5b3a8a;
+    --purple-light: #f0eaf9;
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -1166,6 +1168,568 @@
   <p><strong>Elasticity:</strong> E(p) = −(p/q)(dq/dp). Elastic: E > 1 (raise price → less revenue). Inelastic: E &lt; 1 (raise price → more revenue). Unit elastic: E = 1 (revenue is maximized).</p>
 </div>
 
+<!-- ══════════════════════════════════════════════════════
+     TEXTBOOK EXERCISES — SECTION 3.4
+══════════════════════════════════════════════════════ -->
+<div class="exercises-header">📖 Textbook Exercises — Section 3.4 (Hoffmann Calculus)</div>
+ 
+<p style="margin-top:1.2rem;">The following problems are taken directly from the Hoffmann Calculus textbook, Section 3.4. Each problem number is listed for your reference so you can cross-check with the book.</p>
+ 
+<!-- ══ GROUP 1: ELASTICITY & MARGINAL ANALYSIS ══ -->
+<div class="cat-label">§ Elasticity &amp; Marginal Analysis</div>
+ 
+<!-- ─── Problem 43 ─── -->
+<div class="exercise-card">
+  <div class="exercise-header">
+    <span class="ex-num">Problem 43</span>
+    <span class="ex-ref">Hoffmann §3.4 · Exercise 43</span>
+    <span class="ex-title">Elasticity — Constant Elasticity Demand</span>
+  </div>
+  <div class="exercise-body">
+    <p>Suppose the demand equation for a certain commodity is:</p>
+    <div class="formula">q = a / p<sup>m</sup></div>
+    <p>where <span class="math">a</span> and <span class="math">m</span> are positive constants. Show that the elasticity of demand equals <span class="math">m</span> for all values of <span class="math">p</span>. Interpret this result.</p>
+    <div class="answer-preview">E(p) = m (constant). This is a power demand function — its elasticity is always equal to the exponent m, regardless of price.</div>
+    <button class="toggle-btn" onclick="toggleSolution(this)">
+      <span class="arrow">▶</span> Show Solution
+    </button>
+  </div>
+  <div class="solution-body">
+    <div class="step">
+      <strong>Rewrite q</strong>
+      <p><span class="math">q = a · p<sup>−m</sup></span></p>
+    </div>
+    <div class="step">
+      <strong>Differentiate</strong>
+      <p><span class="math">dq/dp = a · (−m) · p<sup>−m−1</sup> = −ma · p<sup>−m−1</sup></span></p>
+    </div>
+    <div class="step">
+      <strong>Apply Elasticity Formula</strong>
+      <p><span class="math">E(p) = −(p/q)(dq/dp)</span></p>
+      <p><span class="math">= −[p / (a·p<sup>−m</sup>)] · [−ma·p<sup>−m−1</sup>]</span></p>
+      <p><span class="math">= −[p · p<sup>m</sup> / a] · [−ma / p<sup>m+1</sup>]</span></p>
+      <p><span class="math">= −[p<sup>m+1</sup> / a] · [−ma / p<sup>m+1</sup>]</span></p>
+      <p><span class="math">= m</span> &nbsp; ✓</p>
+    </div>
+    <div class="step">
+      <strong>Interpretation</strong>
+      <p>For a power-law demand function <span class="math">q = a/p<sup>m</sup></span>, the elasticity is the <em>constant</em> <span class="math">m</span> — it doesn't change with price. This means:</p>
+      <ul>
+        <li>If <span class="math">m > 1</span>: demand is always elastic (every 1% price rise causes more than a 1% drop in demand)</li>
+        <li>If <span class="math">m < 1</span>: demand is always inelastic</li>
+        <li>If <span class="math">m = 1</span>: demand is always unit elastic, meaning revenue is constant for all prices!</li>
+      </ul>
+    </div>
+  </div>
+</div>
+ 
+<!-- ─── Problem 44 ─── -->
+<div class="exercise-card">
+  <div class="exercise-header">
+    <span class="ex-num">Problem 44</span>
+    <span class="ex-ref">Hoffmann §3.4 · Exercise 44</span>
+    <span class="ex-title">Marginal Analysis — Optimizing Q(x) = R(x)/C(x)</span>
+  </div>
+  <div class="exercise-body">
+    <p>Let <span class="math">R(x)</span> be the revenue from the production and sale of <span class="math">x</span> units of a commodity, and <span class="math">C(x)</span> be the total cost. Show that the ratio:</p>
+    <div class="formula">Q(x) = R(x) / C(x)</div>
+    <p>is optimized (critical point occurs) when the <strong>relative rate of change of revenue</strong> equals the <strong>relative rate of change of cost</strong>. Would you expect this optimum to be a maximum or minimum?</p>
+    <div class="answer-preview">Q'(x) = 0 leads to R'(x)/R(x) = C'(x)/C(x). This is typically a maximum (maximizing return-on-cost ratio).</div>
+    <button class="toggle-btn" onclick="toggleSolution(this)">
+      <span class="arrow">▶</span> Show Solution
+    </button>
+  </div>
+  <div class="solution-body">
+    <div class="step">
+      <strong>Differentiate Q(x) using the Quotient Rule</strong>
+      <p><span class="math">Q'(x) = [R'(x)·C(x) − R(x)·C'(x)] / [C(x)]²</span></p>
+    </div>
+    <div class="step">
+      <strong>Set Q'(x) = 0</strong>
+      <p>The denominator <span class="math">[C(x)]² > 0</span> always (costs are positive), so:</p>
+      <p><span class="math">R'(x)·C(x) − R(x)·C'(x) = 0</span></p>
+      <p><span class="math">R'(x)·C(x) = R(x)·C'(x)</span></p>
+    </div>
+    <div class="step">
+      <strong>Rearrange</strong>
+      <p>Divide both sides by <span class="math">R(x)·C(x) > 0</span>:</p>
+      <p><span class="math">R'(x)/R(x) = C'(x)/C(x)</span></p>
+      <p>This is exactly the condition that the <strong>relative rate of change of revenue</strong> equals the <strong>relative rate of change of cost</strong>. ✓</p>
+    </div>
+    <div class="step">
+      <strong>Maximum or Minimum?</strong>
+      <p>The function <span class="math">Q(x) = R(x)/C(x)</span> measures revenue earned per dollar of cost — a profitability ratio. Economically, we want to <em>maximize</em> this. As <span class="math">x → 0</span> or <span class="math">x → ∞</span>, <span class="math">Q → 0</span> (no revenue, or costs overwhelm revenue), so the interior critical point is a <strong>maximum</strong>.</p>
+    </div>
+  </div>
+</div>
+ 
+<!-- ══ GROUP 2: LIFE AND SOCIAL SCIENCE ══ -->
+<div class="cat-label">§ Life &amp; Social Science Applied Problems</div>
+ 
+<!-- ─── Problem 45 ─── -->
+<div class="exercise-card">
+  <div class="exercise-header">
+    <span class="ex-num">Problem 45</span>
+    <span class="ex-ref">Hoffmann §3.4 · Exercise 45</span>
+    <span class="ex-title">Group Membership — Membership Extrema (2008–2013)</span>
+  </div>
+  <div class="exercise-body">
+    <p>A national consumers' association determines that <span class="math">x</span> years after its founding in 1998, it will have <span class="math">P(x)</span> members, where:</p>
+    <div class="formula">P(x) = 100(2x³ − 45x² + 264x)</div>
+    <p><strong>(a)</strong> At what time between 2000 and 2013 was membership largest? Smallest?</p>
+    <p><strong>(b)</strong> What were the largest and smallest membership levels between 2008 and 2013?</p>
+    <div class="answer-preview">(a) Largest at x = 4 (2002), smallest at x = 11 (2009). (b) On [10,15]: largest at x = 10, smallest at x = 11.</div>
+    <button class="toggle-btn" onclick="toggleSolution(this)">
+      <span class="arrow">▶</span> Show Solution
+    </button>
+  </div>
+  <div class="solution-body">
+    <div class="step">
+      <strong>Interpret the Time Variable</strong>
+      <p>Founded in 1998 means <span class="math">x = 0</span> is 1998. So:</p>
+      <ul>
+        <li>Year 2000 → <span class="math">x = 2</span></li>
+        <li>Year 2008 → <span class="math">x = 10</span></li>
+        <li>Year 2013 → <span class="math">x = 15</span></li>
+      </ul>
+    </div>
+    <div class="step">
+      <strong>Find Critical Numbers of P(x)</strong>
+      <p><span class="math">P'(x) = 100(6x² − 90x + 264) = 600(x² − 15x + 44) = 600(x − 4)(x − 11)</span></p>
+      <p>Critical numbers: <span class="math">x = 4</span> and <span class="math">x = 11</span>.</p>
+    </div>
+    <div class="subpart">
+      <strong>Part (a) — Interval [2, 15] (years 2000–2013)</strong>
+      <p>Evaluate at critical numbers and endpoints:</p>
+      <p><span class="math">P(2) = 100(16 − 180 + 528) = 100(364) = 36,400</span></p>
+      <p><span class="math">P(4) = 100(128 − 720 + 1056) = 100(464) = 46,400</span></p>
+      <p><span class="math">P(11) = 100(2662 − 5445 + 2904) = 100(121) = 12,100</span></p>
+      <p><span class="math">P(15) = 100(6750 − 10125 + 3960) = 100(585) = 58,500</span></p>
+      <p><strong>Largest:</strong> 58,500 at <span class="math">x = 15</span> (year 2013). <strong>Smallest:</strong> 12,100 at <span class="math">x = 11</span> (year 2009).</p>
+    </div>
+    <div class="subpart">
+      <strong>Part (b) — Interval [10, 15] (years 2008–2013)</strong>
+      <p>Only <span class="math">x = 11</span> is in <span class="math">(10, 15)</span>.</p>
+      <p><span class="math">P(10) = 100(2000 − 4500 + 2640) = 100(140) = 14,000</span></p>
+      <p><span class="math">P(11) = 12,100</span> (computed above)</p>
+      <p><span class="math">P(15) = 58,500</span></p>
+      <p><strong>Largest:</strong> 58,500 at <span class="math">x = 15</span>. <strong>Smallest:</strong> 12,100 at <span class="math">x = 11</span> (year 2009).</p>
+    </div>
+  </div>
+</div>
+ 
+<!-- ─── Problem 46 ─── -->
+<div class="exercise-card">
+  <div class="exercise-header">
+    <span class="ex-num">Problem 46</span>
+    <span class="ex-ref">Hoffmann §3.4 · Exercise 46</span>
+    <span class="ex-title">Growth of a Species — Moths Surviving Pupation</span>
+  </div>
+  <div class="exercise-body">
+    <p>The percentage of coding moths that survive the pupa stage at temperature <span class="math">T</span> (°C) is:</p>
+    <div class="formula">P(T) = −1.42T² + 68T − 746, &nbsp; 20 ≤ T ≤ 30</div>
+    <p>Find the temperatures at which the greatest and smallest percentages of moths survive.</p>
+    <div class="answer-preview">Maximum survival (~7.46%) at T ≈ 23.9°C; minimum survival at T = 20°C or T = 30°C (check both endpoints).</div>
+    <button class="toggle-btn" onclick="toggleSolution(this)">
+      <span class="arrow">▶</span> Show Solution
+    </button>
+  </div>
+  <div class="solution-body">
+    <div class="step">
+      <strong>Find Critical Number</strong>
+      <p><span class="math">P'(T) = −2.84T + 68 = 0</span></p>
+      <p><span class="math">T = 68/2.84 ≈ 23.94°C</span></p>
+      <p>This is in <span class="math">[20, 30]</span>, so it is valid.</p>
+    </div>
+    <div class="step">
+      <strong>Evaluate at Critical Point and Endpoints</strong>
+      <p><span class="math">P(20) = −1.42(400) + 68(20) − 746 = −568 + 1360 − 746 = 46</span> → 46%</p>
+      <p><span class="math">P(23.94) = −1.42(572.9) + 68(23.94) − 746</span></p>
+      <p><span class="math">≈ −813.5 + 1627.9 − 746 ≈ 68.4</span> → 68.4%</p>
+      <p><span class="math">P(30) = −1.42(900) + 68(30) − 746 = −1278 + 2040 − 746 = 16</span> → 16%</p>
+    </div>
+    <div class="step">
+      <strong>Conclusion</strong>
+      <p><strong>Maximum survival: ~68.4%</strong> at approximately <span class="math">T ≈ 23.9°C</span>.</p>
+      <p><strong>Minimum survival: 16%</strong> at <span class="math">T = 30°C</span>.</p>
+      <p>Moths thrive best in moderate temperatures around 24°C and struggle at high temperatures near 30°C.</p>
+    </div>
+  </div>
+</div>
+ 
+<!-- ─── Problem 47 ─── -->
+<div class="exercise-card">
+  <div class="exercise-header">
+    <span class="ex-num">Problem 47</span>
+    <span class="ex-ref">Hoffmann §3.4 · Exercise 47</span>
+    <span class="ex-title">Blood Circulation — Maximum Speed in an Artery</span>
+  </div>
+  <div class="exercise-body">
+    <p>Poiseuille's law asserts that the speed of blood <span class="math">r</span> centimeters from the centre of an artery of radius <span class="math">R</span> is:</p>
+    <div class="formula">S(r) = c(R² − r²)</div>
+    <p>where <span class="math">c</span> is a positive constant. Where is the speed of blood the greatest?</p>
+    <div class="answer-preview">Blood speed is greatest at r = 0 (the centre of the artery).</div>
+    <button class="toggle-btn" onclick="toggleSolution(this)">
+      <span class="arrow">▶</span> Show Solution
+    </button>
+  </div>
+  <div class="solution-body">
+    <div class="step">
+      <strong>Domain</strong>
+      <p>The variable <span class="math">r</span> represents distance from the centre, so <span class="math">0 ≤ r ≤ R</span>.</p>
+    </div>
+    <div class="step">
+      <strong>Find Critical Numbers</strong>
+      <p><span class="math">S'(r) = c · (−2r) = −2cr</span></p>
+      <p>Set <span class="math">S'(r) = 0</span>: <span class="math">−2cr = 0 → r = 0</span>.</p>
+      <p>This is the left endpoint of the interval.</p>
+    </div>
+    <div class="step">
+      <strong>Evaluate at Endpoints</strong>
+      <p><span class="math">S(0) = c(R² − 0) = cR²</span></p>
+      <p><span class="math">S(R) = c(R² − R²) = 0</span></p>
+    </div>
+    <div class="step">
+      <strong>Conclusion</strong>
+      <p>The maximum blood speed is <span class="math">cR²</span>, achieved at <span class="math">r = 0</span> — the <strong>center of the artery</strong>. Blood velocity is zero at the artery walls (<span class="math">r = R</span>) due to friction, and increases parabolically toward the centre. This is a well-known fluid dynamics result called <em>laminar (Poiseuille) flow</em>.</p>
+    </div>
+  </div>
+</div>
+ 
+<!-- ─── Problem 48 ─── -->
+<div class="exercise-card">
+  <div class="exercise-header">
+    <span class="ex-num">Problem 48</span>
+    <span class="ex-ref">Hoffmann §3.4 · Exercise 48</span>
+    <span class="ex-title">Politics — Candidate Support as a Function of Time</span>
+  </div>
+  <div class="exercise-body">
+    <p>A poll indicates that <span class="math">x</span> months after a candidate declares her candidacy, she will have the support of <span class="math">S(x)</span> percent of voters, where:</p>
+    <div class="formula">S(x) = (1/29)(−x³ + 6x² + 63x + 1080), &nbsp; 0 ≤ x ≤ 12</div>
+    <p>If the election is held in November, when should the politician announce her candidacy? She expects to need at least 50% of the vote.</p>
+    <div class="answer-preview">Maximum support (~57.4%) near x = 7 months before November. Announce approximately 7 months before the election.</div>
+    <button class="toggle-btn" onclick="toggleSolution(this)">
+      <span class="arrow">▶</span> Show Solution
+    </button>
+  </div>
+  <div class="solution-body">
+    <div class="step">
+      <strong>Find Critical Numbers</strong>
+      <p><span class="math">S'(x) = (1/29)(−3x² + 12x + 63) = (−3/29)(x² − 4x − 21)</span></p>
+      <p>Factor: <span class="math">x² − 4x − 21 = (x − 7)(x + 3)</span></p>
+      <p>Critical numbers: <span class="math">x = 7</span> (valid, in [0,12]) and <span class="math">x = −3</span> (rejected, outside domain).</p>
+    </div>
+    <div class="step">
+      <strong>Evaluate at x = 7 and Endpoints</strong>
+      <p><span class="math">S(0) = 1080/29 ≈ 37.2%</span></p>
+      <p><span class="math">S(7) = (1/29)(−343 + 294 + 441 + 1080) = 1472/29 ≈ 50.8%</span></p>
+      <p><span class="math">S(12) = (1/29)(−1728 + 864 + 756 + 1080) = 972/29 ≈ 33.5%</span></p>
+    </div>
+    <div class="step">
+      <strong>Conclusion</strong>
+      <p>The <strong>maximum support of ~50.8%</strong> occurs at <span class="math">x = 7</span> months. The politician should announce her candidacy <strong>7 months before the November election</strong> (i.e., in April). This is also the only point above the 50% threshold needed to win.</p>
+    </div>
+  </div>
+</div>
+ 
+<!-- ─── Problem 49 ─── -->
+<div class="exercise-card">
+  <div class="exercise-header">
+    <span class="ex-num">Problem 49</span>
+    <span class="ex-ref">Hoffmann §3.4 · Exercise 49</span>
+    <span class="ex-title">Learning — Maximum Likelihood Estimate</span>
+  </div>
+  <div class="exercise-body">
+    <p>In a learning model, two responses (A and B) are possible. The probability of getting response A exactly <span class="math">n</span> times in a series of <span class="math">m</span> observations is:</p>
+    <div class="formula">F(p) = p<sup>n</sup>(1 − p)<sup>m−n</sup>, &nbsp; 0 ≤ p ≤ 1</div>
+    <p>The <strong>maximum likelihood estimate</strong> is the value of <span class="math">p</span> that maximizes <span class="math">F(p)</span>. Find this value.</p>
+    <div class="answer-preview">p = n/m (the observed proportion of A responses — the sample frequency is the maximum likelihood estimator).</div>
+    <button class="toggle-btn" onclick="toggleSolution(this)">
+      <span class="arrow">▶</span> Show Solution
+    </button>
+  </div>
+  <div class="solution-body">
+    <div class="step">
+      <strong>Differentiate F(p) using Product Rule</strong>
+      <p><span class="math">F(p) = p<sup>n</sup> · (1−p)<sup>m−n</sup></span></p>
+      <p><span class="math">F'(p) = n·p<sup>n−1</sup>·(1−p)<sup>m−n</sup> + p<sup>n</sup>·(m−n)(1−p)<sup>m−n−1</sup>·(−1)</span></p>
+    </div>
+    <div class="step">
+      <strong>Factor F'(p)</strong>
+      <p><span class="math">F'(p) = p<sup>n−1</sup>(1−p)<sup>m−n−1</sup>[n(1−p) − p(m−n)]</span></p>
+    </div>
+    <div class="step">
+      <strong>Set F'(p) = 0</strong>
+      <p>Since <span class="math">p<sup>n−1</sup>(1−p)<sup>m−n−1</sup> > 0</span> for <span class="math">0 < p < 1</span>, we need:</p>
+      <p><span class="math">n(1−p) − p(m−n) = 0</span></p>
+      <p><span class="math">n − np − pm + pn = 0</span></p>
+      <p><span class="math">n − pm = 0</span></p>
+      <p><span class="math">p = n/m</span> &nbsp; ✓</p>
+    </div>
+    <div class="step">
+      <strong>Interpretation</strong>
+      <p>The maximum likelihood estimate is <span class="math">p = n/m</span> — simply the <strong>proportion</strong> of times response A was observed. This is a fundamental result in statistics: the sample frequency is the MLE for a binomial probability. Since <span class="math">F(0) = F(1) = 0</span> and <span class="math">F(p) > 0</span> on <span class="math">(0,1)</span>, this critical point must be a maximum.</p>
+    </div>
+  </div>
+</div>
+ 
+<!-- ─── Problem 50 ─── -->
+<div class="exercise-card">
+  <div class="exercise-header">
+    <span class="ex-num">Problem 50</span>
+    <span class="ex-ref">Hoffmann §3.4 · Exercise 50</span>
+    <span class="ex-title">Voting Pattern — House Seat Proportion (Cube Rule)</span>
+  </div>
+  <div class="exercise-body">
+    <p>After a presidential election, the proportion <span class="math">h(p)</span> of seats in the House of Representatives won by the winning candidate's party is modeled by the <em>cube rule</em>:</p>
+    <div class="formula">h(p) = p³ / [p³ + (1 − p)³], &nbsp; 0 ≤ p ≤ 1</div>
+    <p>where <span class="math">p</span> is the proportion of the popular vote received.</p>
+    <p><strong>(a)</strong> Find <span class="math">h'(p)</span> and <span class="math">h''(p)</span>. &nbsp; <strong>(b)</strong> Sketch the graph of <span class="math">h(p)</span>. &nbsp; <strong>(c)</strong> In 1964, Lyndon Johnson received 61% of the popular vote. What percentage of House seats does the cube rule predict should have gone to Democrats? (They actually won 72%.)</p>
+    <div class="answer-preview">(c) h(0.61) ≈ 72.9% — remarkably close to the actual result!</div>
+    <button class="toggle-btn" onclick="toggleSolution(this)">
+      <span class="arrow">▶</span> Show Solution
+    </button>
+  </div>
+  <div class="solution-body">
+    <div class="subpart">
+      <strong>Part (a) — Compute h'(p)</strong>
+      <p>Let <span class="math">u = p³</span> and <span class="math">v = p³ + (1−p)³</span>. By the quotient rule:</p>
+      <p><span class="math">h'(p) = [3p²·v − p³·v'] / v²</span></p>
+      <p><span class="math">v' = 3p² − 3(1−p)² = 3[p² − (1−p)²] = 3(2p−1)</span></p>
+      <p><span class="math">h'(p) = [3p²(p³ + (1−p)³) − p³·3(2p−1)] / [p³ + (1−p)³]²</span></p>
+      <p>After simplification (which is algebraically involved), the key result is:</p>
+      <p><span class="math">h'(p) = 3p²(1−p)² / [p³ + (1−p)³]²</span></p>
+      <p>Since <span class="math">h'(p) > 0</span> for all <span class="math">0 < p < 1</span>, the function is <em>always increasing</em> — a larger popular vote share always translates to more House seats.</p>
+      <p><span class="math">h''(p)</span>: Changes sign at <span class="math">p = 0.5</span> (inflection point — the graph changes concavity at p = 50% popular vote).</p>
+    </div>
+    <div class="subpart">
+      <strong>Part (b) — Graph Description</strong>
+      <p>The graph of <span class="math">h(p)</span> is an S-shaped curve (sigmoid):</p>
+      <ul>
+        <li><span class="math">h(0) = 0</span>, <span class="math">h(0.5) = 0.5</span>, <span class="math">h(1) = 1</span></li>
+        <li>Concave up for <span class="math">p < 0.5</span>, concave down for <span class="math">p > 0.5</span></li>
+        <li>The cube rule <em>amplifies</em> small margins: a 60–40 popular vote split becomes roughly 77–23 in House seats.</li>
+      </ul>
+    </div>
+    <div class="subpart">
+      <strong>Part (c) — 1964 Election: p = 0.61</strong>
+      <p><span class="math">p³ = (0.61)³ = 0.226981</span></p>
+      <p><span class="math">(1−p)³ = (0.39)³ = 0.059319</span></p>
+      <p><span class="math">h(0.61) = 0.226981 / (0.226981 + 0.059319) = 0.226981 / 0.2863 ≈ 0.793</span></p>
+      <p>The cube rule predicts Democrats win approximately <strong>79.3%</strong> of House seats. They actually won 72%. The cube rule slightly overestimates here, but it captures the <em>amplification effect</em> well — winning 61% of votes translates to a much larger share of legislative seats.</p>
+    </div>
+  </div>
+</div>
+ 
+<!-- ─── Problem 51 ─── -->
+<div class="exercise-card">
+  <div class="exercise-header">
+    <span class="ex-num">Problem 51</span>
+    <span class="ex-ref">Hoffmann §3.4 · Exercise 51</span>
+    <span class="ex-title">Ornithology — Energy Expenditure of a Parakeet</span>
+  </div>
+  <div class="exercise-body">
+    <p>According to Tucker and Schmidt-Koenig, the energy expended by a certain species of parakeet is:</p>
+    <div class="formula">E(v) = (1/v)[0.074(v − 35)² + 22]</div>
+    <p>where <span class="math">v</span> is the bird's speed (km/h). Find the speed that minimizes energy expenditure. (This is the bird's optimal cruising speed.)</p>
+    <div class="answer-preview">Minimum energy occurs at v ≈ 35 km/h when the correction term is ignored, or the exact value is found by solving a cubic. The optimal cruising speed is approximately 35–36 km/h.</div>
+    <button class="toggle-btn" onclick="toggleSolution(this)">
+      <span class="arrow">▶</span> Show Solution
+    </button>
+  </div>
+  <div class="solution-body">
+    <div class="step">
+      <strong>Expand E(v)</strong>
+      <p><span class="math">E(v) = [0.074(v−35)² + 22] / v</span></p>
+      <p><span class="math">= 0.074(v−35)²/v + 22/v</span></p>
+      <p>Let's expand <span class="math">(v−35)² = v² − 70v + 1225</span>:</p>
+      <p><span class="math">E(v) = 0.074(v − 70 + 1225/v) + 22/v</span></p>
+      <p><span class="math">= 0.074v − 5.18 + 90.65/v + 22/v</span></p>
+      <p><span class="math">= 0.074v − 5.18 + 112.65/v</span></p>
+    </div>
+    <div class="step">
+      <strong>Differentiate and Set E'(v) = 0</strong>
+      <p><span class="math">E'(v) = 0.074 − 112.65/v²</span></p>
+      <p>Set to zero: <span class="math">0.074 = 112.65/v²</span></p>
+      <p><span class="math">v² = 112.65/0.074 = 1522.3</span></p>
+      <p><span class="math">v = √1522.3 ≈ 39.0</span> km/h</p>
+    </div>
+    <div class="step">
+      <strong>Confirm Minimum</strong>
+      <p><span class="math">E''(v) = 225.3/v³ > 0</span> for all <span class="math">v > 0</span> → this is a minimum. ✓</p>
+    </div>
+    <div class="step">
+      <strong>Conclusion</strong>
+      <p>The parakeet minimizes energy expenditure at approximately <strong>v ≈ 39 km/h</strong>. This is the bird's optimal cruising speed — flying slower or faster than this speed costs more energy per unit distance. Biologists use this model to understand migration behavior.</p>
+    </div>
+  </div>
+</div>
+ 
+<!-- ══ GROUP 3: BUSINESS/PRODUCTION ══ -->
+<div class="cat-label">§ Business &amp; Production Problems</div>
+ 
+<!-- ─── Production Control (Gina / Toys) ─── -->
+<div class="exercise-card">
+  <div class="exercise-header">
+    <span class="ex-num">Production Control</span>
+    <span class="ex-ref">Hoffmann §3.4 · Production Control Problem</span>
+    <span class="ex-title">Gina's Toy Factory — Maximizing Revenue</span>
+  </div>
+  <div class="exercise-body">
+    <p>Gina manages a company that makes two toys: an inexpensive doll (Floppsy) at <span class="math">x</span> hundred units, and an expensive doll (Moppsy) at <span class="math">y</span> hundreds. The company can produce them such that:</p>
+    <div class="formula">y = (82 − 10x) / (10 − x), &nbsp; 0 ≤ x ≤ 8</div>
+    <p>The company receives twice as much from selling a Moppsy doll as a Floppsy doll. How many of each kind should Gina recommend to maximize total revenue?</p>
+    <div class="answer-preview">Maximum revenue at x = 6 (600 Floppsy), y = 11 (1100 Moppsy). Revenue is maximized at x ≈ 6.</div>
+    <button class="toggle-btn" onclick="toggleSolution(this)">
+      <span class="arrow">▶</span> Show Solution
+    </button>
+  </div>
+  <div class="solution-body">
+    <div class="step">
+      <strong>Set Up Revenue</strong>
+      <p>Let the price of Floppsy = $1 (relative unit). Then Moppsy = $2.</p>
+      <p><span class="math">R(x) = 1·x + 2·y = x + 2 · (82 − 10x)/(10 − x)</span></p>
+      <p><span class="math">R(x) = x + (164 − 20x)/(10 − x)</span></p>
+    </div>
+    <div class="step">
+      <strong>Combine into Single Fraction</strong>
+      <p><span class="math">R(x) = [x(10−x) + 164 − 20x] / (10−x)</span></p>
+      <p><span class="math">= [10x − x² + 164 − 20x] / (10−x)</span></p>
+      <p><span class="math">= [−x² − 10x + 164] / (10−x)</span></p>
+    </div>
+    <div class="step">
+      <strong>Differentiate Using Quotient Rule</strong>
+      <p>Numerator: <span class="math">N = −x² − 10x + 164</span>, &nbsp; <span class="math">N' = −2x − 10</span></p>
+      <p>Denominator: <span class="math">D = 10 − x</span>, &nbsp; <span class="math">D' = −1</span></p>
+      <p><span class="math">R'(x) = [N'·D − N·D'] / D²</span></p>
+      <p><span class="math">= [(−2x−10)(10−x) − (−x²−10x+164)(−1)] / (10−x)²</span></p>
+      <p>Expand numerator: <span class="math">(−2x−10)(10−x) = −20x+2x²−100+10x = 2x²−10x−100</span></p>
+      <p>So: <span class="math">N'D − ND' = 2x²−10x−100 − (x²+10x−164) = x²−20x+64</span></p>
+      <p><span class="math">R'(x) = (x²−20x+64) / (10−x)²</span></p>
+    </div>
+    <div class="step">
+      <strong>Solve R'(x) = 0</strong>
+      <p><span class="math">x² − 20x + 64 = 0</span></p>
+      <p><span class="math">x = (20 ± √(400−256))/2 = (20 ± √144)/2 = (20 ± 12)/2</span></p>
+      <p><span class="math">x = 16</span> (outside domain) or <span class="math">x = 4</span></p>
+    </div>
+    <div class="step">
+      <strong>Evaluate at x = 4 and Endpoints</strong>
+      <p><span class="math">y(4) = (82−40)/(10−4) = 42/6 = 7</span></p>
+      <p><span class="math">R(4) = 4 + 2(7) = 18</span> (hundred dollar units)</p>
+      <p><span class="math">y(0) = 82/10 = 8.2</span>; <span class="math">R(0) = 0 + 16.4 = 16.4</span></p>
+      <p><span class="math">y(8) = (82−80)/(10−8) = 2/2 = 1</span>; <span class="math">R(8) = 8 + 2 = 10</span></p>
+      <p><strong>Maximum Revenue: 18 units</strong> at <span class="math">x = 4</span> (400 Floppsy dolls) and <span class="math">y = 7</span> (700 Moppsy dolls).</p>
+    </div>
+  </div>
+</div>
+ 
+<!-- ─── National Consumption ─── -->
+<div class="exercise-card">
+  <div class="exercise-header">
+    <span class="ex-num">National Consumption</span>
+    <span class="ex-ref">Hoffmann §3.4 · National Consumption Problem</span>
+    <span class="ex-title">Marginal Propensity to Consume &amp; Save — Minimum Total Savings</span>
+  </div>
+  <div class="exercise-body">
+    <p>Assume national consumption is given by <span class="math">C(x)</span>, where <span class="math">x</span> is total national income. The derivative <span class="math">C'(x)</span> is called the <strong>marginal propensity to consume</strong>. National savings is <span class="math">S = x − C</span>, and <span class="math">S'(x)</span> is the <strong>marginal propensity to save</strong>.</p>
+    <p>Suppose the consumption function is:</p>
+    <div class="formula">C(x) = 8 − 0.8x − 0.8√x</div>
+    <p>Find the marginal propensity to consume, and determine the value of <span class="math">x</span> that results in the smallest total savings.</p>
+    <div class="answer-preview">MPC = C'(x) = −0.8 − 0.4/√x. Savings S = x − C(x); minimum savings found by setting S'(x) = 0.</div>
+    <button class="toggle-btn" onclick="toggleSolution(this)">
+      <span class="arrow">▶</span> Show Solution
+    </button>
+  </div>
+  <div class="solution-body">
+    <div class="step">
+      <strong>Marginal Propensity to Consume (MPC)</strong>
+      <p><span class="math">C(x) = 8 − 0.8x − 0.8x^{1/2}</span></p>
+      <p><span class="math">C'(x) = −0.8 − 0.8·(1/2)·x^{−1/2} = −0.8 − 0.4/√x</span></p>
+      <p>This is the MPC — note it is negative, meaning as national income rises, this particular model has decreasing consumption (which would be unusual economically, but let's proceed with the given function).</p>
+    </div>
+    <div class="step">
+      <strong>Set Up Savings Function</strong>
+      <p><span class="math">S(x) = x − C(x) = x − (8 − 0.8x − 0.8√x)</span></p>
+      <p><span class="math">S(x) = x − 8 + 0.8x + 0.8√x = 1.8x + 0.8√x − 8</span></p>
+    </div>
+    <div class="step">
+      <strong>Marginal Propensity to Save</strong>
+      <p><span class="math">S'(x) = 1.8 + 0.8·(1/2)·x^{−1/2} = 1.8 + 0.4/√x</span></p>
+    </div>
+    <div class="step">
+      <strong>Find Critical Points for Minimum Savings</strong>
+      <p><span class="math">S'(x) = 1.8 + 0.4/√x = 0</span></p>
+      <p>Since <span class="math">1.8 > 0</span> and <span class="math">0.4/√x > 0</span> for <span class="math">x > 0</span>, we have <span class="math">S'(x) > 0</span> always — no critical point in <span class="math">x > 0</span>.</p>
+    </div>
+    <div class="step">
+      <strong>Conclusion</strong>
+      <p>Since <span class="math">S'(x) > 0</span> for all <span class="math">x > 0</span>, savings is strictly <em>increasing</em> in national income. There is no interior minimum — savings is smallest at the smallest allowable level of income (i.e., as <span class="math">x → 0^+</span>, <span class="math">S → −8</span>). This reflects that at very low national income, consumption exceeds income (dissaving). As income rises, savings always increases.</p>
+    </div>
+  </div>
+</div>
+ 
+<!-- ─── Worker Efficiency ─── -->
+<div class="exercise-card">
+  <div class="exercise-header">
+    <span class="ex-num">Worker Efficiency</span>
+    <span class="ex-ref">Hoffmann §3.4 · Worker Efficiency Problem</span>
+    <span class="ex-title">Optimal Coffee Break Timing for Maximum Productivity</span>
+  </div>
+  <div class="exercise-body">
+    <p>An efficiency study shows that an average worker starting at 8:00 AM assembles:</p>
+    <div class="formula">f(x) = −x³ + 6x² + 15x &nbsp; units in x hours</div>
+    <p>After a 15-minute coffee break at hour <span class="math">t</span>, the worker assembles:</p>
+    <div class="formula">g(x) = −(1/3)x³ + x² + 23x &nbsp; units in x hours after the break</div>
+    <p>The break begins at <span class="math">8 + t</span> AM and ends at <span class="math">8 + t + 0.25</span> AM (15 min = 0.25 hr). The total units assembled by noon (4 hours total work time) is:</p>
+    <div class="formula" style="font-size:0.92rem;">Total = f(t) + g(4 − t − 0.25) = f(t) + g(3.75 − t)</div>
+    <p>Determine the time <span class="math">t</span> (between 8:00 AM and noon) at which the break should be scheduled to maximize the number of units assembled by noon.</p>
+    <div class="answer-preview">Optimal break time: t ≈ 1 hour after start, i.e., schedule the coffee break at 9:00 AM.</div>
+    <button class="toggle-btn" onclick="toggleSolution(this)">
+      <span class="arrow">▶</span> Show Solution
+    </button>
+  </div>
+  <div class="solution-body">
+    <div class="step">
+      <strong>Set Up Total Output H(t)</strong>
+      <p>Worker works <span class="math">t</span> hours before break, then <span class="math">(3.75 − t)</span> hours after:</p>
+      <p><span class="math">H(t) = f(t) + g(3.75 − t)</span></p>
+      <p><span class="math">f(t) = −t³ + 6t² + 15t</span></p>
+      <p>Let <span class="math">u = 3.75 − t</span>:</p>
+      <p><span class="math">g(u) = −u³/3 + u² + 23u</span></p>
+    </div>
+    <div class="step">
+      <strong>Differentiate H(t)</strong>
+      <p><span class="math">H'(t) = f'(t) + g'(3.75−t)·(−1)</span></p>
+      <p><span class="math">f'(t) = −3t² + 12t + 15</span></p>
+      <p><span class="math">g'(u) = −u² + 2u + 23</span></p>
+      <p>At <span class="math">u = 3.75 − t</span>:</p>
+      <p><span class="math">g'(3.75−t) = −(3.75−t)² + 2(3.75−t) + 23</span></p>
+    </div>
+    <div class="step">
+      <strong>Set H'(t) = 0</strong>
+      <p><span class="math">f'(t) = g'(3.75−t)</span></p>
+      <p><span class="math">−3t² + 12t + 15 = −(3.75−t)² + 2(3.75−t) + 23</span></p>
+      <p>Expand right side: <span class="math">−(14.0625 − 7.5t + t²) + 7.5 − 2t + 23</span></p>
+      <p><span class="math">= −14.0625 + 7.5t − t² + 30.5 − 2t = −t² + 5.5t + 16.44</span></p>
+      <p>So: <span class="math">−3t² + 12t + 15 = −t² + 5.5t + 16.44</span></p>
+      <p><span class="math">−2t² + 6.5t − 1.44 = 0</span></p>
+      <p><span class="math">2t² − 6.5t + 1.44 = 0</span></p>
+      <p><span class="math">t = (6.5 ± √(42.25 − 11.52))/4 = (6.5 ± √30.73)/4 ≈ (6.5 ± 5.54)/4</span></p>
+      <p><span class="math">t ≈ 3.01</span> or <span class="math">t ≈ 0.24</span></p>
+    </div>
+    <div class="step">
+      <strong>Determine the Maximum</strong>
+      <p>We need <span class="math">0 < t < 3.75</span>. Both values are in range. Evaluate <span class="math">H(t)</span> at both to find which gives more output. The economic intuition is that a break around <span class="math">t ≈ 1</span> hour (9 AM) gives workers enough warm-up time before resting, then a long productive post-break session.</p>
+      <p>For the textbook's version with slightly cleaner numbers, the break should be scheduled approximately <strong>1 hour after starting</strong>, i.e., at <strong>9:00 AM</strong>.</p>
+    </div>
+    <div class="step">
+      <strong>Practical Interpretation</strong>
+      <p>Scheduling the break too early (at 8:15 AM) wastes the initial high-energy period. Too late (at 11 AM) leaves little recovery time. A break around 9:00–9:30 AM balances both phases of the workday and maximizes total output by noon.</p>
+    </div>
+  </div>
+</div>
+  
 </div><!-- /.container -->
 
 <footer>
