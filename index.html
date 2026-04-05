@@ -1756,59 +1756,104 @@
     <span class="ex-ref">Hoffmann §3.4 · Exercise 39</span>
     <span class="ex-title">Worker Efficiency</span>
   </div>
+
   <div class="exercise-body">
     <p>An efficiency study shows that an average worker starting at 8:00 AM assembles:</p>
-    <div class="formula">f(x) = −x³ + 6x² + 15x &nbsp; units in x hours</div>
-    <p>After a 15-minute coffee break at hour <span class="math">t</span>, the worker assembles:</p>
-    <div class="formula">g(x) = −(1/3)x³ + x² + 23x &nbsp; units in x hours after the break</div>
-    <p>The break begins at <span class="math">8 + t</span> AM and ends at <span class="math">8 + t + 0.25</span> AM (15 min = 0.25 hr). The total units assembled by noon (4 hours total work time) is:</p>
-    <div class="formula" style="font-size:0.92rem;">Total = f(t) + g(4 − t − 0.25) = f(t) + g(3.75 − t)</div>
-    <p>Determine the time <span class="math">t</span> (between 8:00 AM and noon) at which the break should be scheduled to maximize the number of units assembled by noon.</p>
-    <div class="answer-preview">Optimal break time: t ≈ 1 hour after start, i.e., schedule the coffee break at 9:00 AM.</div>
+    <div class="formula">f(x) = −x³ + 6x² + 15x</div>
+
+    <p>After a 15-minute coffee break, the worker assembles:</p>
+    <div class="formula">g(x) = −(1/3)x³ + x² + 23x</div>
+
+    <p>If the break begins <span class="math">t</span> hours after 8:00 AM, total production is:</p>
+    <div class="formula">T(t) = f(t) + g(4 − t)</div>
+
+    <div class="answer-preview">
+      Optimal break time: <strong>t = 3 hours → 11:00 AM</strong>
+    </div>
+
+    <!-- 📊 GRAPH -->
+    <canvas id="outputGraph" style="max-width:100%; height:300px;"></canvas>
+
     <button class="toggle-btn" onclick="toggleSolution(this)">
       <span class="arrow">▶</span> Show Solution
     </button>
   </div>
+
   <div class="solution-body">
     <div class="step">
-      <strong>Set Up Total Output H(t)</strong>
-      <p>Worker works <span class="math">t</span> hours before break, then <span class="math">(3.75 − t)</span> hours after:</p>
-      <p><span class="math">H(t) = f(t) + g(3.75 − t)</span></p>
-      <p><span class="math">f(t) = −t³ + 6t² + 15t</span></p>
-      <p>Let <span class="math">u = 3.75 − t</span>:</p>
-      <p><span class="math">g(u) = −u³/3 + u² + 23u</span></p>
-    </div>
-    <div class="step">
-      <strong>Differentiate H(t)</strong>
-      <p><span class="math">H'(t) = f'(t) + g'(3.75−t)·(−1)</span></p>
-      <p><span class="math">f'(t) = −3t² + 12t + 15</span></p>
-      <p><span class="math">g'(u) = −u² + 2u + 23</span></p>
-      <p>At <span class="math">u = 3.75 − t</span>:</p>
-      <p><span class="math">g'(3.75−t) = −(3.75−t)² + 2(3.75−t) + 23</span></p>
-    </div>
-    <div class="step">
-      <strong>Set H'(t) = 0</strong>
-      <p><span class="math">f'(t) = g'(3.75−t)</span></p>
-      <p><span class="math">−3t² + 12t + 15 = −(3.75−t)² + 2(3.75−t) + 23</span></p>
-      <p>Expand right side: <span class="math">−(14.0625 − 7.5t + t²) + 7.5 − 2t + 23</span></p>
-      <p><span class="math">= −14.0625 + 7.5t − t² + 30.5 − 2t = −t² + 5.5t + 16.44</span></p>
-      <p>So: <span class="math">−3t² + 12t + 15 = −t² + 5.5t + 16.44</span></p>
-      <p><span class="math">−2t² + 6.5t − 1.44 = 0</span></p>
-      <p><span class="math">2t² − 6.5t + 1.44 = 0</span></p>
-      <p><span class="math">t = (6.5 ± √(42.25 − 11.52))/4 = (6.5 ± √30.73)/4 ≈ (6.5 ± 5.54)/4</span></p>
-      <p><span class="math">t ≈ 3.01</span> or <span class="math">t ≈ 0.24</span></p>
-    </div>
-    <div class="step">
-      <strong>Determine the Maximum</strong>
-      <p>We need <span class="math">0 < t < 3.75</span>. Both values are in range. Evaluate <span class="math">H(t)</span> at both to find which gives more output. The economic intuition is that a break around <span class="math">t ≈ 1</span> hour (9 AM) gives workers enough warm-up time before resting, then a long productive post-break session.</p>
-      <p>For the textbook's version with slightly cleaner numbers, the break should be scheduled approximately <strong>1 hour after starting</strong>, i.e., at <strong>9:00 AM</strong>.</p>
-    </div>
-    <div class="step">
-      <strong>Practical Interpretation</strong>
-      <p>Scheduling the break too early (at 8:15 AM) wastes the initial high-energy period. Too late (at 11 AM) leaves little recovery time. A break around 9:00–9:30 AM balances both phases of the workday and maximizes total output by noon.</p>
+      <strong>Final Result</strong>
+      <p><span class="math">T(t) = −(2/3)t³ + 3t² + 260/3</span></p>
+      <p>Maximum occurs at <span class="math">t = 3</span></p>
+      <p><strong>Break time = 11:00 AM</strong></p>
     </div>
   </div>
 </div>
+
+<!-- Chart.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+function T(t) {
+  return -(2/3)*t*t*t + 3*t*t + 260/3;
+}
+
+// Generate data points
+let labels = [];
+let dataPoints = [];
+
+for (let t = 0; t <= 4; t += 0.1) {
+  labels.push(t.toFixed(1));
+  dataPoints.push(T(t));
+}
+
+// Highlight max point
+let maxT = T(3);
+
+// Create chart
+const ctx = document.getElementById('outputGraph').getContext('2d');
+new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: labels,
+    datasets: [
+      {
+        label: 'Total Output T(t)',
+        data: dataPoints,
+        fill: false,
+        tension: 0.3
+      },
+      {
+        label: 'Maximum Point (t = 3)',
+        data: labels.map((x, i) => parseFloat(x) === 3 ? maxT : null),
+        pointRadius: 6,
+        showLine: false
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: {
+        display: true
+      }
+    },
+    scales: {
+      x: {
+        title: {
+          display: true,
+          text: 'Time after 8:00 AM (hours)'
+        }
+      },
+      y: {
+        title: {
+          display: true,
+          text: 'Total Units Produced'
+        }
+      }
+    }
+  }
+});
+</script>
   
 </div><!-- /.container -->
 
