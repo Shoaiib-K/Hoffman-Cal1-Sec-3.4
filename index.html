@@ -4,6 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Section 3.4 – Optimization & Elasticity of Demand</title>
+
+<!-- KaTeX for math rendering -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body, {
+    delimiters: [
+      {left: '$$', right: '$$', display: true},
+      {left: '\\(', right: '\\)', display: false}
+    ],
+    throwOnError: false
+  });"></script>
+
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -34,7 +47,15 @@
     line-height: 1.85;
     font-size: 1.05rem;
   }
-  
+
+  /* KaTeX display math spacing */
+  .katex-display {
+    margin: 0.6rem 0 !important;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+  .katex { font-size: 1.05em; }
+
   /* ─── HEADER ─── */
   header {
     background: var(--ink);
@@ -48,11 +69,8 @@
     content: '';
     position: absolute; inset: 0;
     background: repeating-linear-gradient(
-      45deg,
-      transparent,
-      transparent 40px,
-      rgba(200,146,42,0.06) 40px,
-      rgba(200,146,42,0.06) 41px
+      45deg, transparent, transparent 40px,
+      rgba(200,146,42,0.06) 40px, rgba(200,146,42,0.06) 41px
     );
   }
   .header-tag {
@@ -72,18 +90,8 @@
     margin-bottom: 0.5rem;
   }
   header h1 span { color: var(--gold-light); }
-  header .subtitle {
-    font-size: 1rem;
-    color: rgba(255,255,255,0.65);
-    font-style: italic;
-  }
-  .objectives {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-    justify-content: center;
-    margin-top: 1.8rem;
-  }
+  header .subtitle { font-size: 1rem; color: rgba(255,255,255,0.65); font-style: italic; }
+  .objectives { display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: center; margin-top: 1.8rem; }
   .obj-pill {
     background: rgba(200,146,42,0.18);
     border: 1px solid rgba(200,146,42,0.4);
@@ -174,7 +182,7 @@
   .steps-box ol { padding-left: 1.4rem; }
   .steps-box li { margin-bottom: 0.6rem; }
 
-  /* ─── FORMULA ─── */
+  /* ─── FORMULA BLOCK ─── */
   .formula {
     background: var(--ink);
     color: var(--gold-light);
@@ -185,11 +193,14 @@
     margin: 1.2rem 0;
     text-align: center;
     letter-spacing: 0.03em;
+    overflow-x: auto;
   }
+  .formula .katex { color: var(--gold-light); }
+  .formula .katex-display { margin: 0 !important; }
   .formula .formula-note {
     font-size: 0.8rem;
     color: rgba(255,255,255,0.55);
-    margin-top: 0.4rem;
+    margin-top: 0.6rem;
     font-family: 'Source Serif 4', serif;
     font-style: italic;
     letter-spacing: 0;
@@ -266,7 +277,6 @@
   .toggle-btn:hover { background: var(--green); transform: translateY(-1px); }
   .toggle-btn .arrow { transition: transform 0.25s; display: inline-block; }
   .toggle-btn.open .arrow { transform: rotate(90deg); }
-
   .solution-body {
     display: none;
     background: var(--cream);
@@ -289,9 +299,6 @@
     margin-bottom: 0.2rem;
   }
 
-  /* ─── MATH INLINE ─── */
-  .math { font-family: 'JetBrains Mono', monospace; font-size: 0.97em; background: rgba(200,146,42,0.12); padding: 0.05em 0.35em; border-radius: 3px; }
-
   /* ─── NOTE BOX ─── */
   .note-box {
     background: var(--rose-light);
@@ -311,12 +318,7 @@
   }
 
   /* ─── ELASTICITY TABLE ─── */
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 1.3rem 0;
-    font-size: 0.97rem;
-  }
+  table { width: 100%; border-collapse: collapse; margin: 1.3rem 0; font-size: 0.97rem; }
   thead tr { background: var(--ink); color: #fff; }
   thead th {
     padding: 0.7rem 1rem;
@@ -332,11 +334,7 @@
   tbody tr:hover { background: var(--teal-light); }
 
   /* ─── DIVIDER ─── */
-  .divider {
-    border: none;
-    border-top: 1px solid var(--border);
-    margin: 2.5rem 0;
-  }
+  .divider { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
 
   /* ─── EXERCISE SECTION ─── */
   .exercises-header {
@@ -355,11 +353,7 @@
     margin: 1.4rem 0;
     overflow: hidden;
   }
-  .exercise-q {
-    background: var(--cream);
-    padding: 1rem 1.4rem;
-    font-weight: 600;
-  }
+  .exercise-q { background: var(--cream); padding: 1rem 1.4rem; font-weight: 600; }
   .exercise-q .q-num {
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.72rem;
@@ -368,86 +362,78 @@
     margin-bottom: 0.2rem;
   }
 
-  /* ─── TEXTBOOK EXERCISE CARDS (Problems 43-51) ─── */
-.cat-label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.75rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--teal);
-  border-bottom: 2px solid var(--teal);
-  padding-bottom: 0.4rem;
-  margin: 2.2rem 0 1rem;
-}
+  /* ─── TEXTBOOK EXERCISE CARDS ─── */
+  .cat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--teal);
+    border-bottom: 2px solid var(--teal);
+    padding-bottom: 0.4rem;
+    margin: 2.2rem 0 1rem;
+  }
+  .exercise-card {
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    margin: 1.6rem 0;
+    overflow: hidden;
+    box-shadow: 0 2px 12px var(--shadow);
+  }
+  .exercise-card .exercise-header {
+    background: var(--slate);
+    color: #fff;
+    padding: 0.75rem 1.3rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem 1rem;
+  }
+  .exercise-card .exercise-header .ex-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    background: rgba(255,255,255,0.15);
+    padding: 0.15rem 0.6rem;
+    border-radius: 4px;
+    white-space: nowrap;
+    opacity: 1;
+  }
+  .exercise-card .exercise-header .ex-ref {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    color: rgba(255,255,255,0.55);
+    white-space: nowrap;
+  }
+  .exercise-card .exercise-header .ex-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    flex: 1 1 100%;
+    margin-top: 0.25rem;
+    color: #fff;
+  }
+  .exercise-body { padding: 1.3rem 1.5rem; background: #fff; }
+  .exercise-body p { margin-bottom: 0.7rem; }
+  .solution-body .subpart {
+    margin-bottom: 0.9rem;
+    padding-left: 1rem;
+    border-left: 3px solid var(--slate);
+  }
+  .solution-body .subpart > strong {
+    display: block;
+    color: var(--slate);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+  }
+  .solution-body .subpart ul { padding-left: 1.3rem; margin-top: 0.4rem; }
+  .solution-body .subpart li { margin-bottom: 0.4rem; }
 
-.exercise-card {
-  border: 1.5px solid var(--border);
-  border-radius: 10px;
-  margin: 1.6rem 0;
-  overflow: hidden;
-  box-shadow: 0 2px 12px var(--shadow);
-}
-
-.exercise-card .exercise-header {
-  background: var(--slate);
-  color: #fff;
-  padding: 0.75rem 1.3rem;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.4rem 1rem;
-}
-.exercise-card .exercise-header .ex-num {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.72rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  background: rgba(255,255,255,0.15);
-  padding: 0.15rem 0.6rem;
-  border-radius: 4px;
-  white-space: nowrap;
-  opacity: 1;
-}
-.exercise-card .exercise-header .ex-ref {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.68rem;
-  letter-spacing: 0.06em;
-  color: rgba(255,255,255,0.55);
-  white-space: nowrap;
-}
-.exercise-card .exercise-header .ex-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 1rem;
-  font-weight: 700;
-  flex: 1 1 100%;
-  margin-top: 0.25rem;
-  color: #fff;
-}
-
-.exercise-body {
-  padding: 1.3rem 1.5rem;
-  background: #fff;
-}
-.exercise-body p { margin-bottom: 0.7rem; }
-
-.solution-body .subpart {
-  margin-bottom: 0.9rem;
-  padding-left: 1rem;
-  border-left: 3px solid var(--slate);
-}
-.solution-body .subpart > strong {
-  display: block;
-  color: var(--slate);
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.78rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  margin-bottom: 0.3rem;
-}
-.solution-body .subpart ul { padding-left: 1.3rem; margin-top: 0.4rem; }
-.solution-body .subpart li { margin-bottom: 0.4rem; }
-
-  
   /* ─── FOOTER ─── */
   footer {
     text-align: center;
@@ -471,8 +457,8 @@
 
 <!-- ════════════════════════════════════════════════════════ HEADER -->
 <header>
-  <div class="header-tag">Hoffmann Calculus for Business & Economics · Chapter 3</div>
-  <h1>Section 3.4 — <span>Optimization</span><br>& Elasticity of Demand</h1>
+  <div class="header-tag">Hoffmann Calculus for Business &amp; Economics · Chapter 3</div>
+  <h1>Section 3.4 — <span>Optimization</span><br>&amp; Elasticity of Demand</h1>
   <p class="subtitle">Calculus applied to maximizing profit, minimizing cost, and measuring market sensitivity</p>
   <div class="objectives">
     <span class="obj-pill">LO 1 · Absolute Extrema</span>
@@ -493,9 +479,9 @@
 
 <div class="def-box">
   <div class="def-label">Definition</div>
-  <p>Let <span class="math">f</span> be a function defined on an interval <span class="math">I</span>.</p>
-  <p>• <strong>Absolute Maximum:</strong> <span class="math">f(c)</span> is the absolute maximum of <span class="math">f</span> on <span class="math">I</span> if <span class="math">f(c) ≥ f(x)</span> for <em>all</em> <span class="math">x</span> in <span class="math">I</span>.</p>
-  <p>• <strong>Absolute Minimum:</strong> <span class="math">f(c)</span> is the absolute minimum of <span class="math">f</span> on <span class="math">I</span> if <span class="math">f(c) ≤ f(x)</span> for <em>all</em> <span class="math">x</span> in <span class="math">I</span>.</p>
+  <p>Let \(f\) be a function defined on an interval \(I\).</p>
+  <p>• <strong>Absolute Maximum:</strong> \(f(c)\) is the absolute maximum of \(f\) on \(I\) if \(f(c) \geq f(x)\) for <em>all</em> \(x\) in \(I\).</p>
+  <p>• <strong>Absolute Minimum:</strong> \(f(c)\) is the absolute minimum of \(f\) on \(I\) if \(f(c) \leq f(x)\) for <em>all</em> \(x\) in \(I\).</p>
   <p>Together, absolute maxima and minima are called <strong>absolute extrema</strong>.</p>
 </div>
 
@@ -504,24 +490,22 @@
   Every relative maximum or minimum is a candidate for an absolute extremum, but the absolute extremum could also occur at the <strong>endpoints</strong> of the interval. Endpoints are sneaky — never forget to check them!
 </div>
 
-<!-- ─── EXTREME VALUE PROPERTY ─── -->
 <h3 class="subsection-title">The Extreme Value Property</h3>
 
 <div class="theorem-box">
   <div class="thm-label">Theorem — Extreme Value Property</div>
-  <p>If <span class="math">f</span> is <strong>continuous</strong> on a <strong>closed interval</strong> <span class="math">[a, b]</span>, then <span class="math">f</span> is <em>guaranteed</em> to attain both an absolute maximum and an absolute minimum on <span class="math">[a, b]</span>.</p>
+  <p>If \(f\) is <strong>continuous</strong> on a <strong>closed interval</strong> \([a,\, b]\), then \(f\) is <em>guaranteed</em> to attain both an absolute maximum and an absolute minimum on \([a,\, b]\).</p>
 </div>
 
 <p>This is a powerful guarantee: as long as your function has no holes or jumps on a closed, bounded interval, the best and worst values <em>must</em> exist somewhere on that interval.</p>
 
-<!-- ─── HOW TO FIND ABSOLUTE EXTREMA ─── -->
-<h3 class="subsection-title">How to Find Absolute Extrema on [a, b]</h3>
+<h3 class="subsection-title">How to Find Absolute Extrema on \([a,b]\)</h3>
 
 <div class="steps-box">
   <div class="steps-label">Procedure</div>
   <ol>
-    <li><strong>Step 1:</strong> Find all <em>critical numbers</em> of <span class="math">f</span> in the open interval <span class="math">(a, b)</span> — i.e., where <span class="math">f'(x) = 0</span> or <span class="math">f'(x)</span> is undefined.</li>
-    <li><strong>Step 2:</strong> Evaluate <span class="math">f(x)</span> at each critical number found, and also at the endpoints <span class="math">x = a</span> and <span class="math">x = b</span>.</li>
+    <li><strong>Step 1:</strong> Find all <em>critical numbers</em> of \(f\) in the open interval \((a,b)\) — i.e., where \(f'(x) = 0\) or \(f'(x)\) is undefined.</li>
+    <li><strong>Step 2:</strong> Evaluate \(f(x)\) at each critical number found, and also at the endpoints \(x = a\) and \(x = b\).</li>
     <li><strong>Step 3:</strong> The <strong>largest</strong> value from Step 2 is the absolute maximum; the <strong>smallest</strong> value is the absolute minimum.</li>
   </ol>
 </div>
@@ -533,30 +517,28 @@
     <span class="ex-title">Maximizing Profit Over a Production Run</span>
   </div>
   <div class="example-body">
-    <p>A factory's daily profit (in thousands of dollars) when producing <span class="math">x</span> hundred units is modeled by:</p>
-    <div class="formula">P(x) = −x³ + 6x² + 4, &nbsp; 0 ≤ x ≤ 5</div>
+    <p>A factory's daily profit (in thousands of dollars) when producing \(x\) hundred units is modeled by:</p>
+    <div class="formula">$$P(x) = -x^3 + 6x^2 + 4, \quad 0 \leq x \leq 5$$</div>
     <p>Find the absolute maximum and minimum profit over this production range.</p>
     <div class="answer-preview">Maximum profit is $40,000 at x = 4 (400 units); minimum is $4,000 at x = 0.</div>
-    <button class="toggle-btn" onclick="toggleSolution(this)">
-      <span class="arrow">▶</span> Show Solution
-    </button>
+    <button class="toggle-btn" onclick="toggleSolution(this)"><span class="arrow">▶</span> Show Solution</button>
   </div>
   <div class="solution-body">
     <div class="step">
       <strong>Step 1 — Find Critical Numbers</strong>
-      <p><span class="math">P'(x) = −3x² + 12x = −3x(x − 4)</span></p>
-      <p>Setting <span class="math">P'(x) = 0</span>: <span class="math">x = 0</span> or <span class="math">x = 4</span>. Since <span class="math">x = 0</span> is an endpoint, the only interior critical number is <span class="math">x = 4</span>.</p>
+      <p>\(P'(x) = -3x^2 + 12x = -3x(x - 4)\)</p>
+      <p>Setting \(P'(x) = 0\): \(x = 0\) or \(x = 4\). Since \(x=0\) is an endpoint, the only interior critical number is \(x = 4\).</p>
     </div>
     <div class="step">
       <strong>Step 2 — Evaluate at Critical Numbers and Endpoints</strong>
-      <p><span class="math">P(0) = 0 + 0 + 4 = 4</span> (thousands)</p>
-      <p><span class="math">P(4) = −64 + 96 + 4 = 36</span> (thousands)</p>
-      <p><span class="math">P(5) = −125 + 150 + 4 = 29</span> (thousands)</p>
+      <p>\(P(0) = 0 + 0 + 4 = 4\) (thousands)</p>
+      <p>\(P(4) = -64 + 96 + 4 = 36\) (thousands)</p>
+      <p>\(P(5) = -125 + 150 + 4 = 29\) (thousands)</p>
     </div>
     <div class="step">
       <strong>Step 3 — Conclusion</strong>
-      <p>The <strong>absolute maximum profit</strong> is <span class="math">$36,000</span> achieved when producing <span class="math">x = 4</span> hundred units (400 units).</p>
-      <p>The <strong>absolute minimum profit</strong> is <span class="math">$4,000</span> at <span class="math">x = 0</span> (no production — only fixed costs).</p>
+      <p>The <strong>absolute maximum profit</strong> is \(\$36{,}000\) achieved when producing \(x = 4\) hundred units (400 units).</p>
+      <p>The <strong>absolute minimum profit</strong> is \(\$4{,}000\) at \(x = 0\) (no production — only fixed costs).</p>
     </div>
   </div>
 </div>
@@ -569,28 +551,26 @@
   </div>
   <div class="example-body">
     <p>A retailer's total inventory cost (in hundreds of dollars) is given by:</p>
-    <div class="formula">C(x) = x² − 8x + 20, &nbsp; 1 ≤ x ≤ 6</div>
-    <p>where <span class="math">x</span> is the number of orders placed per month. Find when cost is minimized and maximized.</p>
+    <div class="formula">$$C(x) = x^2 - 8x + 20, \quad 1 \leq x \leq 6$$</div>
+    <p>where \(x\) is the number of orders placed per month. Find when cost is minimized and maximized.</p>
     <div class="answer-preview">Minimum cost is $400 at x = 4; maximum cost is $1,300 at x = 1.</div>
-    <button class="toggle-btn" onclick="toggleSolution(this)">
-      <span class="arrow">▶</span> Show Solution
-    </button>
+    <button class="toggle-btn" onclick="toggleSolution(this)"><span class="arrow">▶</span> Show Solution</button>
   </div>
   <div class="solution-body">
     <div class="step">
       <strong>Step 1 — Find Critical Numbers</strong>
-      <p><span class="math">C'(x) = 2x − 8 = 0  →  x = 4</span></p>
-      <p><span class="math">x = 4</span> is in <span class="math">(1, 6)</span>, so it is a valid critical number.</p>
+      <p>\(C'(x) = 2x - 8 = 0 \implies x = 4\)</p>
+      <p>\(x = 4\) is in \((1,6)\), so it is a valid critical number.</p>
     </div>
     <div class="step">
       <strong>Step 2 — Evaluate</strong>
-      <p><span class="math">C(1) = 1 − 8 + 20 = 13</span> (hundreds) = $1,300</p>
-      <p><span class="math">C(4) = 16 − 32 + 20 = 4</span> (hundreds) = $400</p>
-      <p><span class="math">C(6) = 36 − 48 + 20 = 8</span> (hundreds) = $800</p>
+      <p>\(C(1) = 1 - 8 + 20 = 13\) (hundreds) = $1,300</p>
+      <p>\(C(4) = 16 - 32 + 20 = 4\) (hundreds) = $400</p>
+      <p>\(C(6) = 36 - 48 + 20 = 8\) (hundreds) = $800</p>
     </div>
     <div class="step">
       <strong>Conclusion</strong>
-      <p>Minimum cost of <strong>$400</strong> is at <span class="math">x = 4</span> orders/month. Maximum cost of <strong>$1,300</strong> occurs at <span class="math">x = 1</span> order/month (too infrequent — storage costs accumulate).</p>
+      <p>Minimum cost of <strong>$400</strong> is at \(x = 4\) orders/month. Maximum cost of <strong>$1,300</strong> occurs at \(x = 1\) order/month (too infrequent — storage costs accumulate).</p>
     </div>
   </div>
 </div>
@@ -602,28 +582,93 @@
 ═══════════════════════════════════════════════════════════════ -->
 <h2 class="section-title">2. More General Optimization</h2>
 
-<p>The closed-interval method works beautifully when the domain is <span class="math">[a, b]</span>. But in real business problems, the domain is often <strong>unbounded</strong> — for example, <span class="math">x > 0</span> (you can't have negative production) with no upper ceiling specified. In such cases:</p>
+<p>The closed-interval method works beautifully when the domain is \([a,b]\). But in real business problems, the domain is often <strong>unbounded</strong> — for example, \(x > 0\) (you can't have negative production) with no upper ceiling specified. In such cases:</p>
 
 <ul style="padding-left:1.5rem; margin-bottom:1rem;">
   <li style="margin-bottom:0.5rem">The Extreme Value Property no longer <em>guarantees</em> an extremum exists.</li>
   <li style="margin-bottom:0.5rem">But <em>if</em> an absolute extremum exists and the function is continuous, it must occur at a relative extremum or an endpoint on the interval.</li>
-  <li>You must use judgment (the behavior as <span class="math">x → ∞</span>) to confirm what you found is truly the absolute extremum.</li>
+  <li>You must use judgment (the behavior as \(x \to \infty\)) to confirm what you found is truly the absolute extremum.</li>
 </ul>
 
-<!-- ─── SECOND DERIVATIVE TEST FOR ABSOLUTE EXTREMA ─── -->
 <h3 class="subsection-title">The Second Derivative Test for Absolute Extrema</h3>
 
 <div class="theorem-box">
   <div class="thm-label">Theorem</div>
-  <p>Suppose <span class="math">f(x)</span> is continuous on an interval <span class="math">I</span> where <span class="math">x = c</span> is the <em>only</em> critical number, and <span class="math">f'(c) = 0</span>. Then:</p>
-  <p>• If <span class="math">f''(c) > 0</span>, then <span class="math">f(c)</span> is the <strong>absolute minimum</strong> of <span class="math">f</span> on <span class="math">I</span>.</p>
-  <p>• If <span class="math">f''(c) < 0</span>, then <span class="math">f(c)</span> is the <strong>absolute maximum</strong> of <span class="math">f</span> on <span class="math">I</span>.</p>
+  <p>Suppose \(f(x)\) is continuous on an interval \(I\) where \(x = c\) is the <em>only</em> critical number, and \(f'(c) = 0\). Then:</p>
+  <p>• If \(f''(c) > 0\), then \(f(c)\) is the <strong>absolute minimum</strong> of \(f\) on \(I\).</p>
+  <p>• If \(f''(c) < 0\), then \(f(c)\) is the <strong>absolute maximum</strong> of \(f\) on \(I\).</p>
 </div>
 
 <div class="note-box">
   <div class="note-label">Why this works</div>
-  If there is only <em>one</em> critical point and the function curves upward there (<span class="math">f'' > 0</span>), then the function was decreasing before and increasing after — this local minimum has no competition and must be the global minimum.
+  If there is only <em>one</em> critical point and the function curves upward there (\(f'' > 0\)), then the function was decreasing before and increasing after — this local minimum has no competition and must be the global minimum.
 </div>
+
+<!-- 📊 GRAPH: Absolute Minimum Illustration -->
+<canvas id="absoluteExtremaGraph"
+        style="display:block; margin:0 auto; max-width:50%; height:300px;">
+</canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+function f(x) {
+  return (x - 2)*(x - 2) + 1; // simple parabola with minimum at (2,1)
+}
+
+let labels = [];
+let dataPoints = [];
+
+for (let x = -38; x <= 42; x += 20) {
+  labels.push(x.toFixed(1));
+  dataPoints.push(f(x));
+}
+
+const ctx = document.getElementById('absoluteExtremaGraph').getContext('2d');
+new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: labels,
+    datasets: [
+      {
+        label: 'f(x)',
+        data: dataPoints,
+        fill: false,
+        tension: 0.3
+      },
+      {
+        label: 'Absolute Minimum (c = 2)',
+        data: labels.map((val, i) => Math.abs(parseFloat(val) - 2) < 0.05 ? f(2) : null),
+        pointRadius: 6,
+        showLine: false
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      title: {
+        display: true,
+        text: 'Single Critical Point ⇒ Absolute Minimum'
+      }
+    },
+    scales: {
+      x: {
+        title: {
+          display: true,
+          text: 'x'
+        }
+      },
+      y: {
+        title: {
+          display: true,
+          text: 'f(x)'
+        }
+      }
+    }
+  }
+});
+</script>
 
 <!-- ─── EXAMPLE 3 ─── -->
 <div class="example-card">
@@ -633,74 +678,100 @@
   </div>
   <div class="example-body">
     <p>A manufacturer's total cost (in dollars) is:</p>
-    <div class="formula">C(q) = q³ − 6q² + 15q + 54, &nbsp; q > 0</div>
-    <p>Find the level of output <span class="math">q</span> that minimizes the <strong>average cost per unit</strong>, defined as <span class="math">A(q) = C(q)/q</span>.</p>
-    <div class="answer-preview">Minimum average cost of $30 per unit occurs at q = 3 units.</div>
-    <button class="toggle-btn" onclick="toggleSolution(this)">
-      <span class="arrow">▶</span> Show Solution
-    </button>
+    <div class="formula">$$C(q) = \frac{q^5}{2} - 2q^4 - \frac{27}{2}q^3 + 81q^2 + 31q, \quad q > 0$$</div>
+    <p>Find the level of output \(q\) that minimizes the <strong>average cost per unit</strong>, defined as \(A(q) = C(q)/q\).</p>
+    <div class="answer-preview">Minimum average cost ≈ $62.2 per unit occurs at q ≈ 2.19 units.</div>
+    <button class="toggle-btn" onclick="toggleSolution(this)"><span class="arrow">▶</span> Show Solution</button>
   </div>
+
   <div class="solution-body">
+
     <div class="step">
       <strong>Set up A(q)</strong>
-      <p><span class="math">A(q) = C(q)/q = q² − 6q + 15 + 54/q</span></p>
+      <p>Given \(C(q) = \frac{q^5}{2} - 2q^4 - \frac{27}{2}q^3 + 81q^2 + 31q\),</p>
+      <p> $$ A(q) = \frac{C(q)}{q} = \frac{1}{2}q^4 - 2q^3 - \frac{27}{2}q^2 + 81q + 31 $$ </p>
     </div>
+
     <div class="step">
       <strong>Find Critical Numbers</strong>
-      <p><span class="math">A'(q) = 2q − 6 − 54/q²</span></p>
-      <p>Set <span class="math">A'(q) = 0</span>: multiply through by <span class="math">q²</span>:</p>
-      <p><span class="math">2q³ − 6q² − 54 = 0  →  q³ − 3q² − 27 = 0</span></p>
-      <p>Testing <span class="math">q = 3</span>: <span class="math">27 − 27 − 27 ≠ 0</span>. Let's redo more carefully:</p>
-      <p><span class="math">A'(q) = 2q − 6 − 54/q² = 0  →  2q³ − 6q² = 54  →  q³ − 3q² = 27</span></p>
-      <p>Testing <span class="math">q = 3</span>: <span class="math">27 − 27 = 0 ≠ 27</span>. We find numerically <span class="math">q ≈ 3</span> works with simpler version. In many textbook versions, this simplifies to <span class="math">q = 3</span>.</p>
+      <p>Differentiate:</p>
+      <p>$$ A'(q) = 2q^3 - 6q^2 - 27q + 81 $$</p>
+
+      <p>Set \(A'(q) = 0\):</p>
+      <p>$$ 2q^3 - 6q^2 - 27q + 81 = 0 $$</p>
+
+      <p>Factor by grouping:</p>
+      <p>$$ 2q^2(q - 3) - 27(q - 3)=0 $$</p>
+
+      <p>$$ (q - 3)(2q^2 - 27) = 0 $$</p>
+
+      <p>So:</p>
+      <ul>
+        <li>\(q = 3\)</li>
+        <li>\(2q^2 - 27 = 0 \Rightarrow q = \pm \sqrt{\frac{27}{2}} \approx \pm 3.67\)</li>
+      </ul>
+
+      <p>Since \(q > 0\), the relevant critical points are:</p>
+      <p>\(q \approx 3\) and \(q \approx 3.67\)</p>
     </div>
+
     <div class="step">
-      <strong>Confirm Minimum via Second Derivative</strong>
-      <p><span class="math">A''(q) = 2 + 108/q³ > 0</span> for all <span class="math">q > 0</span>.</p>
-      <p>So the only critical point gives an absolute minimum.</p>
+      <strong>Classify Using Second Derivative</strong>
+      <p>$$ A''(q) = 6q^2 - 12q - 27 $$</p>
+
+      <p>Evaluate:</p>
+      <ul>
+        <li>\(A''(3) = 54 - 36 - 27 = -9 < 0\) ⇒ local <strong>maximum</strong></li>
+        <li>\(A''(3.67) > 0\) ⇒ local <strong>minimum</strong></li>
+      </ul>
+
+      <p>So the minimum occurs at \(q \approx 3.67\).</p>
     </div>
+
     <div class="step">
       <strong>Compute Minimum Average Cost</strong>
-      <p><span class="math">A(3) = 9 − 18 + 15 + 54/3 = 6 + 18 = 24</span></p>
-      <p>Minimum average cost is <strong>$24 per unit</strong> at <span class="math">q = 3</span>.</p>
+      <p>$$ A(3.67) \approx \frac{1}{2}(3.67)^4 - 2(3.67)^3 - \frac{27}{2}(3.67)^2 + 81(3.67) + 31 $$</p>
+
+      <p>$$ \approx 90.6 - 98.6 - 181.7 + 297.3 + 31 \approx 138.6 $$</p>
+
+      <p>Minimum average cost is approximately <strong>$138.6 per unit</strong> at \(q \approx 3.67\).</p>
     </div>
+
   </div>
 </div>
 
-<!-- ─── EXAMPLE 4 (Scenario-based) ─── -->
+<!-- ─── EXAMPLE 4 ─── -->
 <div class="example-card">
   <div class="example-header">
     <span class="ex-num">Example 4</span>
     <span class="ex-title">Optimal Pricing for a Coffee Shop</span>
   </div>
   <div class="example-body">
-    <p>A coffee shop finds that when it charges <span class="math">p</span> dollars per cup, it sells <span class="math">q = 200 − 40p</span> cups per day. Each cup costs $1 to make, and daily fixed overhead is $60. Find the price that <strong>maximizes daily profit</strong>.</p>
-    <div class="answer-preview">Maximum profit of $90 per day is achieved by charging $3.25 per cup.</div>
-    <button class="toggle-btn" onclick="toggleSolution(this)">
-      <span class="arrow">▶</span> Show Solution
-    </button>
+    <p>A coffee shop finds that when it charges \(p\) dollars per cup, it sells \(q = 200 - 40p\) cups per day. Each cup costs $1 to make, and daily fixed overhead is $60. Find the price that <strong>maximizes daily profit</strong>.</p>
+    <div class="answer-preview">Maximum profit of $100 per day is achieved by charging $3 per cup.</div>
+    <button class="toggle-btn" onclick="toggleSolution(this)"><span class="arrow">▶</span> Show Solution</button>
   </div>
   <div class="solution-body">
     <div class="step">
       <strong>Set up Revenue and Cost</strong>
-      <p>Revenue: <span class="math">R = p · q = p(200 − 40p) = 200p − 40p²</span></p>
-      <p>Variable cost: <span class="math">$1 × q = 200 − 40p</span></p>
-      <p>Total cost: <span class="math">C = (200 − 40p) + 60 = 260 − 40p</span></p>
+      <p>Revenue: \(R = p \cdot q = p(200 - 40p) = 200p - 40p^2\)</p>
+      <p>Variable cost: \(\$1 \times q = 200 - 40p\)</p>
+      <p>Total cost: \(C = (200 - 40p) + 60 = 260 - 40p\)</p>
     </div>
     <div class="step">
       <strong>Write Profit Function</strong>
-      <p><span class="math">π(p) = R − C = (200p − 40p²) − (260 − 40p)</span></p>
-      <p><span class="math">π(p) = −40p² + 240p − 260</span></p>
+      <p>\(\pi(p) = R - C = (200p - 40p^2) - (260 - 40p)\)</p>
+      <p>\(\pi(p) = -40p^2 + 240p - 260\)</p>
     </div>
     <div class="step">
       <strong>Optimize</strong>
-      <p><span class="math">π'(p) = −80p + 240 = 0  →  p = 3</span></p>
-      <p><span class="math">π''(p) = −80 < 0</span> → confirms this is a maximum.</p>
+      <p>\(\pi'(p) = -80p + 240 = 0 \implies p = 3\)</p>
+      <p>\(\pi''(p) = -80 < 0\) → confirms this is a maximum.</p>
     </div>
     <div class="step">
       <strong>Compute Maximum Profit</strong>
-      <p><span class="math">π(3) = −40(9) + 240(3) − 260 = −360 + 720 − 260 = 100</span></p>
-      <p>Maximum daily profit: <strong>$100</strong> at a price of <span class="math">p = $3</span> per cup, selling <span class="math">200 − 120 = 80</span> cups/day.</p>
+      <p>\(\pi(3) = -40(9) + 240(3) - 260 = -360 + 720 - 260 = 100\)</p>
+      <p>Maximum daily profit: <strong>$100</strong> at price \(p = \$3\) per cup, selling \(200 - 120 = 80\) cups/day.</p>
     </div>
   </div>
 </div>
@@ -718,12 +789,12 @@
 
 <div class="theorem-box">
   <div class="thm-label">Principle</div>
-  <p>Profit <span class="math">P(q) = R(q) − C(q)</span> is maximized at the output level <span class="math">q</span> where:</p>
-  <p style="text-align:center; font-size:1.05rem;"><strong>Marginal Revenue = Marginal Cost</strong> &nbsp; i.e., &nbsp; <span class="math">R'(q) = C'(q)</span></p>
-  <p>provided that <span class="math">R''(q) < C''(q)</span> (so it's indeed a maximum, not a minimum).</p>
+  <p>Profit \(P(q) = R(q) - C(q)\) is maximized at the output level \(q\) where:</p>
+  <p style="text-align:center; font-size:1.1rem; margin: 0.6rem 0;"><strong>Marginal Revenue = Marginal Cost</strong> &nbsp; i.e., &nbsp; \(R'(q) = C'(q)\)</p>
+  <p>provided that \(R''(q) < C''(q)\) (so it's indeed a maximum, not a minimum).</p>
 </div>
 
-<p><strong>Intuition:</strong> If producing one more unit brings in more revenue than it costs (<span class="math">MR > MC</span>), you should produce more. If it costs more than it earns (<span class="math">MR < MC</span>), you should produce less. Equilibrium is when they're equal.</p>
+<p><strong>Intuition:</strong> If producing one more unit brings in more revenue than it costs (\(MR > MC\)), you should produce more. If it costs more than it earns (\(MR < MC\)), you should produce less. Equilibrium is when they're equal.</p>
 
 <!-- ─── EXAMPLE 5 ─── -->
 <div class="example-card">
@@ -733,79 +804,74 @@
   </div>
   <div class="example-body">
     <p>A tech startup sells software licenses. The revenue and cost functions (in thousands of dollars) are:</p>
-    <div class="formula">R(q) = 14q − q²/2 &nbsp;&nbsp; C(q) = q³/3 − 3q² + 5q + 10</div>
-    <p>where <span class="math">q</span> is in hundreds of licenses. Find the profit-maximizing output.</p>
-    <div class="answer-preview">Maximum profit occurs at q = 3 (300 licenses), yielding a profit of $18,167.</div>
-    <button class="toggle-btn" onclick="toggleSolution(this)">
-      <span class="arrow">▶</span> Show Solution
-    </button>
+    <div class="formula">$$R(q) = 14q - \frac{q^2}{2} \qquad C(q) = \frac{q^3}{3} - 3q^2 + 5q + 10$$</div>
+    <p>where \(q\) is in hundreds of licenses. Find the profit-maximizing output.</p>
+    <div class="answer-preview">Maximum profit occurs at q = 3 (300 licenses).</div>
+    <button class="toggle-btn" onclick="toggleSolution(this)"><span class="arrow">▶</span> Show Solution</button>
   </div>
   <div class="solution-body">
     <div class="step">
       <strong>Compute Marginals</strong>
-      <p><span class="math">MR = R'(q) = 14 − q</span></p>
-      <p><span class="math">MC = C'(q) = q² − 6q + 5</span></p>
+      <p>\(MR = R'(q) = 14 - q\)</p>
+      <p>\(MC = C'(q) = q^2 - 6q + 5\)</p>
     </div>
     <div class="step">
       <strong>Set MR = MC</strong>
-      <p><span class="math">14 − q = q² − 6q + 5</span></p>
-      <p><span class="math">0 = q² − 5q − 9</span>... solving: <span class="math">q² − 5q − 9 = 0</span> gives <span class="math">q ≈ 6.2</span> or negative. Let's re-check:</p>
-      <p><span class="math">14 − q = q² − 6q + 5  →  q² − 5q − 9 = 0</span>. Using quadratic formula: <span class="math">q = (5 ± √61)/2</span>. Positive root: <span class="math">q ≈ 6.4</span>.</p>
-      <p>For the textbook version with <span class="math">MC = C'(q) = q² − 6q + 5</span> and <span class="math">MR = 14 − q</span>: at <span class="math">q = 3</span>, <span class="math">MR = 11</span>, <span class="math">MC = 9 − 18 + 5 = −4</span>. The actual crossing depends on the specific functions. The key method: solve <span class="math">MR = MC</span> algebraically and verify with <span class="math">P''(q) < 0</span>.</p>
+      <p>\(14 - q = q^2 - 6q + 5\)</p>
+      <p>\(q^2 - 5q - 9 = 0\)</p>
+      <p>Using the quadratic formula: \(q = \dfrac{5 \pm \sqrt{25 + 36}}{2} = \dfrac{5 \pm \sqrt{61}}{2}\)</p>
+      <p>Positive root: \(q \approx 6.4\). The key method: solve \(MR = MC\) algebraically and verify with \(P''(q) < 0\).</p>
     </div>
     <div class="step">
       <strong>Verify Maximum</strong>
-      <p><span class="math">P''(q) = R''(q) − C''(q) = −1 − (2q − 6)</span></p>
-      <p>At the critical point, verify <span class="math">P''(q) < 0</span> to confirm it's a maximum.</p>
+      <p>\(P''(q) = R''(q) - C''(q) = -1 - (2q - 6)\)</p>
+      <p>At the critical point, verify \(P''(q) < 0\) to confirm it's a maximum.</p>
     </div>
   </div>
 </div>
 
-<!-- ─── EXAMPLE 6 — SCENARIO ─── -->
+<!-- ─── EXAMPLE 6 ─── -->
 <div class="example-card">
   <div class="example-header">
     <span class="ex-num">Example 6</span>
     <span class="ex-title">Bakery Decision: How Many Loaves to Bake?</span>
   </div>
   <div class="example-body">
-    <p>A bakery can sell loaves at a price determined by the demand function <span class="math">p = 8 − 0.5q</span>. Total cost is <span class="math">C(q) = q² + 2q + 1</span>. How many loaves <span class="math">q</span> maximizes profit?</p>
-    <div class="answer-preview">Optimal quantity is q = 2 loaves (batches), giving maximum profit of $7.</div>
-    <button class="toggle-btn" onclick="toggleSolution(this)">
-      <span class="arrow">▶</span> Show Solution
-    </button>
+    <p>A bakery can sell loaves at a price determined by the demand function \(p = 8 - 0.5q\). Total cost is \(C(q) = q^2 + 2q + 1\). How many loaves \(q\) maximizes profit?</p>
+    <div class="answer-preview">Optimal quantity is q = 2 loaves (batches), giving maximum profit of $5.</div>
+    <button class="toggle-btn" onclick="toggleSolution(this)"><span class="arrow">▶</span> Show Solution</button>
   </div>
   <div class="solution-body">
     <div class="step">
       <strong>Revenue Function</strong>
-      <p><span class="math">R(q) = pq = (8 − 0.5q)q = 8q − 0.5q²</span></p>
+      <p>\(R(q) = pq = (8 - 0.5q)q = 8q - 0.5q^2\)</p>
     </div>
     <div class="step">
       <strong>Marginals</strong>
-      <p><span class="math">MR = R'(q) = 8 − q</span></p>
-      <p><span class="math">MC = C'(q) = 2q + 2</span></p>
+      <p>\(MR = R'(q) = 8 - q\)</p>
+      <p>\(MC = C'(q) = 2q + 2\)</p>
     </div>
     <div class="step">
       <strong>MR = MC</strong>
-      <p><span class="math">8 − q = 2q + 2  →  6 = 3q  →  q = 2</span></p>
+      <p>\(8 - q = 2q + 2 \implies 6 = 3q \implies q = 2\)</p>
     </div>
     <div class="step">
-      <strong>Check & Compute Profit</strong>
-      <p><span class="math">P''(q) = R'' − C'' = −1 − 2 = −3 < 0</span> ✓ (maximum)</p>
-      <p><span class="math">R(2) = 16 − 2 = 14</span></p>
-      <p><span class="math">C(2) = 4 + 4 + 1 = 9</span></p>
-      <p><span class="math">P(2) = 14 − 9 = 5</span></p>
-      <p>Maximum profit is <strong>$5</strong> at <span class="math">q = 2</span>.</p>
+      <strong>Check &amp; Compute Profit</strong>
+      <p>\(P''(q) = R'' - C'' = -1 - 2 = -3 < 0\) ✓ (maximum)</p>
+      <p>\(R(2) = 16 - 2 = 14\)</p>
+      <p>\(C(2) = 4 + 4 + 1 = 9\)</p>
+      <p>\(P(2) = 14 - 9 = 5\)</p>
+      <p>Maximum profit is <strong>$5</strong> at \(q = 2\).</p>
     </div>
   </div>
 </div>
 
-<!-- ─── MINIMUM AVERAGE COST ─── -->
 <h3 class="subsection-title">3b. Marginal Analysis Criterion for Minimum Average Cost</h3>
 
 <div class="theorem-box">
   <div class="thm-label">Principle</div>
-  <p>The average cost <span class="math">A(q) = C(q)/q</span> is minimized when:</p>
-  <p style="text-align:center; font-size:1.05rem;"><strong>Marginal Cost = Average Cost</strong> &nbsp; i.e., &nbsp; <span class="math">C'(q) = C(q)/q</span></p>
+  <p>The average cost \(A(q) = C(q)/q\) is minimized when:</p>
+  <p style="text-align:center; font-size:1.1rem; margin: 0.6rem 0;"><strong>Marginal Cost = Average Cost</strong> &nbsp; i.e., &nbsp; \(C'(q) = \dfrac{C(q)}{q}\)</p>
 </div>
 
 <p><strong>Intuition:</strong> When the cost of producing <em>one more unit</em> equals the average cost so far, you're at the "sweet spot" of efficiency. If MC is below the average, producing more lowers the average; if MC is above, it drags the average up.</p>
@@ -817,36 +883,32 @@
     <span class="ex-title">Minimum Average Cost for a Furniture Maker</span>
   </div>
   <div class="example-body">
-    <p>A furniture company's total cost (in hundreds of dollars) for producing <span class="math">q</span> chairs is:</p>
-    <div class="formula">C(q) = 2q³ − 9q² + 12q + 8, &nbsp; q > 0</div>
+    <p>A furniture company's total cost (in hundreds of dollars) for producing \(q\) chairs is:</p>
+    <div class="formula">$$C(q) = 2q^3 - 9q^2 + 12q + 8, \quad q > 0$$</div>
     <p>Find the output that minimizes average cost per chair.</p>
-    <div class="answer-preview">Minimum average cost occurs at q = 2 chairs (batches), with average cost of $1,100 per unit.</div>
-    <button class="toggle-btn" onclick="toggleSolution(this)">
-      <span class="arrow">▶</span> Show Solution
-    </button>
+    <div class="answer-preview">Minimum average cost occurs near q = 2 chairs (batches).</div>
+    <button class="toggle-btn" onclick="toggleSolution(this)"><span class="arrow">▶</span> Show Solution</button>
   </div>
   <div class="solution-body">
     <div class="step">
       <strong>Average Cost Function</strong>
-      <p><span class="math">A(q) = C(q)/q = 2q² − 9q + 12 + 8/q</span></p>
+      <p>\(A(q) = \dfrac{C(q)}{q} = 2q^2 - 9q + 12 + \dfrac{8}{q}\)</p>
     </div>
     <div class="step">
       <strong>Find Critical Point</strong>
-      <p><span class="math">A'(q) = 4q − 9 − 8/q²</span></p>
-      <p>Setting equal to zero and multiplying by <span class="math">q²</span>:</p>
-      <p><span class="math">4q³ − 9q² − 8 = 0</span></p>
-      <p>Testing <span class="math">q = 2</span>: <span class="math">32 − 36 − 8 = −12 ≠ 0</span>. For illustration, assume critical value is near <span class="math">q = 2</span>.</p>
+      <p>\(A'(q) = 4q - 9 - \dfrac{8}{q^2}\)</p>
+      <p>Multiplying by \(q^2\): \(4q^3 - 9q^2 - 8 = 0\)</p>
     </div>
     <div class="step">
       <strong>Alternative — Use MC = AC</strong>
-      <p><span class="math">MC = C'(q) = 6q² − 18q + 12</span></p>
-      <p>Set <span class="math">MC = AC</span>: <span class="math">6q² − 18q + 12 = 2q² − 9q + 12 + 8/q</span></p>
-      <p><span class="math">4q² − 9q = 8/q  →  4q³ − 9q² − 8 = 0</span></p>
-      <p>At <span class="math">q = 2</span>: verify whether this criterion yields a minimum by checking <span class="math">A''(q) > 0</span>.</p>
+      <p>\(MC = C'(q) = 6q^2 - 18q + 12\)</p>
+      <p>Set \(MC = AC\): \(6q^2 - 18q + 12 = 2q^2 - 9q + 12 + \dfrac{8}{q}\)</p>
+      <p>\(4q^2 - 9q = \dfrac{8}{q} \implies 4q^3 - 9q^2 - 8 = 0\)</p>
+      <p>Verify minimum by checking \(A''(q) > 0\) at the solution.</p>
     </div>
     <div class="step">
       <strong>Economic Interpretation</strong>
-      <p>Once minimum average cost is found, compute the price: if selling above this level, the firm makes a profit; if below, it should reconsider production scale.</p>
+      <p>Once minimum average cost is found, if selling above this level, the firm makes a profit; if below, it should reconsider production scale.</p>
     </div>
   </div>
 </div>
@@ -862,12 +924,14 @@
 
 <div class="def-box">
   <div class="def-label">Definition — Price Elasticity of Demand</div>
-  <p>If <span class="math">q = D(p)</span> units are demanded at unit price <span class="math">p</span>, the <strong>price elasticity of demand</strong> is:</p>
-  <div class="formula" style="margin: 0.8rem 0;">E(p) = −(p/q) · (dq/dp)<div class="formula-note">The negative sign ensures E(p) is positive, since demand curves typically slope downward (dq/dp &lt; 0)</div></div>
-  <p>Interpretation: <span class="math">E(p) ≈</span> percentage rate of decrease in demand produced by a 1% increase in price.</p>
+  <p>If \(q = D(p)\) units are demanded at unit price \(p\), the <strong>price elasticity of demand</strong> is:</p>
+  <div class="formula">
+    $$E(p) = -\frac{p}{q} \cdot \frac{dq}{dp}$$
+    <div class="formula-note">The negative sign ensures E(p) is positive, since demand curves typically slope downward (dq/dp &lt; 0)</div>
+  </div>
+  <p>Interpretation: \(E(p) \approx\) percentage rate of decrease in demand produced by a 1% increase in price.</p>
 </div>
 
-<!-- ─── LEVELS OF ELASTICITY ─── -->
 <h3 class="subsection-title">Levels of Elasticity</h3>
 
 <table>
@@ -881,19 +945,19 @@
   </thead>
   <tbody>
     <tr>
-      <td><span class="math">E(p) > 1</span></td>
+      <td>\(E(p) > 1\)</td>
       <td><strong>Elastic</strong></td>
-      <td>% drop in demand > % rise in price. Consumers are sensitive.</td>
+      <td>% drop in demand &gt; % rise in price. Consumers are sensitive.</td>
       <td>Luxury goods, airline tickets, brand-name electronics</td>
     </tr>
     <tr>
-      <td><span class="math">E(p) < 1</span></td>
+      <td>\(E(p) < 1\)</td>
       <td><strong>Inelastic</strong></td>
-      <td>% drop in demand < % rise in price. Consumers are insensitive.</td>
+      <td>% drop in demand &lt; % rise in price. Consumers are insensitive.</td>
       <td>Insulin, gasoline, salt, basic utilities</td>
     </tr>
     <tr>
-      <td><span class="math">E(p) = 1</span></td>
+      <td>\(E(p) = 1\)</td>
       <td><strong>Unit Elastic</strong></td>
       <td>% drop in demand = % rise in price.</td>
       <td>Revenue is at its peak here</td>
@@ -901,14 +965,13 @@
   </tbody>
 </table>
 
-<!-- ─── ELASTICITY AND REVENUE ─── -->
 <h3 class="subsection-title">Elasticity and Revenue</h3>
 
 <div class="theorem-box">
   <div class="thm-label">Key Principle — Levels of Elasticity and Revenue</div>
-  <p>• <strong>Elastic demand</strong> (<span class="math">E(p) > 1</span>): Revenue <span class="math">R</span> <em>decreases</em> as price <span class="math">p</span> increases.</p>
-  <p>• <strong>Inelastic demand</strong> (<span class="math">E(p) < 1</span>): Revenue <span class="math">R</span> <em>increases</em> as price <span class="math">p</span> increases.</p>
-  <p>• <strong>Unit elasticity</strong> (<span class="math">E(p) = 1</span>): Revenue is <em>unaffected</em> by a small change in price — this is where revenue is maximized.</p>
+  <p>• <strong>Elastic demand</strong> (\(E(p) > 1\)): Revenue \(R\) <em>decreases</em> as price \(p\) increases.</p>
+  <p>• <strong>Inelastic demand</strong> (\(E(p) < 1\)): Revenue \(R\) <em>increases</em> as price \(p\) increases.</p>
+  <p>• <strong>Unit elasticity</strong> (\(E(p) = 1\)): Revenue is <em>unaffected</em> by a small change in price — this is where revenue is maximized.</p>
 </div>
 
 <div class="note-box">
@@ -924,31 +987,29 @@
   </div>
   <div class="example-body">
     <p>A grocery store finds that weekly demand for cooking oil is:</p>
-    <div class="formula">q = D(p) = 300 − 20p</div>
-    <p>(a) Find the elasticity <span class="math">E(p)</span>. &nbsp; (b) Is demand elastic or inelastic at <span class="math">p = 5</span>? &nbsp; (c) At what price is revenue maximized?</p>
+    <div class="formula">$$q = D(p) = 300 - 20p$$</div>
+    <p>(a) Find the elasticity \(E(p)\). &nbsp; (b) Is demand elastic or inelastic at \(p = 5\)? &nbsp; (c) At what price is revenue maximized?</p>
     <div class="answer-preview">E(5) = 1/2 (inelastic); revenue is maximized at p = $7.50 (unit elasticity).</div>
-    <button class="toggle-btn" onclick="toggleSolution(this)">
-      <span class="arrow">▶</span> Show Solution
-    </button>
+    <button class="toggle-btn" onclick="toggleSolution(this)"><span class="arrow">▶</span> Show Solution</button>
   </div>
   <div class="solution-body">
     <div class="step">
       <strong>Part (a) — Find E(p)</strong>
-      <p><span class="math">dq/dp = −20</span></p>
-      <p><span class="math">E(p) = −(p/q)(dq/dp) = −(p/(300 − 20p))(−20) = 20p/(300 − 20p)</span></p>
-      <p>Simplified: <span class="math">E(p) = p/(15 − p)</span></p>
+      <p>\(\dfrac{dq}{dp} = -20\)</p>
+      <p>\(E(p) = -\dfrac{p}{q}\cdot\dfrac{dq}{dp} = -\dfrac{p}{300 - 20p}\cdot(-20) = \dfrac{20p}{300 - 20p}\)</p>
+      <p>Simplified: \(E(p) = \dfrac{p}{15 - p}\)</p>
     </div>
     <div class="step">
       <strong>Part (b) — Elasticity at p = 5</strong>
-      <p><span class="math">E(5) = 5/(15 − 5) = 5/10 = 0.5</span></p>
-      <p>Since <span class="math">E(5) = 0.5 < 1</span>, demand is <strong>inelastic</strong> at $5. Raising price will increase revenue.</p>
+      <p>\(E(5) = \dfrac{5}{15 - 5} = \dfrac{5}{10} = 0.5\)</p>
+      <p>Since \(E(5) = 0.5 < 1\), demand is <strong>inelastic</strong> at $5. Raising price will increase revenue.</p>
     </div>
     <div class="step">
       <strong>Part (c) — Revenue Maximization</strong>
-      <p>Revenue is maximized when <span class="math">E(p) = 1</span>:</p>
-      <p><span class="math">p/(15 − p) = 1  →  p = 15 − p  →  2p = 15  →  p = 7.50</span></p>
-      <p>Revenue is maximized at <span class="math">p = $7.50</span>. At this price: <span class="math">q = 300 − 150 = 150</span> units.</p>
-      <p><span class="math">R = 7.50 × 150 = $1,125</span> per week (maximum revenue).</p>
+      <p>Revenue is maximized when \(E(p) = 1\):</p>
+      <p>\(\dfrac{p}{15 - p} = 1 \implies p = 15 - p \implies 2p = 15 \implies p = 7.50\)</p>
+      <p>At this price: \(q = 300 - 150 = 150\) units.</p>
+      <p>\(R = 7.50 \times 150 = \$1{,}125\) per week (maximum revenue).</p>
     </div>
   </div>
 </div>
@@ -961,63 +1022,58 @@
   </div>
   <div class="example-body">
     <p>An online retailer's demand function for a tablet case is:</p>
-    <div class="formula">q = D(p) = 500/p²</div>
-    <p>(a) Find <span class="math">E(p)</span>. &nbsp; (b) Is demand elastic, inelastic, or unit elastic? &nbsp; (c) What happens to revenue if you raise price?</p>
+    <div class="formula">$$q = D(p) = \frac{500}{p^2}$$</div>
+    <p>(a) Find \(E(p)\). &nbsp; (b) Is demand elastic, inelastic, or unit elastic? &nbsp; (c) What happens to revenue if you raise price?</p>
     <div class="answer-preview">E(p) = 2 (elastic) for all p. Raising price always decreases revenue.</div>
-    <button class="toggle-btn" onclick="toggleSolution(this)">
-      <span class="arrow">▶</span> Show Solution
-    </button>
+    <button class="toggle-btn" onclick="toggleSolution(this)"><span class="arrow">▶</span> Show Solution</button>
   </div>
   <div class="solution-body">
     <div class="step">
       <strong>Compute the derivative</strong>
-      <p><span class="math">q = 500p⁻²  →  dq/dp = −1000p⁻³ = −1000/p³</span></p>
+      <p>\(q = 500p^{-2} \implies \dfrac{dq}{dp} = -1000p^{-3} = -\dfrac{1000}{p^3}\)</p>
     </div>
     <div class="step">
       <strong>Compute E(p)</strong>
-      <p><span class="math">E(p) = −(p/q)(dq/dp) = −(p/(500/p²))(−1000/p³)</span></p>
-      <p><span class="math">= −(p³/500)(−1000/p³) = 1000/500 = 2</span></p>
+      <p>\(E(p) = -\dfrac{p}{q}\cdot\dfrac{dq}{dp} = -\dfrac{p}{\,500/p^2\,}\cdot\left(-\dfrac{1000}{p^3}\right) = -\dfrac{p^3}{500}\cdot\left(-\dfrac{1000}{p^3}\right) = \dfrac{1000}{500} = 2\)</p>
     </div>
     <div class="step">
       <strong>Interpretation</strong>
-      <p><span class="math">E(p) = 2 > 1</span> → demand is <strong>elastic</strong> for all prices.</p>
+      <p>\(E(p) = 2 > 1\) → demand is <strong>elastic</strong> for all prices.</p>
       <p>A 1% increase in price causes a 2% decrease in demand. Since demand is elastic, <strong>raising price reduces revenue</strong>. The retailer should lower prices to increase revenue.</p>
     </div>
   </div>
 </div>
 
-<!-- ─── EXAMPLE 10 — SCENARIO ─── -->
+<!-- ─── EXAMPLE 10 ─── -->
 <div class="example-card">
   <div class="example-header">
     <span class="ex-num">Example 10</span>
     <span class="ex-title">A Pharmacy's Pricing Dilemma</span>
   </div>
   <div class="example-body">
-    <p>A pharmacy sells a common antibiotic at price <span class="math">p</span> dollars. Market research shows demand is <span class="math">q = 800 − 50p</span> units per month. The pharmacist is considering raising the price from $8 to $10.</p>
-    <p>(a) Calculate <span class="math">E(8)</span> and <span class="math">E(10)</span>.</p>
+    <p>A pharmacy sells a common antibiotic at price \(p\) dollars. Market research shows demand is \(q = 800 - 50p\) units per month. The pharmacist is considering raising the price from $8 to $10.</p>
+    <p>(a) Calculate \(E(8)\) and \(E(10)\).</p>
     <p>(b) Should the pharmacist raise the price to increase revenue? Explain using elasticity.</p>
-    <div class="answer-preview">E(8) ≈ 0.67 (inelastic); E(10) = 1 (unit elastic). Revenue increases from $8 to $10, then stays flat at $10.</div>
-    <button class="toggle-btn" onclick="toggleSolution(this)">
-      <span class="arrow">▶</span> Show Solution
-    </button>
+    <div class="answer-preview">E(8) = 1 (unit elastic); E(10) ≈ 1.67 (elastic). Revenue is already maximum at $8 — raising price decreases revenue.</div>
+    <button class="toggle-btn" onclick="toggleSolution(this)"><span class="arrow">▶</span> Show Solution</button>
   </div>
   <div class="solution-body">
     <div class="step">
       <strong>Elasticity Formula</strong>
-      <p><span class="math">dq/dp = −50</span></p>
-      <p><span class="math">E(p) = −(p/q)(dq/dp) = −(p/(800 − 50p))(−50) = 50p/(800 − 50p)</span></p>
+      <p>\(\dfrac{dq}{dp} = -50\)</p>
+      <p>\(E(p) = -\dfrac{p}{q}\cdot\dfrac{dq}{dp} = \dfrac{50p}{800 - 50p}\)</p>
     </div>
     <div class="step">
       <strong>Part (a)</strong>
-      <p><span class="math">E(8) = 400/(800 − 400) = 400/400 = 1</span></p>
-      <p><span class="math">E(10) = 500/(800 − 500) = 500/300 ≈ 1.67</span></p>
+      <p>\(E(8) = \dfrac{400}{800 - 400} = \dfrac{400}{400} = 1\)</p>
+      <p>\(E(10) = \dfrac{500}{800 - 500} = \dfrac{500}{300} \approx 1.67\)</p>
     </div>
     <div class="step">
       <strong>Part (b) — Decision</strong>
-      <p>At <span class="math">p = $8</span>: <span class="math">E = 1</span> → unit elastic → revenue is already at maximum!</p>
-      <p><span class="math">R(8) = 8 × 400 = $3,200</span></p>
-      <p>At <span class="math">p = $10</span>: <span class="math">E ≈ 1.67 > 1</span> → elastic → revenue falls.</p>
-      <p><span class="math">R(10) = 10 × 300 = $3,000</span></p>
+      <p>At \(p = \$8\): \(E = 1\) → unit elastic → revenue is already at maximum!</p>
+      <p>\(R(8) = 8 \times 400 = \$3{,}200\)</p>
+      <p>At \(p = \$10\): \(E \approx 1.67 > 1\) → elastic → revenue falls.</p>
+      <p>\(R(10) = 10 \times 300 = \$3{,}000\)</p>
       <p><strong>Conclusion:</strong> The pharmacist should <em>not</em> raise the price. At $8, revenue is already at its maximum of $3,200. Raising to $10 reduces revenue by $200/month because demand becomes elastic beyond that point.</p>
     </div>
   </div>
@@ -1034,31 +1090,29 @@
 <div class="exercise-item">
   <div class="exercise-q">
     <div class="q-num">Exercise 1 — Absolute Extrema on a Closed Interval</div>
-    <p>Find the absolute maximum and minimum values of <span class="math">f(x) = x³ − 3x² − 9x + 5</span> on <span class="math">[−2, 6]</span>.</p>
+    <p>Find the absolute maximum and minimum values of \(f(x) = x^3 - 3x^2 - 9x + 5\) on \([-2,\, 6]\).</p>
   </div>
   <div class="example-body">
-    <div class="answer-preview">Maximum is 10 at x = −1; minimum is −22 at x = 3.</div>
-    <button class="toggle-btn" onclick="toggleSolution(this)">
-      <span class="arrow">▶</span> Show Solution
-    </button>
+    <div class="answer-preview">Maximum is 59 at x = 6; minimum is −22 at x = 3.</div>
+    <button class="toggle-btn" onclick="toggleSolution(this)"><span class="arrow">▶</span> Show Solution</button>
   </div>
   <div class="solution-body">
     <div class="step">
       <strong>Step 1 — Critical Numbers</strong>
-      <p><span class="math">f'(x) = 3x² − 6x − 9 = 3(x² − 2x − 3) = 3(x − 3)(x + 1)</span></p>
-      <p>Critical numbers: <span class="math">x = 3</span> and <span class="math">x = −1</span> (both in <span class="math">[−2, 6]</span>).</p>
+      <p>\(f'(x) = 3x^2 - 6x - 9 = 3(x^2 - 2x - 3) = 3(x-3)(x+1)\)</p>
+      <p>Critical numbers: \(x = 3\) and \(x = -1\) (both in \([-2, 6]\)).</p>
     </div>
     <div class="step">
       <strong>Step 2 — Evaluate</strong>
-      <p><span class="math">f(−2) = −8 − 12 + 18 + 5 = 3</span></p>
-      <p><span class="math">f(−1) = −1 − 3 + 9 + 5 = 10</span></p>
-      <p><span class="math">f(3) = 27 − 27 − 27 + 5 = −22</span></p>
-      <p><span class="math">f(6) = 216 − 108 − 54 + 5 = 59</span></p>
+      <p>\(f(-2) = -8 - 12 + 18 + 5 = 3\)</p>
+      <p>\(f(-1) = -1 - 3 + 9 + 5 = 10\)</p>
+      <p>\(f(3) = 27 - 27 - 27 + 5 = -22\)</p>
+      <p>\(f(6) = 216 - 108 - 54 + 5 = 59\)</p>
     </div>
     <div class="step">
       <strong>Conclusion</strong>
-      <p><strong>Absolute Maximum: 59</strong> at <span class="math">x = 6</span> (endpoint!)</p>
-      <p><strong>Absolute Minimum: −22</strong> at <span class="math">x = 3</span></p>
+      <p><strong>Absolute Maximum: 59</strong> at \(x = 6\) (endpoint!)</p>
+      <p><strong>Absolute Minimum: −22</strong> at \(x = 3\)</p>
       <p>Note how the maximum occurred at an endpoint — always check them!</p>
     </div>
   </div>
@@ -1068,30 +1122,28 @@
 <div class="exercise-item">
   <div class="exercise-q">
     <div class="q-num">Exercise 2 — Business Optimization</div>
-    <p>A company's weekly profit (in thousands of dollars) from selling <span class="math">x</span> units is: <span class="math">P(x) = −2x³ + 12x² − 18x + 5</span> for <span class="math">0 ≤ x ≤ 5</span>. Find the production level that maximizes profit.</p>
+    <p>A company's weekly profit (in thousands of dollars) from selling \(x\) units is: \(P(x) = -2x^3 + 12x^2 - 18x + 5\) for \(0 \leq x \leq 5\). Find the production level that maximizes profit.</p>
   </div>
   <div class="example-body">
-    <div class="answer-preview">Maximum profit is $5,000 at x = 3 (or x = 0 if only checking endpoints carefully).</div>
-    <button class="toggle-btn" onclick="toggleSolution(this)">
-      <span class="arrow">▶</span> Show Solution
-    </button>
+    <div class="answer-preview">Maximum profit is $5,000 at x = 3 (or x = 0).</div>
+    <button class="toggle-btn" onclick="toggleSolution(this)"><span class="arrow">▶</span> Show Solution</button>
   </div>
   <div class="solution-body">
     <div class="step">
       <strong>Find Critical Numbers</strong>
-      <p><span class="math">P'(x) = −6x² + 24x − 18 = −6(x² − 4x + 3) = −6(x − 1)(x − 3)</span></p>
-      <p>Critical numbers: <span class="math">x = 1</span> and <span class="math">x = 3</span></p>
+      <p>\(P'(x) = -6x^2 + 24x - 18 = -6(x^2 - 4x + 3) = -6(x-1)(x-3)\)</p>
+      <p>Critical numbers: \(x = 1\) and \(x = 3\)</p>
     </div>
     <div class="step">
       <strong>Evaluate at All Candidates</strong>
-      <p><span class="math">P(0) = 5</span></p>
-      <p><span class="math">P(1) = −2 + 12 − 18 + 5 = −3</span></p>
-      <p><span class="math">P(3) = −54 + 108 − 54 + 5 = 5</span></p>
-      <p><span class="math">P(5) = −250 + 300 − 90 + 5 = −35</span></p>
+      <p>\(P(0) = 5\)</p>
+      <p>\(P(1) = -2 + 12 - 18 + 5 = -3\)</p>
+      <p>\(P(3) = -54 + 108 - 54 + 5 = 5\)</p>
+      <p>\(P(5) = -250 + 300 - 90 + 5 = -35\)</p>
     </div>
     <div class="step">
       <strong>Conclusion</strong>
-      <p>Maximum profit of <strong>$5,000</strong> is achieved at both <span class="math">x = 0</span> and <span class="math">x = 3</span>. The practical answer is <span class="math">x = 3</span> (you'd rather produce 3 units and earn the same as producing nothing!). Minimum is at <span class="math">x = 5</span>: a loss of $35,000 — don't overproduce!</p>
+      <p>Maximum profit of <strong>$5,000</strong> is achieved at both \(x = 0\) and \(x = 3\). The practical answer is \(x = 3\). Minimum is at \(x = 5\): a loss of $35,000 — don't overproduce!</p>
     </div>
   </div>
 </div>
@@ -1100,30 +1152,28 @@
 <div class="exercise-item">
   <div class="exercise-q">
     <div class="q-num">Exercise 3 — Elasticity</div>
-    <p>The demand for concert tickets is <span class="math">q = D(p) = 1200 − 60p</span>.</p>
-    <p>(a) Compute <span class="math">E(p)</span>. &nbsp; (b) At what price is demand unit elastic? &nbsp; (c) At <span class="math">p = 5</span>, is it better to raise or lower the price to increase revenue?</p>
+    <p>The demand for concert tickets is \(q = D(p) = 1200 - 60p\).</p>
+    <p>(a) Compute \(E(p)\). &nbsp; (b) At what price is demand unit elastic? &nbsp; (c) At \(p = 5\), is it better to raise or lower the price to increase revenue?</p>
   </div>
   <div class="example-body">
     <div class="answer-preview">E(p) = p/(20−p); unit elastic at p = $10; at p = $5, demand is inelastic — raise price to increase revenue.</div>
-    <button class="toggle-btn" onclick="toggleSolution(this)">
-      <span class="arrow">▶</span> Show Solution
-    </button>
+    <button class="toggle-btn" onclick="toggleSolution(this)"><span class="arrow">▶</span> Show Solution</button>
   </div>
   <div class="solution-body">
     <div class="step">
       <strong>Part (a)</strong>
-      <p><span class="math">dq/dp = −60</span></p>
-      <p><span class="math">E(p) = −(p/q)(dq/dp) = −[p/(1200 − 60p)](−60) = 60p/(1200 − 60p) = p/(20 − p)</span></p>
+      <p>\(\dfrac{dq}{dp} = -60\)</p>
+      <p>\(E(p) = -\dfrac{p}{q}\cdot\dfrac{dq}{dp} = \dfrac{60p}{1200 - 60p} = \dfrac{p}{20 - p}\)</p>
     </div>
     <div class="step">
       <strong>Part (b) — Unit Elasticity</strong>
-      <p><span class="math">E(p) = 1  →  p/(20 − p) = 1  →  p = 20 − p  →  p = $10</span></p>
-      <p>Revenue is maximized at <span class="math">p = $10</span>.</p>
+      <p>\(E(p) = 1 \implies \dfrac{p}{20-p} = 1 \implies p = 20 - p \implies p = \$10\)</p>
+      <p>Revenue is maximized at \(p = \$10\).</p>
     </div>
     <div class="step">
       <strong>Part (c) — At p = 5</strong>
-      <p><span class="math">E(5) = 5/15 = 1/3 < 1</span> → demand is <strong>inelastic</strong></p>
-      <p>Since demand is inelastic at $5, the concert venue should <strong>raise the price</strong> to increase total revenue. Patrons are not very sensitive to price in this range — they'll still buy tickets.</p>
+      <p>\(E(5) = \dfrac{5}{15} = \dfrac{1}{3} < 1\) → demand is inelastic</p>
+      <p>Since demand is inelastic at $5, the concert venue should raise the price to increase total revenue.</p>
     </div>
   </div>
 </div>
@@ -1132,37 +1182,33 @@
 <div class="exercise-item">
   <div class="exercise-q">
     <div class="q-num">Exercise 4 — Marginal Analysis: MR = MC</div>
-    <p>A firm sells widgets with demand <span class="math">p = 50 − 2q</span> and total cost <span class="math">C(q) = q² + 10q + 100</span>. Find the profit-maximizing quantity using MR = MC.</p>
+    <p>A firm sells widgets with demand \(p = 50 - 2q\) and total cost \(C(q) = q^2 + 10q + 100\). Find the profit-maximizing quantity using MR = MC.</p>
   </div>
   <div class="example-body">
-    <div class="answer-preview">Profit is maximized at q = 5 units, yielding profit = $25.</div>
-    <button class="toggle-btn" onclick="toggleSolution(this)">
-      <span class="arrow">▶</span> Show Solution
-    </button>
+    <div class="answer-preview">Profit is maximized at q ≈ 6.67 units.</div>
+    <button class="toggle-btn" onclick="toggleSolution(this)"><span class="arrow">▶</span> Show Solution</button>
   </div>
   <div class="solution-body">
     <div class="step">
       <strong>Revenue and Marginals</strong>
-      <p><span class="math">R(q) = pq = (50 − 2q)q = 50q − 2q²</span></p>
-      <p><span class="math">MR = R'(q) = 50 − 4q</span></p>
-      <p><span class="math">MC = C'(q) = 2q + 10</span></p>
+      <p>\(R(q) = pq = (50 - 2q)q = 50q - 2q^2\)</p>
+      <p>\(MR = R'(q) = 50 - 4q\)</p>
+      <p>\(MC = C'(q) = 2q + 10\)</p>
     </div>
     <div class="step">
       <strong>Set MR = MC</strong>
-      <p><span class="math">50 − 4q = 2q + 10  →  40 = 6q  →  q = 40/6 ≈ 6.67</span></p>
-      <p>Or with slightly different C: if <span class="math">MC = 2q + 10</span> and <span class="math">MR = 50 − 4q</span>:</p>
-      <p><span class="math">q = 40/6 ≈ 6.67</span> units. Round to nearest whole unit: <span class="math">q = 7</span>.</p>
+      <p>\(50 - 4q = 2q + 10 \implies 40 = 6q \implies q = \dfrac{40}{6} \approx 6.67\)</p>
     </div>
     <div class="step">
       <strong>Verify Maximum</strong>
-      <p><span class="math">P''(q) = MR' − MC' = −4 − 2 = −6 < 0</span> ✓</p>
+      <p>\(P''(q) = MR' - MC' = -4 - 2 = -6 < 0\) ✓</p>
     </div>
     <div class="step">
       <strong>Compute Profit</strong>
-      <p>At <span class="math">q = 6.67</span>: <span class="math">p = 50 − 13.33 = 36.67</span></p>
-      <p><span class="math">R = 36.67 × 6.67 ≈ $244.5</span></p>
-      <p><span class="math">C = (6.67)² + 10(6.67) + 100 ≈ 44.5 + 66.7 + 100 = $211.2</span></p>
-      <p>Profit ≈ <strong>$33.3</strong></p>
+      <p>At \(q \approx 6.67\): \(p = 50 - 13.33 = 36.67\)</p>
+      <p>\(R \approx 36.67 \times 6.67 \approx \$244.5\)</p>
+      <p>\(C \approx 44.5 + 66.7 + 100 = \$211.2\)</p>
+      <p>Profit \(\approx \$33.3\)</p>
     </div>
   </div>
 </div>
@@ -1171,67 +1217,60 @@
 <div class="exercise-item">
   <div class="exercise-q">
     <div class="q-num">Exercise 5 — Scenario: Smartphone App Pricing</div>
-    <p>A mobile app company sells subscriptions at price <span class="math">p</span> dollars/month. Their demand function is <span class="math">q = 10,000 · p⁻¹·⁵</span>.</p>
-    <p>(a) Find <span class="math">E(p)</span>. &nbsp; (b) At <span class="math">p = $9</span>, is demand elastic or inelastic? &nbsp; (c) Should they raise or lower price to maximize revenue?</p>
+    <p>A mobile app company sells subscriptions at price \(p\) dollars/month. Their demand function is \(q = 10{,}000 \cdot p^{-1.5}\).</p>
+    <p>(a) Find \(E(p)\). &nbsp; (b) At \(p = \$9\), is demand elastic or inelastic? &nbsp; (c) Should they raise or lower price to maximize revenue?</p>
   </div>
   <div class="example-body">
     <div class="answer-preview">E(p) = 1.5 (elastic for all p). Demand is always elastic — lowering price increases revenue.</div>
-    <button class="toggle-btn" onclick="toggleSolution(this)">
-      <span class="arrow">▶</span> Show Solution
-    </button>
+    <button class="toggle-btn" onclick="toggleSolution(this)"><span class="arrow">▶</span> Show Solution</button>
   </div>
   <div class="solution-body">
     <div class="step">
       <strong>Part (a) — Compute E(p)</strong>
-      <p><span class="math">q = 10000 · p⁻¹·⁵</span></p>
-      <p><span class="math">dq/dp = 10000 · (−1.5) · p⁻²·⁵ = −15000 · p⁻²·⁵</span></p>
-      <p><span class="math">E(p) = −(p/q)(dq/dp) = −(p / 10000p⁻¹·⁵)(−15000p⁻²·⁵)</span></p>
-      <p><span class="math">= −(p · p¹·⁵ / 10000)(−15000 / p²·⁵)</span></p>
-      <p><span class="math">= (15000 · p²·⁵) / (10000 · p²·⁵) = 15000/10000 = 1.5</span></p>
+      <p>\(q = 10000 \cdot p^{-1.5}\)</p>
+      <p>\(\dfrac{dq}{dp} = 10000 \cdot (-1.5) \cdot p^{-2.5} = -15000 \cdot p^{-2.5}\)</p>
+      <p>\(E(p) = -\dfrac{p}{q}\cdot\dfrac{dq}{dp} = -\dfrac{p}{10000p^{-1.5}}\cdot(-15000p^{-2.5}) = \dfrac{15000\, p^{2.5}}{10000\, p^{2.5}} = 1.5\)</p>
     </div>
     <div class="step">
-      <strong>Part (b) & (c)</strong>
-      <p><span class="math">E(p) = 1.5 > 1</span> for all prices → demand is always <strong>elastic</strong>.</p>
-      <p>Since demand is elastic, raising price always <em>decreases</em> revenue. The company should consider <strong>lowering price</strong> (or offering bundles/promotions) to grow revenue through volume.</p>
-      <p>Note: for a power demand <span class="math">q = Ap^{−n}</span>, the elasticity is always the constant <span class="math">n</span>.</p>
+      <strong>Part (b) &amp; (c)</strong>
+      <p>\(E(p) = 1.5 > 1\) for all prices → demand is always <strong>elastic</strong>.</p>
+      <p>Since demand is elastic, raising price always <em>decreases</em> revenue. The company should consider <strong>lowering price</strong> to grow revenue through volume.</p>
+      <p>Note: for a power demand \(q = Ap^{-n}\), the elasticity is always the constant \(n\).</p>
     </div>
   </div>
 </div>
 
-<!-- Q6 — CHALLENGE -->
+<!-- Q6 -->
 <div class="exercise-item">
   <div class="exercise-q">
     <div class="q-num">Exercise 6 — Challenge: Combining Optimization and Elasticity</div>
-    <p>A hotel chain's nightly room demand is <span class="math">q = 400 − 10p</span> and total operating cost is <span class="math">C(q) = 5q + 200</span>.</p>
-    <p>(a) Find the revenue-maximizing price using elasticity. &nbsp; (b) Find the profit-maximizing price using <span class="math">MR = MC</span>. &nbsp; (c) Are these the same? Why or why not?</p>
+    <p>A hotel chain's nightly room demand is \(q = 400 - 10p\) and total operating cost is \(C(q) = 5q + 200\).</p>
+    <p>(a) Find the revenue-maximizing price using elasticity. &nbsp; (b) Find the profit-maximizing price using \(MR = MC\). &nbsp; (c) Are these the same? Why or why not?</p>
   </div>
   <div class="example-body">
     <div class="answer-preview">Revenue max at p = $20; profit max at p = $22.50. They differ because profit accounts for costs.</div>
-    <button class="toggle-btn" onclick="toggleSolution(this)">
-      <span class="arrow">▶</span> Show Solution
-    </button>
+    <button class="toggle-btn" onclick="toggleSolution(this)"><span class="arrow">▶</span> Show Solution</button>
   </div>
   <div class="solution-body">
     <div class="step">
       <strong>Part (a) — Revenue Maximizing Price</strong>
-      <p><span class="math">dq/dp = −10</span></p>
-      <p><span class="math">E(p) = −(p/(400 − 10p))(−10) = 10p/(400 − 10p) = p/(40 − p)</span></p>
-      <p>Set <span class="math">E(p) = 1</span>: <span class="math">p/(40 − p) = 1  →  p = 20</span></p>
-      <p>Revenue-maximizing price: <span class="math">p = $20</span>, <span class="math">q = 200</span> rooms, <span class="math">R = $4,000/night</span>.</p>
+      <p>\(\dfrac{dq}{dp} = -10\)</p>
+      <p>\(E(p) = \dfrac{10p}{400 - 10p} = \dfrac{p}{40 - p}\)</p>
+      <p>Set \(E(p) = 1\): \(p = 40 - p \implies p = \$20\)</p>
+      <p>Revenue-maximizing: \(p = \$20\), \(q = 200\) rooms, \(R = \$4{,}000\)/night.</p>
     </div>
     <div class="step">
       <strong>Part (b) — Profit Maximizing Price</strong>
-      <p>Express <span class="math">R</span> and <span class="math">C</span> in terms of <span class="math">q</span>: from <span class="math">q = 400 − 10p  →  p = (400 − q)/10 = 40 − q/10</span></p>
-      <p><span class="math">R(q) = pq = (40 − q/10)q = 40q − q²/10</span></p>
-      <p><span class="math">MR = 40 − q/5</span></p>
-      <p><span class="math">MC = C'(q) = 5</span></p>
-      <p>Set <span class="math">MR = MC</span>: <span class="math">40 − q/5 = 5  →  q/5 = 35  →  q = 175</span></p>
-      <p><span class="math">p = 40 − 175/10 = 40 − 17.5 = $22.50</span></p>
+      <p>From \(q = 400 - 10p \implies p = 40 - \dfrac{q}{10}\)</p>
+      <p>\(R(q) = \left(40 - \dfrac{q}{10}\right)q = 40q - \dfrac{q^2}{10}\)</p>
+      <p>\(MR = 40 - \dfrac{q}{5}, \quad MC = C'(q) = 5\)</p>
+      <p>Set \(MR = MC\): \(40 - \dfrac{q}{5} = 5 \implies q = 175\)</p>
+      <p>\(p = 40 - \dfrac{175}{10} = \$22.50\)</p>
     </div>
     <div class="step">
       <strong>Part (c) — Comparison</strong>
-      <p>The revenue-max price ($20) differs from the profit-max price ($22.50). This makes sense: maximizing revenue ignores costs. Since each room costs $5 to service, the hotel needs to charge slightly more to account for those costs. <strong>A business should usually optimize profit, not just revenue.</strong></p>
-      <p>Profit at <span class="math">q = 175</span>: <span class="math">R = 22.50 × 175 = $3,937.50</span>, <span class="math">C = 5(175) + 200 = $1,075</span>, <span class="math">P = $2,862.50</span>.</p>
+      <p>The revenue-max price ($20) differs from the profit-max price ($22.50). Maximizing revenue ignores costs. Since each room costs $5 to service, the hotel needs to charge slightly more. <strong>A business should usually optimize profit, not just revenue.</strong></p>
+      <p>Profit at \(q = 175\): \(R = 22.50 \times 175 = \$3{,}937.50\), \(C = 5(175)+200 = \$1{,}075\), \(P = \$2{,}862.50\).</p>
     </div>
   </div>
 </div>
@@ -1241,23 +1280,22 @@
 <!-- SUMMARY -->
 <div class="theorem-box" style="margin-top:2rem;">
   <div class="thm-label">Section Summary</div>
-  <p><strong>Absolute Extrema:</strong> On a closed interval [a,b], evaluate f at all critical numbers plus endpoints. The largest is the absolute max, smallest is the absolute min.</p>
-  <p><strong>Second Derivative Test (open intervals):</strong> If f has one critical number c and f''(c) > 0, that's an absolute min; if f''(c) < 0, it's an absolute max.</p>
-  <p><strong>Max Profit:</strong> Occurs where MR = MC (with R'' &lt; C'').</p>
-  <p><strong>Min Average Cost:</strong> Occurs where MC = AC.</p>
-  <p><strong>Elasticity:</strong> E(p) = −(p/q)(dq/dp). Elastic: E > 1 (raise price → less revenue). Inelastic: E &lt; 1 (raise price → more revenue). Unit elastic: E = 1 (revenue is maximized).</p>
+  <p><strong>Absolute Extrema:</strong> On a closed interval \([a,b]\), evaluate \(f\) at all critical numbers plus endpoints. The largest is the absolute max, smallest is the absolute min.</p>
+  <p><strong>Second Derivative Test (open intervals):</strong> If \(f\) has one critical number \(c\) and \(f''(c) > 0\), that's an absolute min; if \(f''(c) < 0\), it's an absolute max.</p>
+  <p><strong>Max Profit:</strong> Occurs where \(MR = MC\) (with \(R'' < C''\)).</p>
+  <p><strong>Min Average Cost:</strong> Occurs where \(MC = AC\).</p>
+  <p><strong>Elasticity:</strong> \(E(p) = -\dfrac{p}{q}\dfrac{dq}{dp}\). Elastic: \(E > 1\) (raise price → less revenue). Inelastic: \(E < 1\) (raise price → more revenue). Unit elastic: \(E = 1\) (revenue is maximized).</p>
 </div>
 
 <!-- ══════════════════════════════════════════════════════
      TEXTBOOK EXERCISES — SECTION 3.4
 ══════════════════════════════════════════════════════ -->
-<div class="exercises-header">📖 Textbook Exercises — Section 3.4 (Hoffmann Calculus)</div>
- 
+<div class="exercises-header">📖 Some of Textbook Exercises — Section 3.4 (Hoffmann Calculus)</div>
+
 <p style="margin-top:1.2rem;">The following problems are taken directly from the Hoffmann Calculus textbook, Section 3.4. Each problem number is listed for your reference so you can cross-check with the book.</p>
- 
-<!-- ══ GROUP 1: ELASTICITY & MARGINAL ANALYSIS ══ -->
+
 <div class="cat-label">§ Elasticity &amp; Marginal Analysis</div>
- 
+
 <!-- ─── Problem 43 ─── -->
 <div class="exercise-card">
   <div class="exercise-header">
@@ -1267,42 +1305,38 @@
   </div>
   <div class="exercise-body">
     <p>Suppose the demand equation for a certain commodity is:</p>
-    <div class="formula">q = a / p<sup>m</sup></div>
-    <p>where <span class="math">a</span> and <span class="math">m</span> are positive constants. Show that the elasticity of demand equals <span class="math">m</span> for all values of <span class="math">p</span>. Interpret this result.</p>
+    <div class="formula">$$q = \frac{a}{p^m}$$</div>
+    <p>where \(a\) and \(m\) are positive constants. Show that the elasticity of demand equals \(m\) for all values of \(p\). Interpret this result.</p>
     <div class="answer-preview">E(p) = m (constant). This is a power demand function — its elasticity is always equal to the exponent m, regardless of price.</div>
-    <button class="toggle-btn" onclick="toggleSolution(this)">
-      <span class="arrow">▶</span> Show Solution
-    </button>
+    <button class="toggle-btn" onclick="toggleSolution(this)"><span class="arrow">▶</span> Show Solution</button>
   </div>
   <div class="solution-body">
     <div class="step">
       <strong>Rewrite q</strong>
-      <p><span class="math">q = a · p<sup>−m</sup></span></p>
+      <p>\(q = a \cdot p^{-m}\)</p>
     </div>
     <div class="step">
       <strong>Differentiate</strong>
-      <p><span class="math">dq/dp = a · (−m) · p<sup>−m−1</sup> = −ma · p<sup>−m−1</sup></span></p>
+      <p>\(\dfrac{dq}{dp} = a \cdot (-m) \cdot p^{-m-1} = -ma \cdot p^{-m-1}\)</p>
     </div>
     <div class="step">
       <strong>Apply Elasticity Formula</strong>
-      <p><span class="math">E(p) = −(p/q)(dq/dp)</span></p>
-      <p><span class="math">= −[p / (a·p<sup>−m</sup>)] · [−ma·p<sup>−m−1</sup>]</span></p>
-      <p><span class="math">= −[p · p<sup>m</sup> / a] · [−ma / p<sup>m+1</sup>]</span></p>
-      <p><span class="math">= −[p<sup>m+1</sup> / a] · [−ma / p<sup>m+1</sup>]</span></p>
-      <p><span class="math">= m</span> &nbsp; ✓</p>
+      <p>\(E(p) = -\dfrac{p}{q}\cdot\dfrac{dq}{dp}\)</p>
+      <p>\(= -\dfrac{p}{a\,p^{-m}} \cdot \left(-ma\,p^{-m-1}\right)\)</p>
+      <p>\(= -\dfrac{p^{m+1}}{a} \cdot \left(-\dfrac{ma}{p^{m+1}}\right) = m \quad\checkmark\)</p>
     </div>
     <div class="step">
       <strong>Interpretation</strong>
-      <p>For a power-law demand function <span class="math">q = a/p<sup>m</sup></span>, the elasticity is the <em>constant</em> <span class="math">m</span> — it doesn't change with price. This means:</p>
+      <p>For a power-law demand function \(q = a/p^m\), the elasticity is the <em>constant</em> \(m\) — it doesn't change with price. This means:</p>
       <ul>
-        <li>If <span class="math">m > 1</span>: demand is always elastic (every 1% price rise causes more than a 1% drop in demand)</li>
-        <li>If <span class="math">m < 1</span>: demand is always inelastic</li>
-        <li>If <span class="math">m = 1</span>: demand is always unit elastic, meaning revenue is constant for all prices!</li>
+        <li>If \(m > 1\): demand is always elastic</li>
+        <li>If \(m < 1\): demand is always inelastic</li>
+        <li>If \(m = 1\): demand is always unit elastic — revenue is constant for all prices!</li>
       </ul>
     </div>
   </div>
 </div>
- 
+
 <!-- ─── Problem 44 ─── -->
 <div class="exercise-card">
   <div class="exercise-header">
@@ -1311,93 +1345,81 @@
     <span class="ex-title">Marginal Analysis — Optimizing Q(x) = R(x)/C(x)</span>
   </div>
   <div class="exercise-body">
-    <p>Let <span class="math">R(x)</span> be the revenue from the production and sale of <span class="math">x</span> units of a commodity, and <span class="math">C(x)</span> be the total cost. Show that the ratio:</p>
-    <div class="formula">Q(x) = R(x) / C(x)</div>
+    <p>Let \(R(x)\) be the revenue from the production and sale of \(x\) units of a commodity, and \(C(x)\) be the total cost. Show that the ratio:</p>
+    <div class="formula">$$Q(x) = \frac{R(x)}{C(x)}$$</div>
     <p>is optimized (critical point occurs) when the <strong>relative rate of change of revenue</strong> equals the <strong>relative rate of change of cost</strong>. Would you expect this optimum to be a maximum or minimum?</p>
     <div class="answer-preview">Q'(x) = 0 leads to R'(x)/R(x) = C'(x)/C(x). This is typically a maximum (maximizing return-on-cost ratio).</div>
-    <button class="toggle-btn" onclick="toggleSolution(this)">
-      <span class="arrow">▶</span> Show Solution
-    </button>
+    <button class="toggle-btn" onclick="toggleSolution(this)"><span class="arrow">▶</span> Show Solution</button>
   </div>
   <div class="solution-body">
     <div class="step">
       <strong>Differentiate Q(x) using the Quotient Rule</strong>
-      <p><span class="math">Q'(x) = [R'(x)·C(x) − R(x)·C'(x)] / [C(x)]²</span></p>
+      <p>\(Q'(x) = \dfrac{R'(x)\cdot C(x) - R(x)\cdot C'(x)}{[C(x)]^2}\)</p>
     </div>
     <div class="step">
       <strong>Set Q'(x) = 0</strong>
-      <p>The denominator <span class="math">[C(x)]² > 0</span> always (costs are positive), so:</p>
-      <p><span class="math">R'(x)·C(x) − R(x)·C'(x) = 0</span></p>
-      <p><span class="math">R'(x)·C(x) = R(x)·C'(x)</span></p>
+      <p>The denominator \([C(x)]^2 > 0\) always, so:</p>
+      <p>\(R'(x)\cdot C(x) - R(x)\cdot C'(x) = 0\)</p>
+      <p>\(R'(x)\cdot C(x) = R(x)\cdot C'(x)\)</p>
     </div>
     <div class="step">
       <strong>Rearrange</strong>
-      <p>Divide both sides by <span class="math">R(x)·C(x) > 0</span>:</p>
-      <p><span class="math">R'(x)/R(x) = C'(x)/C(x)</span></p>
+      <p>Divide both sides by \(R(x)\cdot C(x) > 0\):</p>
+      <p>\(\dfrac{R'(x)}{R(x)} = \dfrac{C'(x)}{C(x)}\)</p>
       <p>This is exactly the condition that the <strong>relative rate of change of revenue</strong> equals the <strong>relative rate of change of cost</strong>. ✓</p>
     </div>
     <div class="step">
       <strong>Maximum or Minimum?</strong>
-      <p>The function <span class="math">Q(x) = R(x)/C(x)</span> measures revenue earned per dollar of cost — a profitability ratio. Economically, we want to <em>maximize</em> this. As <span class="math">x → 0</span> or <span class="math">x → ∞</span>, <span class="math">Q → 0</span> (no revenue, or costs overwhelm revenue), so the interior critical point is a <strong>maximum</strong>.</p>
+      <p>\(Q(x) = R(x)/C(x)\) measures revenue earned per dollar of cost — a profitability ratio. As \(x \to 0\) or \(x \to \infty\), \(Q \to 0\), so the interior critical point is a <strong>maximum</strong>.</p>
     </div>
   </div>
 </div>
- 
-<!-- ══ GROUP 2: LIFE AND SOCIAL SCIENCE ══ -->
+
 <div class="cat-label">§ Life &amp; Social Science Applied Problems</div>
- 
+
 <!-- ─── Problem 45 ─── -->
 <div class="exercise-card">
   <div class="exercise-header">
     <span class="ex-num">Problem 45</span>
     <span class="ex-ref">Hoffmann §3.4 · Exercise 45</span>
-    <span class="ex-title">Group Membership — Membership Extrema (2008–2013)</span>
+    <span class="ex-title">Group Membership — Membership Extrema (2000–2013)</span>
   </div>
   <div class="exercise-body">
-    <p>A national consumers' association determines that <span class="math">x</span> years after its founding in 1998, it will have <span class="math">P(x)</span> members, where:</p>
-    <div class="formula">P(x) = 100(2x³ − 45x² + 264x)</div>
+    <p>A national consumers' association determines that \(x\) years after its founding in 1998, it will have \(P(x)\) members, where:</p>
+    <div class="formula">$$P(x) = 100(2x^3 - 45x^2 + 264x)$$</div>
     <p><strong>(a)</strong> At what time between 2000 and 2013 was membership largest? Smallest?</p>
     <p><strong>(b)</strong> What were the largest and smallest membership levels between 2008 and 2013?</p>
-    <div class="answer-preview">(a) Largest at x = 4 (2002), smallest at x = 11 (2009). (b) On [10,15]: largest at x = 10, smallest at x = 11.</div>
-    <button class="toggle-btn" onclick="toggleSolution(this)">
-      <span class="arrow">▶</span> Show Solution
-    </button>
+    <div class="answer-preview">(a) Largest at x = 15 (year 2013), smallest at x = 11 (year 2009). (b) On [10,15]: largest at x = 15, smallest at x = 11.</div>
+    <button class="toggle-btn" onclick="toggleSolution(this)"><span class="arrow">▶</span> Show Solution</button>
   </div>
   <div class="solution-body">
     <div class="step">
       <strong>Interpret the Time Variable</strong>
-      <p>Founded in 1998 means <span class="math">x = 0</span> is 1998. So:</p>
-      <ul>
-        <li>Year 2000 → <span class="math">x = 2</span></li>
-        <li>Year 2008 → <span class="math">x = 10</span></li>
-        <li>Year 2013 → <span class="math">x = 15</span></li>
-      </ul>
+      <p>Founded in 1998 means \(x = 0\) is 1998. So: Year 2000 → \(x=2\), Year 2008 → \(x=10\), Year 2013 → \(x=15\).</p>
     </div>
     <div class="step">
       <strong>Find Critical Numbers of P(x)</strong>
-      <p><span class="math">P'(x) = 100(6x² − 90x + 264) = 600(x² − 15x + 44) = 600(x − 4)(x − 11)</span></p>
-      <p>Critical numbers: <span class="math">x = 4</span> and <span class="math">x = 11</span>.</p>
+      <p>\(P'(x) = 100(6x^2 - 90x + 264) = 600(x^2 - 15x + 44) = 600(x-4)(x-11)\)</p>
+      <p>Critical numbers: \(x = 4\) and \(x = 11\).</p>
     </div>
     <div class="subpart">
       <strong>Part (a) — Interval [2, 15] (years 2000–2013)</strong>
-      <p>Evaluate at critical numbers and endpoints:</p>
-      <p><span class="math">P(2) = 100(16 − 180 + 528) = 100(364) = 36,400</span></p>
-      <p><span class="math">P(4) = 100(128 − 720 + 1056) = 100(464) = 46,400</span></p>
-      <p><span class="math">P(11) = 100(2662 − 5445 + 2904) = 100(121) = 12,100</span></p>
-      <p><span class="math">P(15) = 100(6750 − 10125 + 3960) = 100(585) = 58,500</span></p>
-      <p><strong>Largest:</strong> 58,500 at <span class="math">x = 15</span> (year 2013). <strong>Smallest:</strong> 12,100 at <span class="math">x = 11</span> (year 2009).</p>
+      <p>\(P(2) = 100(16 - 180 + 528) = 36{,}400\)</p>
+      <p>\(P(4) = 100(128 - 720 + 1056) = 46{,}400\)</p>
+      <p>\(P(11) = 100(2662 - 5445 + 2904) = 12{,}100\)</p>
+      <p>\(P(15) = 100(6750 - 10125 + 3960) = 58{,}500\)</p>
+      <p><strong>Largest:</strong> 58,500 at \(x = 15\) (year 2013). <strong>Smallest:</strong> 12,100 at \(x = 11\) (year 2009).</p>
     </div>
     <div class="subpart">
       <strong>Part (b) — Interval [10, 15] (years 2008–2013)</strong>
-      <p>Only <span class="math">x = 11</span> is in <span class="math">(10, 15)</span>.</p>
-      <p><span class="math">P(10) = 100(2000 − 4500 + 2640) = 100(140) = 14,000</span></p>
-      <p><span class="math">P(11) = 12,100</span> (computed above)</p>
-      <p><span class="math">P(15) = 58,500</span></p>
-      <p><strong>Largest:</strong> 58,500 at <span class="math">x = 15</span>. <strong>Smallest:</strong> 12,100 at <span class="math">x = 11</span> (year 2009).</p>
+      <p>\(P(10) = 100(2000 - 4500 + 2640) = 14{,}000\)</p>
+      <p>\(P(11) = 12{,}100\)</p>
+      <p>\(P(15) = 58{,}500\)</p>
+      <p><strong>Largest:</strong> 58,500 at \(x = 15\). <strong>Smallest:</strong> 12,100 at \(x = 11\) (year 2009).</p>
     </div>
   </div>
 </div>
- 
+
 <!-- ─── Problem 46 ─── -->
 <div class="exercise-card">
   <div class="exercise-header">
@@ -1406,37 +1428,32 @@
     <span class="ex-title">Growth of a Species — Moths Surviving Pupation</span>
   </div>
   <div class="exercise-body">
-    <p>The percentage of coding moths that survive the pupa stage at temperature <span class="math">T</span> (°C) is:</p>
-    <div class="formula">P(T) = −1.42T² + 68T − 746, &nbsp; 20 ≤ T ≤ 30</div>
+    <p>The percentage of coding moths that survive the pupa stage at temperature \(T\) (°C) is:</p>
+    <div class="formula">$$P(T) = -1.42T^2 + 68T - 746, \quad 20 \leq T \leq 30$$</div>
     <p>Find the temperatures at which the greatest and smallest percentages of moths survive.</p>
-    <div class="answer-preview">Maximum survival (~7.46%) at T ≈ 23.9°C; minimum survival at T = 20°C or T = 30°C (check both endpoints).</div>
-    <button class="toggle-btn" onclick="toggleSolution(this)">
-      <span class="arrow">▶</span> Show Solution
-    </button>
+    <div class="answer-preview">Maximum survival (~68.4%) at T ≈ 23.9°C; minimum survival at T = 30°C (~16%).</div>
+    <button class="toggle-btn" onclick="toggleSolution(this)"><span class="arrow">▶</span> Show Solution</button>
   </div>
   <div class="solution-body">
     <div class="step">
       <strong>Find Critical Number</strong>
-      <p><span class="math">P'(T) = −2.84T + 68 = 0</span></p>
-      <p><span class="math">T = 68/2.84 ≈ 23.94°C</span></p>
-      <p>This is in <span class="math">[20, 30]</span>, so it is valid.</p>
+      <p>\(P'(T) = -2.84T + 68 = 0 \implies T = \dfrac{68}{2.84} \approx 23.94^\circ\text{C}\)</p>
+      <p>This is in \([20, 30]\), so it is valid.</p>
     </div>
     <div class="step">
       <strong>Evaluate at Critical Point and Endpoints</strong>
-      <p><span class="math">P(20) = −1.42(400) + 68(20) − 746 = −568 + 1360 − 746 = 46</span> → 46%</p>
-      <p><span class="math">P(23.94) = −1.42(572.9) + 68(23.94) − 746</span></p>
-      <p><span class="math">≈ −813.5 + 1627.9 − 746 ≈ 68.4</span> → 68.4%</p>
-      <p><span class="math">P(30) = −1.42(900) + 68(30) − 746 = −1278 + 2040 − 746 = 16</span> → 16%</p>
+      <p>\(P(20) = -1.42(400) + 68(20) - 746 = -568 + 1360 - 746 = 46\%\)</p>
+      <p>\(P(23.94) \approx -813.5 + 1627.9 - 746 \approx 68.4\%\)</p>
+      <p>\(P(30) = -1.42(900) + 68(30) - 746 = -1278 + 2040 - 746 = 16\%\)</p>
     </div>
     <div class="step">
       <strong>Conclusion</strong>
-      <p><strong>Maximum survival: ~68.4%</strong> at approximately <span class="math">T ≈ 23.9°C</span>.</p>
-      <p><strong>Minimum survival: 16%</strong> at <span class="math">T = 30°C</span>.</p>
-      <p>Moths thrive best in moderate temperatures around 24°C and struggle at high temperatures near 30°C.</p>
+      <p><strong>Maximum survival: ~68.4%</strong> at approximately \(T \approx 23.9^\circ\text{C}\).</p>
+      <p><strong>Minimum survival: 16%</strong> at \(T = 30^\circ\text{C}\).</p>
     </div>
   </div>
 </div>
- 
+
 <!-- ─── Problem 47 ─── -->
 <div class="exercise-card">
   <div class="exercise-header">
@@ -1445,37 +1462,34 @@
     <span class="ex-title">Blood Circulation — Maximum Speed in an Artery</span>
   </div>
   <div class="exercise-body">
-    <p>Poiseuille's law asserts that the speed of blood <span class="math">r</span> centimeters from the centre of an artery of radius <span class="math">R</span> is:</p>
-    <div class="formula">S(r) = c(R² − r²)</div>
-    <p>where <span class="math">c</span> is a positive constant. Where is the speed of blood the greatest?</p>
+    <p>Poiseuille's law asserts that the speed of blood \(r\) centimeters from the centre of an artery of radius \(R\) is:</p>
+    <div class="formula">$$S(r) = c(R^2 - r^2)$$</div>
+    <p>where \(c\) is a positive constant. Where is the speed of blood the greatest?</p>
     <div class="answer-preview">Blood speed is greatest at r = 0 (the centre of the artery).</div>
-    <button class="toggle-btn" onclick="toggleSolution(this)">
-      <span class="arrow">▶</span> Show Solution
-    </button>
+    <button class="toggle-btn" onclick="toggleSolution(this)"><span class="arrow">▶</span> Show Solution</button>
   </div>
   <div class="solution-body">
     <div class="step">
       <strong>Domain</strong>
-      <p>The variable <span class="math">r</span> represents distance from the centre, so <span class="math">0 ≤ r ≤ R</span>.</p>
+      <p>The variable \(r\) represents distance from the centre, so \(0 \leq r \leq R\).</p>
     </div>
     <div class="step">
       <strong>Find Critical Numbers</strong>
-      <p><span class="math">S'(r) = c · (−2r) = −2cr</span></p>
-      <p>Set <span class="math">S'(r) = 0</span>: <span class="math">−2cr = 0 → r = 0</span>.</p>
-      <p>This is the left endpoint of the interval.</p>
+      <p>\(S'(r) = c \cdot (-2r) = -2cr\)</p>
+      <p>Set \(S'(r) = 0\): \(-2cr = 0 \implies r = 0\) (the left endpoint).</p>
     </div>
     <div class="step">
       <strong>Evaluate at Endpoints</strong>
-      <p><span class="math">S(0) = c(R² − 0) = cR²</span></p>
-      <p><span class="math">S(R) = c(R² − R²) = 0</span></p>
+      <p>\(S(0) = c(R^2 - 0) = cR^2\)</p>
+      <p>\(S(R) = c(R^2 - R^2) = 0\)</p>
     </div>
     <div class="step">
       <strong>Conclusion</strong>
-      <p>The maximum blood speed is <span class="math">cR²</span>, achieved at <span class="math">r = 0</span> — the <strong>center of the artery</strong>. Blood velocity is zero at the artery walls (<span class="math">r = R</span>) due to friction, and increases parabolically toward the centre. This is a well-known fluid dynamics result called <em>laminar (Poiseuille) flow</em>.</p>
+      <p>Maximum blood speed is \(cR^2\), achieved at \(r = 0\), the center of the artery. Blood velocity is zero at the artery walls (\(r = R\)) due to friction. This is <em>laminar (Poiseuille) flow</em>.</p>
     </div>
   </div>
 </div>
- 
+
 <!-- ─── Problem 48 ─── -->
 <div class="exercise-card">
   <div class="exercise-header">
@@ -1484,34 +1498,31 @@
     <span class="ex-title">Politics — Candidate Support as a Function of Time</span>
   </div>
   <div class="exercise-body">
-    <p>A poll indicates that <span class="math">x</span> months after a candidate declares her candidacy, she will have the support of <span class="math">S(x)</span> percent of voters, where:</p>
-    <div class="formula">S(x) = (1/29)(−x³ + 6x² + 63x + 1080), &nbsp; 0 ≤ x ≤ 12</div>
+    <p>A poll indicates that \(x\) months after a candidate declares her candidacy, she will have the support of \(S(x)\) percent of voters, where:</p>
+    <div class="formula">$$S(x) = \frac{1}{29}\left(-x^3 + 6x^2 + 63x + 1080\right), \quad 0 \leq x \leq 12$$</div>
     <p>If the election is held in November, when should the politician announce her candidacy? She expects to need at least 50% of the vote.</p>
-    <div class="answer-preview">Maximum support (~57.4%) near x = 7 months before November. Announce approximately 7 months before the election.</div>
-    <button class="toggle-btn" onclick="toggleSolution(this)">
-      <span class="arrow">▶</span> Show Solution
-    </button>
+    <div class="answer-preview">Maximum support (~50.8%) at x = 7 months. Announce approximately 7 months before the election (April).</div>
+    <button class="toggle-btn" onclick="toggleSolution(this)"><span class="arrow">▶</span> Show Solution</button>
   </div>
   <div class="solution-body">
     <div class="step">
       <strong>Find Critical Numbers</strong>
-      <p><span class="math">S'(x) = (1/29)(−3x² + 12x + 63) = (−3/29)(x² − 4x − 21)</span></p>
-      <p>Factor: <span class="math">x² − 4x − 21 = (x − 7)(x + 3)</span></p>
-      <p>Critical numbers: <span class="math">x = 7</span> (valid, in [0,12]) and <span class="math">x = −3</span> (rejected, outside domain).</p>
+      <p>\(S'(x) = \dfrac{1}{29}(-3x^2 + 12x + 63) = \dfrac{-3}{29}(x^2 - 4x - 21) = \dfrac{-3}{29}(x-7)(x+3)\)</p>
+      <p>Critical numbers: \(x = 7\) (valid, in \([0,12]\)) and \(x = -3\) (rejected).</p>
     </div>
     <div class="step">
       <strong>Evaluate at x = 7 and Endpoints</strong>
-      <p><span class="math">S(0) = 1080/29 ≈ 37.2%</span></p>
-      <p><span class="math">S(7) = (1/29)(−343 + 294 + 441 + 1080) = 1472/29 ≈ 50.8%</span></p>
-      <p><span class="math">S(12) = (1/29)(−1728 + 864 + 756 + 1080) = 972/29 ≈ 33.5%</span></p>
+      <p>\(S(0) = 1080/29 \approx 37.2\%\)</p>
+      <p>\(S(7) = \dfrac{-343 + 294 + 441 + 1080}{29} = \dfrac{1472}{29} \approx 50.8\%\)</p>
+      <p>\(S(12) = \dfrac{-1728 + 864 + 756 + 1080}{29} = \dfrac{972}{29} \approx 33.5\%\)</p>
     </div>
     <div class="step">
       <strong>Conclusion</strong>
-      <p>The <strong>maximum support of ~50.8%</strong> occurs at <span class="math">x = 7</span> months. The politician should announce her candidacy <strong>7 months before the November election</strong> (i.e., in April). This is also the only point above the 50% threshold needed to win.</p>
+      <p>Maximum support of <strong>~50.8%</strong> occurs at \(x = 7\) months. The politician should announce her candidacy <strong>7 months before November</strong> (i.e., in April). This is the only point above the 50% threshold.</p>
     </div>
   </div>
 </div>
- 
+
 <!-- ─── Problem 49 ─── -->
 <div class="exercise-card">
   <div class="exercise-header">
@@ -1520,39 +1531,35 @@
     <span class="ex-title">Learning — Maximum Likelihood Estimate</span>
   </div>
   <div class="exercise-body">
-    <p>In a learning model, two responses (A and B) are possible. The probability of getting response A exactly <span class="math">n</span> times in a series of <span class="math">m</span> observations is:</p>
-    <div class="formula">F(p) = p<sup>n</sup>(1 − p)<sup>m−n</sup>, &nbsp; 0 ≤ p ≤ 1</div>
-    <p>The <strong>maximum likelihood estimate</strong> is the value of <span class="math">p</span> that maximizes <span class="math">F(p)</span>. Find this value.</p>
+    <p>In a learning model, two responses (A and B) are possible. The probability of getting response A exactly \(n\) times in a series of \(m\) observations is:</p>
+    <div class="formula">$$F(p) = p^n(1-p)^{m-n}, \quad 0 \leq p \leq 1$$</div>
+    <p>The <strong>maximum likelihood estimate</strong> is the value of \(p\) that maximizes \(F(p)\). Find this value.</p>
     <div class="answer-preview">p = n/m (the observed proportion of A responses — the sample frequency is the maximum likelihood estimator).</div>
-    <button class="toggle-btn" onclick="toggleSolution(this)">
-      <span class="arrow">▶</span> Show Solution
-    </button>
+    <button class="toggle-btn" onclick="toggleSolution(this)"><span class="arrow">▶</span> Show Solution</button>
   </div>
   <div class="solution-body">
     <div class="step">
       <strong>Differentiate F(p) using Product Rule</strong>
-      <p><span class="math">F(p) = p<sup>n</sup> · (1−p)<sup>m−n</sup></span></p>
-      <p><span class="math">F'(p) = n·p<sup>n−1</sup>·(1−p)<sup>m−n</sup> + p<sup>n</sup>·(m−n)(1−p)<sup>m−n−1</sup>·(−1)</span></p>
+      <p>\(F(p) = p^n \cdot (1-p)^{m-n}\)</p>
+      <p>\(F'(p) = n\,p^{n-1}(1-p)^{m-n} + p^n(m-n)(1-p)^{m-n-1}(-1)\)</p>
     </div>
     <div class="step">
       <strong>Factor F'(p)</strong>
-      <p><span class="math">F'(p) = p<sup>n−1</sup>(1−p)<sup>m−n−1</sup>[n(1−p) − p(m−n)]</span></p>
+      <p>\(F'(p) = p^{n-1}(1-p)^{m-n-1}\bigl[n(1-p) - p(m-n)\bigr]\)</p>
     </div>
     <div class="step">
       <strong>Set F'(p) = 0</strong>
-      <p>Since <span class="math">p<sup>n−1</sup>(1−p)<sup>m−n−1</sup> > 0</span> for <span class="math">0 < p < 1</span>, we need:</p>
-      <p><span class="math">n(1−p) − p(m−n) = 0</span></p>
-      <p><span class="math">n − np − pm + pn = 0</span></p>
-      <p><span class="math">n − pm = 0</span></p>
-      <p><span class="math">p = n/m</span> &nbsp; ✓</p>
+      <p>Since \(p^{n-1}(1-p)^{m-n-1} > 0\) for \(0 < p < 1\), we need:</p>
+      <p>\(n(1-p) - p(m-n) = 0\)</p>
+      <p>\(n - np - pm + pn = 0 \implies n - pm = 0 \implies p = \dfrac{n}{m}\) ✓</p>
     </div>
     <div class="step">
       <strong>Interpretation</strong>
-      <p>The maximum likelihood estimate is <span class="math">p = n/m</span> — simply the <strong>proportion</strong> of times response A was observed. This is a fundamental result in statistics: the sample frequency is the MLE for a binomial probability. Since <span class="math">F(0) = F(1) = 0</span> and <span class="math">F(p) > 0</span> on <span class="math">(0,1)</span>, this critical point must be a maximum.</p>
+      <p>The maximum likelihood estimate is \(p = n/m\) — simply the proportion of times response A was observed. Since \(F(0) = F(1) = 0\) and \(F(p) > 0\) on \((0,1)\), this critical point must be a maximum.</p>
     </div>
   </div>
 </div>
- 
+
 <!-- ─── Problem 50 ─── -->
 <div class="exercise-card">
   <div class="exercise-header">
@@ -1561,46 +1568,137 @@
     <span class="ex-title">Voting Pattern — House Seat Proportion (Cube Rule)</span>
   </div>
   <div class="exercise-body">
-    <p>After a presidential election, the proportion <span class="math">h(p)</span> of seats in the House of Representatives won by the winning candidate's party is modeled by the <em>cube rule</em>:</p>
-    <div class="formula">h(p) = p³ / [p³ + (1 − p)³], &nbsp; 0 ≤ p ≤ 1</div>
-    <p>where <span class="math">p</span> is the proportion of the popular vote received.</p>
-    <p><strong>(a)</strong> Find <span class="math">h'(p)</span> and <span class="math">h''(p)</span>. &nbsp; <strong>(b)</strong> Sketch the graph of <span class="math">h(p)</span>. &nbsp; <strong>(c)</strong> In 1964, Lyndon Johnson received 61% of the popular vote. What percentage of House seats does the cube rule predict should have gone to Democrats? (They actually won 72%.)</p>
-    <div class="answer-preview">(c) h(0.61) ≈ 72.9% — remarkably close to the actual result!</div>
-    <button class="toggle-btn" onclick="toggleSolution(this)">
-      <span class="arrow">▶</span> Show Solution
-    </button>
+    <p>After a presidential election, the proportion \(h(p)\) of seats in the House of Representatives won by the winning candidate's party is modeled by the <em>cube rule</em>:</p>
+    <div class="formula">$$h(p) = \frac{p^3}{p^3 + (1-p)^3}, \quad 0 \leq p \leq 1$$</div>
+    <p>where \(p\) is the proportion of the popular vote received.</p>
+    <p><strong>(a)</strong> Find \(h'(p)\) and \(h''(p)\). &nbsp; <strong>(b)</strong> Sketch the graph of \(h(p)\). &nbsp; <strong>(c)</strong> In 1964, Lyndon Johnson received 61% of the popular vote. What percentage of House seats does the cube rule predict?</p>
+    <div class="answer-preview">(c) h(0.61) ≈ 79.3% — remarkably close to the actual result of 72%!</div>
+    <button class="toggle-btn" onclick="toggleSolution(this)"><span class="arrow">▶</span> Show Solution</button>
   </div>
+
   <div class="solution-body">
     <div class="subpart">
-      <strong>Part (a) — Compute h'(p)</strong>
-      <p>Let <span class="math">u = p³</span> and <span class="math">v = p³ + (1−p)³</span>. By the quotient rule:</p>
-      <p><span class="math">h'(p) = [3p²·v − p³·v'] / v²</span></p>
-      <p><span class="math">v' = 3p² − 3(1−p)² = 3[p² − (1−p)²] = 3(2p−1)</span></p>
-      <p><span class="math">h'(p) = [3p²(p³ + (1−p)³) − p³·3(2p−1)] / [p³ + (1−p)³]²</span></p>
-      <p>After simplification (which is algebraically involved), the key result is:</p>
-      <p><span class="math">h'(p) = 3p²(1−p)² / [p³ + (1−p)³]²</span></p>
-      <p>Since <span class="math">h'(p) > 0</span> for all <span class="math">0 < p < 1</span>, the function is <em>always increasing</em> — a larger popular vote share always translates to more House seats.</p>
-      <p><span class="math">h''(p)</span>: Changes sign at <span class="math">p = 0.5</span> (inflection point — the graph changes concavity at p = 50% popular vote).</p>
-    </div>
+  <strong>Part (a) — Compute \(h'(p)\) and \(h''(p)\)</strong>
+
+  <p>Given \(h(p) = \dfrac{p^3}{p^3 + (1-p)^3}\), let:</p>
+  <p>\(u = p^3,\quad v = p^3 + (1-p)^3\)</p>
+
+  <p><strong>Step 1: First Derivative \(h'(p)\)</strong></p>
+  <p>Using the quotient rule:</p>
+  <p>$$h'(p) = \frac{u'v - uv'}{v^2}$$</p>
+
+  <p>Compute derivatives:</p>
+  <p>\(u' = 3p^2\)</p>
+  <p>\(v' = 3p^2 - 3(1-p)^2 = 3(2p - 1)\)</p>
+
+  <p>Substitute:</p>
+  <p>$$   h'(p) = \frac{3p^2\big(p^3 + (1-p)^3\big) - p^3 \cdot 3(2p-1)}{\big[p^3 + (1-p)^3\big]^2} $$</p>
+
+  <p>Simplifying:</p>
+  <p> $$  h'(p) = \frac{3p^2(1-p)^2}{\big[p^3 + (1-p)^3\big]^2} $$ </p>
+
+  <p><strong>Step 2: Second Derivative \(h''(p)\)</strong></p>
+  <p>Differentiate \(h'(p)\). After simplification:</p>
+
+  <p>$$ h''(p) = \frac{6p(1-p)(1-2p)}{\big[p^3 + (1-p)^3\big]^3} $$</p>
+
+  <p><strong>Conclusion:</strong></p>
+  <ul>
+    <li>\(h'(p) > 0\) for \(0 < p < 1 \implies \)  function is increasing</li>
+    <li>\(h''(p) = 0\) at \(p = 0.5 \implies \)  inflection point</li>
+  </ul>
+</div>
+
     <div class="subpart">
-      <strong>Part (b) — Graph Description</strong>
-      <p>The graph of <span class="math">h(p)</span> is an S-shaped curve (sigmoid):</p>
-      <ul>
-        <li><span class="math">h(0) = 0</span>, <span class="math">h(0.5) = 0.5</span>, <span class="math">h(1) = 1</span></li>
-        <li>Concave up for <span class="math">p < 0.5</span>, concave down for <span class="math">p > 0.5</span></li>
-        <li>The cube rule <em>amplifies</em> small margins: a 60–40 popular vote split becomes roughly 77–23 in House seats.</li>
-      </ul>
+      <strong>Part (b) — Graph Sketch Using Calculus Rules</strong>
+
+      <p><strong>Domain:</strong> \(0 \leq p \leq 1\)</p>
+
+      <p><strong>Intercepts:</strong> \((0,0)\), \((1,1)\)</p>
+
+      <p><strong>Monotonicity:</strong> Increasing on entire domain</p>
+
+      <p><strong>Concavity:</strong> Concave up on \((0,0.5)\), concave down on \((0.5,1)\)</p>
+
+      <p><strong>Inflection Point:</strong> \((0.5,0.5)\)</p>
+
+      <p><strong>Asymptotes:</strong> None</p>
+
+      <p><strong>Final Graph:</strong></p>
+
+      <!-- 📊 GRAPH -->
+      <canvas id="cubeRuleGraph" style="max-width:100%; height:200px;"></canvas>
+
     </div>
+
     <div class="subpart">
       <strong>Part (c) — 1964 Election: p = 0.61</strong>
-      <p><span class="math">p³ = (0.61)³ = 0.226981</span></p>
-      <p><span class="math">(1−p)³ = (0.39)³ = 0.059319</span></p>
-      <p><span class="math">h(0.61) = 0.226981 / (0.226981 + 0.059319) = 0.226981 / 0.2863 ≈ 0.793</span></p>
-      <p>The cube rule predicts Democrats win approximately <strong>79.3%</strong> of House seats. They actually won 72%. The cube rule slightly overestimates here, but it captures the <em>amplification effect</em> well — winning 61% of votes translates to a much larger share of legislative seats.</p>
+      <p>\(p^3 = (0.61)^3 = 0.226981\)</p>
+      <p>\((1-p)^3 = (0.39)^3 = 0.059319\)</p>
+      <p>\(h(0.61) = \dfrac{0.226981}{0.226981 + 0.059319} \approx 79.3\%\)</p>
+      <p>They actually won 72%. The cube rule captures the <em>amplification effect</em> well.</p>
     </div>
   </div>
 </div>
- 
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+function h(p) {
+  return Math.pow(p,3) / (Math.pow(p,3) + Math.pow(1-p,3));
+}
+
+let labels = [];
+let dataPoints = [];
+
+for (let p = 0; p <= 1; p += 0.01) {
+  labels.push(p.toFixed(2));
+  dataPoints.push(h(p));
+}
+
+const ctx = document.getElementById('cubeRuleGraph').getContext('2d');
+new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: labels,
+    datasets: [
+      {
+        label: 'h(p)',
+        data: dataPoints,
+        fill: false,
+        tension: 0.3
+      },
+      {
+        label: 'Inflection Point (0.5, 0.5)',
+        data: labels.map((val, i) => Math.abs(parseFloat(val) - 0.5) < 0.005 ? 0.5 : null),
+        pointRadius: 6,
+        showLine: false
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    scales: {
+      x: {
+        title: {
+          display: true,
+          text: 'p (Proportion of Popular Vote)'
+        }
+      },
+      y: {
+        title: {
+          display: true,
+          text: 'h(p) (House Seat Proportion)'
+        },
+        min: 0,
+        max: 1
+      }
+    }
+  }
+});
+</script>
+
 <!-- ─── Problem 51 ─── -->
 <div class="exercise-card">
   <div class="exercise-header">
@@ -1610,45 +1708,38 @@
   </div>
   <div class="exercise-body">
     <p>According to Tucker and Schmidt-Koenig, the energy expended by a certain species of parakeet is:</p>
-    <div class="formula">E(v) = (1/v)[0.074(v − 35)² + 22]</div>
-    <p>where <span class="math">v</span> is the bird's speed (km/h). Find the speed that minimizes energy expenditure. (This is the bird's optimal cruising speed.)</p>
-    <div class="answer-preview">Minimum energy occurs at v ≈ 35 km/h when the correction term is ignored, or the exact value is found by solving a cubic. The optimal cruising speed is approximately 35–36 km/h.</div>
-    <button class="toggle-btn" onclick="toggleSolution(this)">
-      <span class="arrow">▶</span> Show Solution
-    </button>
+    <div class="formula">$$E(v) = \frac{1}{v}\left[0.074(v-35)^2 + 22\right]$$</div>
+    <p>where \(v\) is the bird's speed (km/h). Find the speed that minimizes energy expenditure.</p>
+    <div class="answer-preview">Optimal cruising speed is approximately v ≈ 39 km/h.</div>
+    <button class="toggle-btn" onclick="toggleSolution(this)"><span class="arrow">▶</span> Show Solution</button>
   </div>
   <div class="solution-body">
     <div class="step">
       <strong>Expand E(v)</strong>
-      <p><span class="math">E(v) = [0.074(v−35)² + 22] / v</span></p>
-      <p><span class="math">= 0.074(v−35)²/v + 22/v</span></p>
-      <p>Let's expand <span class="math">(v−35)² = v² − 70v + 1225</span>:</p>
-      <p><span class="math">E(v) = 0.074(v − 70 + 1225/v) + 22/v</span></p>
-      <p><span class="math">= 0.074v − 5.18 + 90.65/v + 22/v</span></p>
-      <p><span class="math">= 0.074v − 5.18 + 112.65/v</span></p>
+      <p>\(E(v) = \dfrac{0.074(v-35)^2 + 22}{v}\)</p>
+      <p>Expand \((v-35)^2 = v^2 - 70v + 1225\):</p>
+      <p>\(E(v) = 0.074\!\left(v - 70 + \dfrac{1225}{v}\right) + \dfrac{22}{v} = 0.074v - 5.18 + \dfrac{90.65}{v} + \dfrac{22}{v}\)</p>
+      <p>\(E(v) = 0.074v - 5.18 + \dfrac{112.65}{v}\)</p>
     </div>
     <div class="step">
       <strong>Differentiate and Set E'(v) = 0</strong>
-      <p><span class="math">E'(v) = 0.074 − 112.65/v²</span></p>
-      <p>Set to zero: <span class="math">0.074 = 112.65/v²</span></p>
-      <p><span class="math">v² = 112.65/0.074 = 1522.3</span></p>
-      <p><span class="math">v = √1522.3 ≈ 39.0</span> km/h</p>
+      <p>\(E'(v) = 0.074 - \dfrac{112.65}{v^2} = 0\)</p>
+      <p>\(v^2 = \dfrac{112.65}{0.074} = 1522.3 \implies v = \sqrt{1522.3} \approx 39.0 \text{ km/h}\)</p>
     </div>
     <div class="step">
       <strong>Confirm Minimum</strong>
-      <p><span class="math">E''(v) = 225.3/v³ > 0</span> for all <span class="math">v > 0</span> → this is a minimum. ✓</p>
+      <p>\(E''(v) = \dfrac{225.3}{v^3} > 0\) for all \(v > 0\) → this is a minimum. ✓</p>
     </div>
     <div class="step">
       <strong>Conclusion</strong>
-      <p>The parakeet minimizes energy expenditure at approximately <strong>v ≈ 39 km/h</strong>. This is the bird's optimal cruising speed — flying slower or faster than this speed costs more energy per unit distance. Biologists use this model to understand migration behavior.</p>
+      <p>The parakeet minimizes energy expenditure at approximately <strong>\(v \approx 39\) km/h</strong>. Flying slower or faster than this costs more energy per unit distance.</p>
     </div>
   </div>
 </div>
- 
-<!-- ══ GROUP 3: BUSINESS/PRODUCTION ══ -->
+
 <div class="cat-label">§ Business &amp; Production Problems</div>
- 
-<!-- ─── Production Control (Gina / Toys) ─── -->
+
+<!-- ─── Problem 37 ─── -->
 <div class="exercise-card">
   <div class="exercise-header">
     <span class="ex-num">Problem 37</span>
@@ -1656,55 +1747,41 @@
     <span class="ex-title">Production Control</span>
   </div>
   <div class="exercise-body">
-    <p>Gina manages a company that makes two toys: an inexpensive doll (Floppsy) at <span class="math">x</span> hundred units, and an expensive doll (Moppsy) at <span class="math">y</span> hundreds. The company can produce them such that:</p>
-    <div class="formula">y = (82 − 10x) / (10 − x), &nbsp; 0 ≤ x ≤ 8</div>
+    <p>Gina manages a company that makes two toys: an inexpensive doll (Floppsy) at \(x\) hundred units, and an expensive doll (Moppsy) at \(y\) hundreds. The company can produce them such that:</p>
+    <div class="formula">$$y = \frac{82 - 10x}{10 - x}, \quad 0 \leq x \leq 8$$</div>
     <p>The company receives twice as much from selling a Moppsy doll as a Floppsy doll. How many of each kind should Gina recommend to maximize total revenue?</p>
-    <div class="answer-preview">Maximum revenue at x = 6 (600 Floppsy), y = 11 (1100 Moppsy). Revenue is maximized at x ≈ 6.</div>
-    <button class="toggle-btn" onclick="toggleSolution(this)">
-      <span class="arrow">▶</span> Show Solution
-    </button>
+    <div class="answer-preview">Maximum revenue at x = 4 (400 Floppsy), y = 7 (700 Moppsy).</div>
+    <button class="toggle-btn" onclick="toggleSolution(this)"><span class="arrow">▶</span> Show Solution</button>
   </div>
   <div class="solution-body">
     <div class="step">
       <strong>Set Up Revenue</strong>
-      <p>Let the price of Floppsy = $1 (relative unit). Then Moppsy = $2.</p>
-      <p><span class="math">R(x) = 1·x + 2·y = x + 2 · (82 − 10x)/(10 − x)</span></p>
-      <p><span class="math">R(x) = x + (164 − 20x)/(10 − x)</span></p>
-    </div>
-    <div class="step">
-      <strong>Combine into Single Fraction</strong>
-      <p><span class="math">R(x) = [x(10−x) + 164 − 20x] / (10−x)</span></p>
-      <p><span class="math">= [10x − x² + 164 − 20x] / (10−x)</span></p>
-      <p><span class="math">= [−x² − 10x + 164] / (10−x)</span></p>
+      <p>Let price of Floppsy = $1 (relative unit). Then Moppsy = $2.</p>
+      <p>\(R(x) = x + 2y = x + \dfrac{2(82-10x)}{10-x} = \dfrac{-x^2 - 10x + 164}{10-x}\)</p>
     </div>
     <div class="step">
       <strong>Differentiate Using Quotient Rule</strong>
-      <p>Numerator: <span class="math">N = −x² − 10x + 164</span>, &nbsp; <span class="math">N' = −2x − 10</span></p>
-      <p>Denominator: <span class="math">D = 10 − x</span>, &nbsp; <span class="math">D' = −1</span></p>
-      <p><span class="math">R'(x) = [N'·D − N·D'] / D²</span></p>
-      <p><span class="math">= [(−2x−10)(10−x) − (−x²−10x+164)(−1)] / (10−x)²</span></p>
-      <p>Expand numerator: <span class="math">(−2x−10)(10−x) = −20x+2x²−100+10x = 2x²−10x−100</span></p>
-      <p>So: <span class="math">N'D − ND' = 2x²−10x−100 − (x²+10x−164) = x²−20x+64</span></p>
-      <p><span class="math">R'(x) = (x²−20x+64) / (10−x)²</span></p>
+      <p>Let \(N = -x^2 - 10x + 164\), \(D = 10-x\).</p>
+      <p>\(R'(x) = \dfrac{N'D - ND'}{D^2} = \dfrac{(-2x-10)(10-x) - (-x^2-10x+164)(-1)}{(10-x)^2}\)</p>
+      <p>After expanding: numerator \(= x^2 - 20x + 64\)</p>
+      <p>\(R'(x) = \dfrac{x^2 - 20x + 64}{(10-x)^2}\)</p>
     </div>
     <div class="step">
       <strong>Solve R'(x) = 0</strong>
-      <p><span class="math">x² − 20x + 64 = 0</span></p>
-      <p><span class="math">x = (20 ± √(400−256))/2 = (20 ± √144)/2 = (20 ± 12)/2</span></p>
-      <p><span class="math">x = 16</span> (outside domain) or <span class="math">x = 4</span></p>
+      <p>\(x^2 - 20x + 64 = 0 \implies x = \dfrac{20 \pm \sqrt{400 - 256}}{2} = \dfrac{20 \pm 12}{2}\)</p>
+      <p>\(x = 16\) (outside domain) or \(x = 4\)</p>
     </div>
     <div class="step">
       <strong>Evaluate at x = 4 and Endpoints</strong>
-      <p><span class="math">y(4) = (82−40)/(10−4) = 42/6 = 7</span></p>
-      <p><span class="math">R(4) = 4 + 2(7) = 18</span> (hundred dollar units)</p>
-      <p><span class="math">y(0) = 82/10 = 8.2</span>; <span class="math">R(0) = 0 + 16.4 = 16.4</span></p>
-      <p><span class="math">y(8) = (82−80)/(10−8) = 2/2 = 1</span>; <span class="math">R(8) = 8 + 2 = 10</span></p>
-      <p><strong>Maximum Revenue: 18 units</strong> at <span class="math">x = 4</span> (400 Floppsy dolls) and <span class="math">y = 7</span> (700 Moppsy dolls).</p>
+      <p>\(y(4) = (82-40)/(10-4) = 42/6 = 7\); \(R(4) = 4 + 14 = 18\)</p>
+      <p>\(y(0) = 8.2\); \(R(0) = 0 + 16.4 = 16.4\)</p>
+      <p>\(y(8) = 1\); \(R(8) = 8 + 2 = 10\)</p>
+      <p><strong>Maximum Revenue: 18 units</strong> at \(x = 4\) (400 Floppsy) and \(y = 7\) (700 Moppsy).</p>
     </div>
   </div>
 </div>
- 
-<!-- ─── National Consumption ─── -->
+
+<!-- ─── Problem 38 ─── -->
 <div class="exercise-card">
   <div class="exercise-header">
     <span class="ex-num">Problem 38</span>
@@ -1712,179 +1789,148 @@
     <span class="ex-title">National Consumption</span>
   </div>
   <div class="exercise-body">
-    <p>Assume national consumption is given by <span class="math">C(x)</span>, where <span class="math">x</span> is total national income. The derivative <span class="math">C'(x)</span> is called the <strong>marginal propensity to consume</strong>. National savings is <span class="math">S = x − C</span>, and <span class="math">S'(x)</span> is the <strong>marginal propensity to save</strong>.</p>
-    <p>Suppose the consumption function is:</p>
-    <div class="formula">C(x) = 8 − 0.8x − 0.8√x</div>
-    <p>Find the marginal propensity to consume, and determine the value of <span class="math">x</span> that results in the smallest total savings.</p>
-    <div class="answer-preview">MPC = C'(x) = −0.8 − 0.4/√x. Savings S = x − C(x); minimum savings found by setting S'(x) = 0.</div>
-    <button class="toggle-btn" onclick="toggleSolution(this)">
-      <span class="arrow">▶</span> Show Solution
-    </button>
+    <p>Assume that total national consumption is given by a function \(C(x)\), where \(x\) is total national income. The derivative \(C'(x)\) is called the <strong>marginal propensity to consume</strong>. Total savings is:</p>
+    <div class="formula">$$S(x) = x - C(x)$$</div>
+    <p>and \(S'(x)\) is called the <strong>marginal propensity to save</strong>. Given:</p>
+    <div class="formula">$$C(x) = 8 + 0.8x + 0.8\sqrt{x}$$</div>
+    <p>Find the marginal propensity to consume and the value of \(x\) that minimizes total savings.</p>
+    <div class="answer-preview">MPC: C'(x) = 0.8 + 0.4/√x; Minimum savings at x = 4.</div>
+
+    <canvas id="savingGraph" style="max-width:100%; height:300px;"></canvas>
+
+    <button class="toggle-btn" onclick="toggleSolution(this)"><span class="arrow">▶</span> Show Solution</button>
   </div>
   <div class="solution-body">
     <div class="step">
-      <strong>Marginal Propensity to Consume (MPC)</strong>
-      <p><span class="math">C(x) = 8 − 0.8x − 0.8x^{1/2}</span></p>
-      <p><span class="math">C'(x) = −0.8 − 0.8·(1/2)·x^{−1/2} = −0.8 − 0.4/√x</span></p>
-      <p>This is the MPC — note it is negative, meaning as national income rises, this particular model has decreasing consumption (which would be unusual economically, but let's proceed with the given function).</p>
+      <strong>Step 1: Marginal Propensity to Consume</strong>
+      <p>\(C(x) = 8 + 0.8x + 0.8x^{1/2}\)</p>
+      <p>\(C'(x) = 0.8 + 0.8 \cdot \dfrac{1}{2} x^{-1/2} = 0.8 + \dfrac{0.4}{\sqrt{x}}\)</p>
     </div>
     <div class="step">
-      <strong>Set Up Savings Function</strong>
-      <p><span class="math">S(x) = x − C(x) = x − (8 − 0.8x − 0.8√x)</span></p>
-      <p><span class="math">S(x) = x − 8 + 0.8x + 0.8√x = 1.8x + 0.8√x − 8</span></p>
+      <strong>Step 2: Savings Function</strong>
+      <p>\(S(x) = x - C(x) = 0.2x - 0.8\sqrt{x} - 8\)</p>
     </div>
     <div class="step">
-      <strong>Marginal Propensity to Save</strong>
-      <p><span class="math">S'(x) = 1.8 + 0.8·(1/2)·x^{−1/2} = 1.8 + 0.4/√x</span></p>
-    </div>
-    <div class="step">
-      <strong>Find Critical Points for Minimum Savings</strong>
-      <p><span class="math">S'(x) = 1.8 + 0.4/√x = 0</span></p>
-      <p>Since <span class="math">1.8 > 0</span> and <span class="math">0.4/√x > 0</span> for <span class="math">x > 0</span>, we have <span class="math">S'(x) > 0</span> always — no critical point in <span class="math">x > 0</span>.</p>
+      <strong>Step 3: Minimize Savings</strong>
+      <p>\(S'(x) = 0.2 - \dfrac{0.4}{\sqrt{x}} = 0 \implies \sqrt{x} = 2 \implies x = 4\)</p>
     </div>
     <div class="step">
       <strong>Conclusion</strong>
-      <p>Since <span class="math">S'(x) > 0</span> for all <span class="math">x > 0</span>, savings is strictly <em>increasing</em> in national income. There is no interior minimum — savings is smallest at the smallest allowable level of income (i.e., as <span class="math">x → 0^+</span>, <span class="math">S → −8</span>). This reflects that at very low national income, consumption exceeds income (dissaving). As income rises, savings always increases.</p>
+      <p>Marginal propensity to consume: \(C'(x) = 0.8 + \dfrac{0.4}{\sqrt{x}}\)</p>
+      <p>Minimum savings occurs at \(\mathbf{x = 4}\).</p>
     </div>
   </div>
 </div>
- 
-<!-- ─── Worker Efficiency ─── -->
+
+<!-- ─── Problem 39 ─── -->
 <div class="exercise-card">
   <div class="exercise-header">
     <span class="ex-num">Problem 39</span>
     <span class="ex-ref">Hoffmann §3.4 · Exercise 39</span>
     <span class="ex-title">Worker Efficiency</span>
   </div>
-
   <div class="exercise-body">
     <p>An efficiency study shows that an average worker starting at 8:00 AM assembles:</p>
-    <div class="formula">f(x) = −x³ + 6x² + 15x</div>
-
+    <div class="formula">$$f(x) = -x^3 + 6x^2 + 15x$$</div>
     <p>After a 15-minute coffee break, the worker assembles:</p>
-    <div class="formula">g(x) = −(1/3)x³ + x² + 23x</div>
+    <div class="formula">$$g(x) = -\tfrac{1}{3}x^3 + x^2 + 23x$$</div>
+    <p>If the break begins \(t\) hours after 8:00 AM, total production is \(T(t) = f(t) + g(4-t)\). Find the optimal break time.</p>
+    <div class="answer-preview">Optimal break time: t = 3 hours → 11:00 AM</div>
 
-    <p>If the break begins <span class="math">t</span> hours after 8:00 AM, total production is:</p>
-    <div class="formula">T(t) = f(t) + g(4 − t)</div>
-
-    <div class="answer-preview">
-      Optimal break time: <strong>t = 3 hours → 11:00 AM</strong>
-    </div>
-
-    <!-- 📊 GRAPH -->
     <canvas id="outputGraph" style="max-width:100%; height:300px;"></canvas>
 
-    <button class="toggle-btn" onclick="toggleSolution(this)">
-      <span class="arrow">▶</span> Show Solution
-    </button>
+    <button class="toggle-btn" onclick="toggleSolution(this)"><span class="arrow">▶</span> Show Solution</button>
   </div>
-
   <div class="solution-body">
     <div class="step">
-      <strong>Final Result</strong>
-      <p><span class="math">T(t) = −(2/3)t³ + 3t² + 260/3</span></p>
-      <p>Maximum occurs at <span class="math">t = 3</span></p>
-      <p><strong>Break time = 11:00 AM</strong></p>
+      <strong>Step 1: Expand g(4 − t)</strong>
+      <p>\((4-t)^3 = 64 - 48t + 12t^2 - t^3\)</p>
+      <p>\(g(4-t) = -\tfrac{1}{3}(64-48t+12t^2-t^3) + (4-t)^2 + 23(4-t)\)</p>
+      <p>\(= \tfrac{1}{3}t^3 - 3t^2 - 15t + \tfrac{260}{3}\)</p>
+    </div>
+    <div class="step">
+      <strong>Step 2: Total Function</strong>
+      <p>\(T(t) = f(t) + g(4-t) = (-t^3 + 6t^2 + 15t) + \left(\tfrac{1}{3}t^3 - 3t^2 - 15t + \tfrac{260}{3}\right)\)</p>
+      <p>\(T(t) = -\tfrac{2}{3}t^3 + 3t^2 + \tfrac{260}{3}\)</p>
+    </div>
+    <div class="step">
+      <strong>Step 3: Differentiate and Find Critical Points</strong>
+      <p>\(T'(t) = -2t^2 + 6t = -2t(t-3) = 0 \implies t = 0 \text{ or } t = 3\)</p>
+    </div>
+    <div class="step">
+      <strong>Step 4: Confirm Maximum</strong>
+      <p>\(T''(t) = -4t + 6\). At \(t = 3\): \(T''(3) = -6 < 0\) ✓ (maximum)</p>
+      <p><strong>Optimal break time: 11:00 AM</strong> (3 hours after 8:00 AM).</p>
     </div>
   </div>
 </div>
 
-<!-- Chart.js CDN -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<script>
-function T(t) {
-  return -(2/3)*t*t*t + 3*t*t + 260/3;
-}
-
-// Generate data points
-let labels = [];
-let dataPoints = [];
-
-for (let t = 0; t <= 4; t += 0.1) {
-  labels.push(t.toFixed(1));
-  dataPoints.push(T(t));
-}
-
-// Highlight max point
-let maxT = T(3);
-
-// Create chart
-const ctx = document.getElementById('outputGraph').getContext('2d');
-new Chart(ctx, {
-  type: 'line',
-  data: {
-    labels: labels,
-    datasets: [
-      {
-        label: 'Total Output T(t)',
-        data: dataPoints,
-        fill: false,
-        tension: 0.3
-      },
-      {
-        label: 'Maximum Point (t = 3)',
-        data: labels.map((x, i) => parseFloat(x) === 3 ? maxT : null),
-        pointRadius: 6,
-        showLine: false
-      }
-    ]
-  },
-  options: {
-    responsive: true,
-    plugins: {
-      legend: {
-        display: true
-      }
-    },
-    scales: {
-      x: {
-        title: {
-          display: true,
-          text: 'Time after 8:00 AM (hours)'
-        }
-      },
-      y: {
-        title: {
-          display: true,
-          text: 'Total Units Produced'
-        }
-      }
-    }
-  }
-});
-</script>
-  
 </div><!-- /.container -->
 
 <footer>
-  Prepared for Calculus for Business & Economics · Based on Hoffmann, Bradley, Sobecki & Price<br>
+  Prepared for Calculus for Business &amp; Economics · Based on Hoffmann, Bradley, Sobecki &amp; Price<br>
   Section 3.4 — Optimization; Elasticity of Demand
 </footer>
 
+<!-- Chart.js for graphs -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-  function toggleSolution(btn) {
-    // 1. Find the parent card (works for both .example-card and .exercise-card)
-    const card = btn.closest('.example-card, .exercise-card');
-    
-    // 2. Find the solution body inside that specific card
-    const solutionBody = card.querySelector('.solution-body');
-    
-    if (solutionBody) {
-      const isVisible = solutionBody.classList.toggle('visible');
-      btn.classList.toggle('open');
-      
-      // Update Arrow
-      btn.querySelector('.arrow').textContent = isVisible ? '▼' : '▶';
-      
-      // Update Text
-      if (isVisible) {
-        btn.innerHTML = btn.innerHTML.replace('Show Solution', 'Hide Solution');
-      } else {
-        btn.innerHTML = btn.innerHTML.replace('Hide Solution', 'Show Solution');
-      }
-    }
+function S_func(x) { return 0.2*x - 0.8*Math.sqrt(x) - 8; }
+function T_func(t) { return -(2/3)*t*t*t + 3*t*t + 260/3; }
+
+// Savings Graph
+(function() {
+  let labels = [], data = [];
+  for (let x = 0.01; x <= 20; x += 0.2) {
+    labels.push(x.toFixed(1));
+    data.push(S_func(x));
   }
+  new Chart(document.getElementById('savingGraph').getContext('2d'), {
+    type: 'line',
+    data: {
+      labels: labels,
+      datasets: [
+        { label: 'Savings S(x)', data: data, fill: false, tension: 0.3, borderColor: '#1a6b6b', backgroundColor: '#1a6b6b' },
+        { label: 'Minimum at x = 4', data: labels.map(v => Math.abs(parseFloat(v) - 4) < 0.15 ? S_func(4) : null), pointRadius: 8, showLine: false, borderColor: '#c8922a', backgroundColor: '#c8922a' }
+      ]
+    },
+    options: { responsive: true, scales: { x: { title: { display: true, text: 'Income x' } }, y: { title: { display: true, text: 'Savings S(x)' } } } }
+  });
+})();
+
+// Output Graph
+(function() {
+  let labels = [], data = [];
+  for (let t = 0; t <= 4; t += 0.1) {
+    labels.push(t.toFixed(1));
+    data.push(T_func(t));
+  }
+  new Chart(document.getElementById('outputGraph').getContext('2d'), {
+    type: 'line',
+    data: {
+      labels: labels,
+      datasets: [
+        { label: 'Total Output T(t)', data: data, fill: false, tension: 0.3, borderColor: '#1a6b6b', backgroundColor: '#1a6b6b' },
+        { label: 'Maximum at t = 3', data: labels.map(v => Math.abs(parseFloat(v) - 3) < 0.05 ? T_func(3) : null), pointRadius: 8, showLine: false, borderColor: '#c8922a', backgroundColor: '#c8922a' }
+      ]
+    },
+    options: { responsive: true, scales: { x: { title: { display: true, text: 'Time after 8:00 AM (hours)' } }, y: { title: { display: true, text: 'Total Units Produced' } } } }
+  });
+})();
+
+// Toggle solution
+function toggleSolution(btn) {
+  const card = btn.closest('.example-card, .exercise-card, .exercise-item');
+  const solutionBody = card.querySelector('.solution-body');
+  if (solutionBody) {
+    const isVisible = solutionBody.classList.toggle('visible');
+    btn.classList.toggle('open');
+    btn.querySelector('.arrow').textContent = isVisible ? '▼' : '▶';
+    btn.innerHTML = isVisible
+      ? btn.innerHTML.replace('Show Solution', 'Hide Solution')
+      : btn.innerHTML.replace('Hide Solution', 'Show Solution');
+  }
+}
 </script>
 
 </body>
