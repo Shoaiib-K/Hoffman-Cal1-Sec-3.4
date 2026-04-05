@@ -1819,16 +1819,25 @@
 
 <script>
   function toggleSolution(btn) {
-    const solutionBody = btn.closest('.example-body, .exercise-item .example-body')
-      .nextElementSibling;
-    if (solutionBody && solutionBody.classList.contains('solution-body')) {
-      solutionBody.classList.toggle('visible');
+    // 1. Find the parent card (works for both .example-card and .exercise-card)
+    const card = btn.closest('.example-card, .exercise-card');
+    
+    // 2. Find the solution body inside that specific card
+    const solutionBody = card.querySelector('.solution-body');
+    
+    if (solutionBody) {
+      const isVisible = solutionBody.classList.toggle('visible');
       btn.classList.toggle('open');
-      btn.querySelector('.arrow').textContent = solutionBody.classList.contains('visible') ? '▼' : '▶';
-      btn.innerHTML = btn.innerHTML.replace(
-        solutionBody.classList.contains('visible') ? 'Show Solution' : 'Hide Solution',
-        solutionBody.classList.contains('visible') ? 'Hide Solution' : 'Show Solution'
-      );
+      
+      // Update Arrow
+      btn.querySelector('.arrow').textContent = isVisible ? '▼' : '▶';
+      
+      // Update Text
+      if (isVisible) {
+        btn.innerHTML = btn.innerHTML.replace('Show Solution', 'Hide Solution');
+      } else {
+        btn.innerHTML = btn.innerHTML.replace('Hide Solution', 'Show Solution');
+      }
     }
   }
 </script>
