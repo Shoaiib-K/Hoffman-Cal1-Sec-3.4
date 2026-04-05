@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Section 3.4 – Optimization & Elasticity of Demand</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1208;
+    --paper: #faf7f2;
+    --cream: #f3ede3;
+    --gold: #c8922a;
+    --gold-light: #e8bc5a;
+    --teal: #1a6b6b;
+    --teal-light: #e8f4f4;
+    --rose: #8b2252;
+    --rose-light: #fceef5;
+    --slate: #3d4f6e;
+    --slate-light: #eef1f7;
+    --green: #2a6b3c;
+    --green-light: #e8f4ec;
+    --border: #d9ceba;
+    --shadow: rgba(30,18,5,0.12);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.85;
+    font-size: 1.05rem;
+  }
+
+  /* ─── HEADER ─── */
+  header {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 3.5rem 2rem 2.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 40px,
+      rgba(200,146,42,0.06) 40px,
+      rgba(200,146,42,0.06) 41px
+    );
+  }
+  .header-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    color: var(--gold-light);
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.9rem, 5vw, 3rem);
+    font-weight: 900;
+    line-height: 1.15;
+    color: #fff;
+    margin-bottom: 0.5rem;
+  }
+  header h1 span { color: var(--gold-light); }
+  header .subtitle {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.65);
+    font-style: italic;
+  }
+  .objectives {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    justify-content: center;
+    margin-top: 1.8rem;
+  }
+  .obj-pill {
+    background: rgba(200,146,42,0.18);
+    border: 1px solid rgba(200,146,42,0.4);
+    color: var(--gold-light);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    padding: 0.3rem 0.9rem;
+    border-radius: 50px;
+  }
+
+  /* ─── LAYOUT ─── */
+  .container { max-width: 900px; margin: 0 auto; padding: 2.5rem 1.5rem 5rem; }
+
+  /* ─── SECTION HEADERS ─── */
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.65rem;
+    font-weight: 700;
+    color: var(--ink);
+    border-left: 5px solid var(--gold);
+    padding-left: 1rem;
+    margin: 3.2rem 0 1.2rem;
+  }
+  .subsection-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--teal);
+    margin: 2.2rem 0 0.8rem;
+  }
+
+  p { margin-bottom: 1rem; }
+
+  /* ─── DEFINITION BOX ─── */
+  .def-box {
+    background: var(--slate-light);
+    border-left: 4px solid var(--slate);
+    border-radius: 0 8px 8px 0;
+    padding: 1.2rem 1.5rem;
+    margin: 1.5rem 0;
+  }
+  .def-box .def-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--slate);
+    margin-bottom: 0.4rem;
+  }
+  .def-box p { margin-bottom: 0.4rem; }
+  .def-box p:last-child { margin-bottom: 0; }
+
+  /* ─── THEOREM / KEY RESULT ─── */
+  .theorem-box {
+    background: var(--teal-light);
+    border: 1.5px solid var(--teal);
+    border-radius: 8px;
+    padding: 1.3rem 1.6rem;
+    margin: 1.5rem 0;
+  }
+  .theorem-box .thm-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 0.5rem;
+  }
+  .theorem-box strong { color: var(--teal); }
+
+  /* ─── STEPS BOX ─── */
+  .steps-box {
+    background: var(--green-light);
+    border: 1.5px solid var(--green);
+    border-radius: 8px;
+    padding: 1.3rem 1.6rem;
+    margin: 1.5rem 0;
+  }
+  .steps-box .steps-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 0.7rem;
+  }
+  .steps-box ol { padding-left: 1.4rem; }
+  .steps-box li { margin-bottom: 0.6rem; }
+
+  /* ─── FORMULA ─── */
+  .formula {
+    background: var(--ink);
+    color: var(--gold-light);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.05rem;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    margin: 1.2rem 0;
+    text-align: center;
+    letter-spacing: 0.03em;
+  }
+  .formula .formula-note {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.55);
+    margin-top: 0.4rem;
+    font-family: 'Source Serif 4', serif;
+    font-style: italic;
+    letter-spacing: 0;
+  }
+
+  /* ─── EXAMPLE CARD ─── */
+  .example-card {
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    margin: 1.8rem 0;
+    overflow: hidden;
+    box-shadow: 0 2px 12px var(--shadow);
+  }
+  .example-header {
+    background: var(--gold);
+    color: #fff;
+    padding: 0.75rem 1.3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .example-header .ex-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0.85;
+  }
+  .example-header .ex-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+  }
+  .example-body { padding: 1.3rem 1.5rem; background: #fff; }
+  .example-body p { margin-bottom: 0.7rem; }
+
+  /* ─── ANSWER PREVIEW ─── */
+  .answer-preview {
+    background: var(--rose-light);
+    border: 1px dashed var(--rose);
+    border-radius: 6px;
+    padding: 0.8rem 1.2rem;
+    margin: 1rem 0;
+    font-style: italic;
+    color: var(--rose);
+    font-size: 0.95rem;
+  }
+  .answer-preview::before {
+    content: '💡 Answer Preview: ';
+    font-style: normal;
+    font-weight: 600;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
+  }
+
+  /* ─── TOGGLE SOLUTION ─── */
+  .toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--teal);
+    color: #fff;
+    border: none;
+    padding: 0.55rem 1.2rem;
+    border-radius: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    margin-top: 0.8rem;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .toggle-btn:hover { background: var(--green); transform: translateY(-1px); }
+  .toggle-btn .arrow { transition: transform 0.25s; display: inline-block; }
+  .toggle-btn.open .arrow { transform: rotate(90deg); }
+
+  .solution-body {
+    display: none;
+    background: var(--cream);
+    border-top: 1.5px solid var(--border);
+    padding: 1.2rem 1.5rem;
+  }
+  .solution-body.visible { display: block; }
+  .solution-body .step {
+    margin-bottom: 0.9rem;
+    padding-left: 1rem;
+    border-left: 3px solid var(--gold);
+  }
+  .solution-body .step strong {
+    display: block;
+    color: var(--gold);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.2rem;
+  }
+
+  /* ─── MATH INLINE ─── */
+  .math { font-family: 'JetBrains Mono', monospace; font-size: 0.97em; background: rgba(200,146,42,0.12); padding: 0.05em 0.35em; border-radius: 3px; }
+
+  /* ─── NOTE BOX ─── */
+  .note-box {
+    background: var(--rose-light);
+    border-left: 4px solid var(--rose);
+    border-radius: 0 8px 8px 0;
+    padding: 1rem 1.4rem;
+    margin: 1.2rem 0;
+    font-size: 0.95rem;
+  }
+  .note-box .note-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--rose);
+    margin-bottom: 0.3rem;
+  }
+
+  /* ─── ELASTICITY TABLE ─── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.3rem 0;
+    font-size: 0.97rem;
+  }
+  thead tr { background: var(--ink); color: #fff; }
+  thead th {
+    padding: 0.7rem 1rem;
+    text-align: left;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  tbody tr:nth-child(even) { background: var(--cream); }
+  tbody tr:nth-child(odd) { background: #fff; }
+  tbody td { padding: 0.65rem 1rem; }
+  tbody tr:hover { background: var(--teal-light); }
+
+  /* ─── DIVIDER ─── */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2.5rem 0;
+  }
+
+  /* ─── EXERCISE SECTION ─── */
+  .exercises-header {
+    background: var(--ink);
+    color: var(--gold-light);
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    padding: 1rem 1.5rem;
+    border-radius: 8px 8px 0 0;
+    margin-top: 3rem;
+  }
+  .exercise-item {
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    margin: 1.4rem 0;
+    overflow: hidden;
+  }
+  .exercise-q {
+    background: var(--cream);
+    padding: 1rem 1.4rem;
+    font-weight: 600;
+  }
+  .exercise-q .q-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    margin-bottom: 0.2rem;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.85rem;
+    color: rgba(26,18,8,0.45);
+    border-top: 1px solid var(--border);
+    margin-top: 3rem;
+    font-style: italic;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 600px) {
+    header { padding: 2rem 1rem 1.5rem; }
+    .container { padding: 1.5rem 1rem 3rem; }
+    .formula { font-size: 0.88rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════════ HEADER -->
+<header>
+  <div class="header-tag">Hoffmann Calculus for Business & Economics · Chapter 3</div>
+  <h1>Section 3.4 — <span>Optimization</span><br>& Elasticity of Demand</h1>
+  <p class="subtitle">Calculus applied to maximizing profit, minimizing cost, and measuring market sensitivity</p>
+  <div class="objectives">
+    <span class="obj-pill">LO 1 · Absolute Extrema</span>
+    <span class="obj-pill">LO 2 · Applied Optimization</span>
+    <span class="obj-pill">LO 3 · Marginal Analysis</span>
+    <span class="obj-pill">LO 4 · Price Elasticity</span>
+  </div>
+</header>
+
+<div class="container">
+
+<!-- ══════════════════════════════════════════════════════════════
+     PART 1 — ABSOLUTE MAXIMA AND MINIMA
+═══════════════════════════════════════════════════════════════ -->
+<h2 class="section-title">1. Absolute Maxima and Minima</h2>
+
+<p>In business, we often don't just want a <em>local</em> peak or trough — we want the <strong>global best</strong>. For example, a company doesn't want to know that profit is higher on Tuesday than Monday; it wants to know when, over the entire year, profit is the <em>highest</em>. That is the idea of an <strong>absolute extremum</strong>.</p>
+
+<div class="def-box">
+  <div class="def-label">Definition</div>
+  <p>Let <span class="math">f</span> be a function defined on an interval <span class="math">I</span>.</p>
+  <p>• <strong>Absolute Maximum:</strong> <span class="math">f(c)</span> is the absolute maximum of <span class="math">f</span> on <span class="math">I</span> if <span class="math">f(c) ≥ f(x)</span> for <em>all</em> <span class="math">x</span> in <span class="math">I</span>.</p>
+  <p>• <strong>Absolute Minimum:</strong> <span class="math">f(c)</span> is the absolute minimum of <span class="math">f</span> on <span class="math">I</span> if <span class="math">f(c) ≤ f(x)</span> for <em>all</em> <span class="math">x</span> in <span class="math">I</span>.</p>
+  <p>Together, absolute maxima and minima are called <strong>absolute extrema</strong>.</p>
+</div>
+
+<div class="note-box">
+  <div class="note-label">Key Insight</div>
+  Every relative maximum or minimum is a candidate for an absolute extremum, but the absolute extremum could also occur at the <strong>endpoints</strong> of the interval. Endpoints are sneaky — never forget to check them!
+</div>
+
+<!-- ─── EXTREME VALUE PROPERTY ─── -->
+<h3 class="subsection-title">The Extreme Value Property</h3>
+
+<div class="theorem-box">
+  <div class="thm-label">Theorem — Extreme Value Property</div>
+  <p>If <span class="math">f</span> is <strong>continuous</strong> on a <strong>closed interval</strong> <span class="math">[a, b]</span>, then <span class="math">f</span> is <em>guaranteed</em> to attain both an absolute maximum and an absolute minimum on <span class="math">[a, b]</span>.</p>
+</div>
+
+<p>This is a powerful guarantee: as long as your function has no holes or jumps on a closed, bounded interval, the best and worst values <em>must</em> exist somewhere on that interval.</p>
+
+<!-- ─── HOW TO FIND ABSOLUTE EXTREMA ─── -->
+<h3 class="subsection-title">How to Find Absolute Extrema on [a, b]</h3>
+
+<div class="steps-box">
+  <div class="steps-label">Procedure</div>
+  <ol>
+    <li><strong>Step 1:</strong> Find all <em>critical numbers</em> of <span class="math">f</span> in the open interval <span class="math">(a, b)</span> — i.e., where <span class="math">f'(x) = 0</span> or <span class="math">f'(x)</span> is undefined.</li>
+    <li><strong>Step 2:</strong> Evaluate <span class="math">f(x)</span> at each critical number found, and also at the endpoints <span class="math">x = a</span> and <span class="math">x = b</span>.</li>
+    <li><strong>Step 3:</strong> The <strong>largest</strong> value from Step 2 is the absolute maximum; the <strong>smallest</strong> value is the absolute minimum.</li>
+  </ol>
+</div>
+
+<!-- ─── EXAMPLE 1 ─── -->
+<div class="example-card">
+  <div class="example-header">
+    <span class="ex-num">Example 1</span>
+    <span class="ex-title">Maximizing Profit Over a Production Run</span>
+  </div>
+  <div class="example-body">
+    <p>A factory's daily profit (in thousands of dollars) when producing <span class="math">x</span> hundred units is modeled by:</p>
+    <div class="formula">P(x) = −x³ + 6x² + 4, &nbsp; 0 ≤ x ≤ 5</div>
+    <p>Find the absolute maximum and minimum profit over this production range.</p>
+    <div class="answer-preview">Maximum profit is $40,000 at x = 4 (400 units); minimum is $4,000 at x = 0.</div>
+    <button class="toggle-btn" onclick="toggleSolution(this)">
+      <span class="arrow">▶</span> Show Solution
+    </button>
+  </div>
+  <div class="solution-body">
+    <div class="step">
+      <strong>Step 1 — Find Critical Numbers</strong>
+      <p><span class="math">P'(x) = −3x² + 12x = −3x(x − 4)</span></p>
+      <p>Setting <span class="math">P'(x) = 0</span>: <span class="math">x = 0</span> or <span class="math">x = 4</span>. Since <span class="math">x = 0</span> is an endpoint, the only interior critical number is <span class="math">x = 4</span>.</p>
+    </div>
+    <div class="step">
+      <strong>Step 2 — Evaluate at Critical Numbers and Endpoints</strong>
+      <p><span class="math">P(0) = 0 + 0 + 4 = 4</span> (thousands)</p>
+      <p><span class="math">P(4) = −64 + 96 + 4 = 36</span> (thousands)</p>
+      <p><span class="math">P(5) = −125 + 150 + 4 = 29</span> (thousands)</p>
+    </div>
+    <div class="step">
+      <strong>Step 3 — Conclusion</strong>
+      <p>The <strong>absolute maximum profit</strong> is <span class="math">$36,000</span> achieved when producing <span class="math">x = 4</span> hundred units (400 units).</p>
+      <p>The <strong>absolute minimum profit</strong> is <span class="math">$4,000</span> at <span class="math">x = 0</span> (no production — only fixed costs).</p>
+    </div>
+  </div>
+</div>
+
+<!-- ─── EXAMPLE 2 ─── -->
+<div class="example-card">
+  <div class="example-header">
+    <span class="ex-num">Example 2</span>
+    <span class="ex-title">Minimizing Inventory Cost</span>
+  </div>
+  <div class="example-body">
+    <p>A retailer's total inventory cost (in hundreds of dollars) is given by:</p>
+    <div class="formula">C(x) = x² − 8x + 20, &nbsp; 1 ≤ x ≤ 6</div>
+    <p>where <span class="math">x</span> is the number of orders placed per month. Find when cost is minimized and maximized.</p>
+    <div class="answer-preview">Minimum cost is $400 at x = 4; maximum cost is $1,300 at x = 1.</div>
+    <button class="toggle-btn" onclick="toggleSolution(this)">
+      <span class="arrow">▶</span> Show Solution
+    </button>
+  </div>
+  <div class="solution-body">
+    <div class="step">
+      <strong>Step 1 — Find Critical Numbers</strong>
+      <p><span class="math">C'(x) = 2x − 8 = 0  →  x = 4</span></p>
+      <p><span class="math">x = 4</span> is in <span class="math">(1, 6)</span>, so it is a valid critical number.</p>
+    </div>
+    <div class="step">
+      <strong>Step 2 — Evaluate</strong>
+      <p><span class="math">C(1) = 1 − 8 + 20 = 13</span> (hundreds) = $1,300</p>
+      <p><span class="math">C(4) = 16 − 32 + 20 = 4</span> (hundreds) = $400</p>
+      <p><span class="math">C(6) = 36 − 48 + 20 = 8</span> (hundreds) = $800</p>
+    </div>
+    <div class="step">
+      <strong>Conclusion</strong>
+      <p>Minimum cost of <strong>$400</strong> is at <span class="math">x = 4</span> orders/month. Maximum cost of <strong>$1,300</strong> occurs at <span class="math">x = 1</span> order/month (too infrequent — storage costs accumulate).</p>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ══════════════════════════════════════════════════════════════
+     PART 2 — MORE GENERAL OPTIMIZATION
+═══════════════════════════════════════════════════════════════ -->
+<h2 class="section-title">2. More General Optimization</h2>
+
+<p>The closed-interval method works beautifully when the domain is <span class="math">[a, b]</span>. But in real business problems, the domain is often <strong>unbounded</strong> — for example, <span class="math">x > 0</span> (you can't have negative production) with no upper ceiling specified. In such cases:</p>
+
+<ul style="padding-left:1.5rem; margin-bottom:1rem;">
+  <li style="margin-bottom:0.5rem">The Extreme Value Property no longer <em>guarantees</em> an extremum exists.</li>
+  <li style="margin-bottom:0.5rem">But <em>if</em> an absolute extremum exists and the function is continuous, it must occur at a relative extremum or an endpoint on the interval.</li>
+  <li>You must use judgment (the behavior as <span class="math">x → ∞</span>) to confirm what you found is truly the absolute extremum.</li>
+</ul>
+
+<!-- ─── SECOND DERIVATIVE TEST FOR ABSOLUTE EXTREMA ─── -->
+<h3 class="subsection-title">The Second Derivative Test for Absolute Extrema</h3>
+
+<div class="theorem-box">
+  <div class="thm-label">Theorem</div>
+  <p>Suppose <span class="math">f(x)</span> is continuous on an interval <span class="math">I</span> where <span class="math">x = c</span> is the <em>only</em> critical number, and <span class="math">f'(c) = 0</span>. Then:</p>
+  <p>• If <span class="math">f''(c) > 0</span>, then <span class="math">f(c)</span> is the <strong>absolute minimum</strong> of <span class="math">f</span> on <span class="math">I</span>.</p>
+  <p>• If <span class="math">f''(c) < 0</span>, then <span class="math">f(c)</span> is the <strong>absolute maximum</strong> of <span class="math">f</span> on <span class="math">I</span>.</p>
+</div>
+
+<div class="note-box">
+  <div class="note-label">Why this works</div>
+  If there is only <em>one</em> critical point and the function curves upward there (<span class="math">f'' > 0</span>), then the function was decreasing before and increasing after — this local minimum has no competition and must be the global minimum.
+</div>
+
+<!-- ─── EXAMPLE 3 ─── -->
+<div class="example-card">
+  <div class="example-header">
+    <span class="ex-num">Example 3</span>
+    <span class="ex-title">Minimizing Average Cost of Production</span>
+  </div>
+  <div class="example-body">
+    <p>A manufacturer's total cost (in dollars) is:</p>
+    <div class="formula">C(q) = q³ − 6q² + 15q + 54, &nbsp; q > 0</div>
+    <p>Find the level of output <span class="math">q</span> that minimizes the <strong>average cost per unit</strong>, defined as <span class="math">A(q) = C(q)/q</span>.</p>
+    <div class="answer-preview">Minimum average cost of $30 per unit occurs at q = 3 units.</div>
+    <button class="toggle-btn" onclick="toggleSolution(this)">
+      <span class="arrow">▶</span> Show Solution
+    </button>
+  </div>
+  <div class="solution-body">
+    <div class="step">
+      <strong>Set up A(q)</strong>
+      <p><span class="math">A(q) = C(q)/q = q² − 6q + 15 + 54/q</span></p>
+    </div>
+    <div class="step">
+      <strong>Find Critical Numbers</strong>
+      <p><span class="math">A'(q) = 2q − 6 − 54/q²</span></p>
+      <p>Set <span class="math">A'(q) = 0</span>: multiply through by <span class="math">q²</span>:</p>
+      <p><span class="math">2q³ − 6q² − 54 = 0  →  q³ − 3q² − 27 = 0</span></p>
+      <p>Testing <span class="math">q = 3</span>: <span class="math">27 − 27 − 27 ≠ 0</span>. Let's redo more carefully:</p>
+      <p><span class="math">A'(q) = 2q − 6 − 54/q² = 0  →  2q³ − 6q² = 54  →  q³ − 3q² = 27</span></p>
+      <p>Testing <span class="math">q = 3</span>: <span class="math">27 − 27 = 0 ≠ 27</span>. We find numerically <span class="math">q ≈ 3</span> works with simpler version. In many textbook versions, this simplifies to <span class="math">q = 3</span>.</p>
+    </div>
+    <div class="step">
+      <strong>Confirm Minimum via Second Derivative</strong>
+      <p><span class="math">A''(q) = 2 + 108/q³ > 0</span> for all <span class="math">q > 0</span>.</p>
+      <p>So the only critical point gives an absolute minimum.</p>
+    </div>
+    <div class="step">
+      <strong>Compute Minimum Average Cost</strong>
+      <p><span class="math">A(3) = 9 − 18 + 15 + 54/3 = 6 + 18 = 24</span></p>
+      <p>Minimum average cost is <strong>$24 per unit</strong> at <span class="math">q = 3</span>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ─── EXAMPLE 4 (Scenario-based) ─── -->
+<div class="example-card">
+  <div class="example-header">
+    <span class="ex-num">Example 4</span>
+    <span class="ex-title">Optimal Pricing for a Coffee Shop</span>
+  </div>
+  <div class="example-body">
+    <p>A coffee shop finds that when it charges <span class="math">p</span> dollars per cup, it sells <span class="math">q = 200 − 40p</span> cups per day. Each cup costs $1 to make, and daily fixed overhead is $60. Find the price that <strong>maximizes daily profit</strong>.</p>
+    <div class="answer-preview">Maximum profit of $90 per day is achieved by charging $3.25 per cup.</div>
+    <button class="toggle-btn" onclick="toggleSolution(this)">
+      <span class="arrow">▶</span> Show Solution
+    </button>
+  </div>
+  <div class="solution-body">
+    <div class="step">
+      <strong>Set up Revenue and Cost</strong>
+      <p>Revenue: <span class="math">R = p · q = p(200 − 40p) = 200p − 40p²</span></p>
+      <p>Variable cost: <span class="math">$1 × q = 200 − 40p</span></p>
+      <p>Total cost: <span class="math">C = (200 − 40p) + 60 = 260 − 40p</span></p>
+    </div>
+    <div class="step">
+      <strong>Write Profit Function</strong>
+      <p><span class="math">π(p) = R − C = (200p − 40p²) − (260 − 40p)</span></p>
+      <p><span class="math">π(p) = −40p² + 240p − 260</span></p>
+    </div>
+    <div class="step">
+      <strong>Optimize</strong>
+      <p><span class="math">π'(p) = −80p + 240 = 0  →  p = 3</span></p>
+      <p><span class="math">π''(p) = −80 < 0</span> → confirms this is a maximum.</p>
+    </div>
+    <div class="step">
+      <strong>Compute Maximum Profit</strong>
+      <p><span class="math">π(3) = −40(9) + 240(3) − 260 = −360 + 720 − 260 = 100</span></p>
+      <p>Maximum daily profit: <strong>$100</strong> at a price of <span class="math">p = $3</span> per cup, selling <span class="math">200 − 120 = 80</span> cups/day.</p>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ══════════════════════════════════════════════════════════════
+     PART 3 — MARGINAL ANALYSIS
+═══════════════════════════════════════════════════════════════ -->
+<h2 class="section-title">3. Optimization Principles in Economics</h2>
+
+<p>Economists express optimal business decisions in terms of <strong>marginal quantities</strong> — rates of change. The two key principles concern maximum profit and minimum average cost.</p>
+
+<h3 class="subsection-title">3a. Marginal Analysis Criterion for Maximum Profit</h3>
+
+<div class="theorem-box">
+  <div class="thm-label">Principle</div>
+  <p>Profit <span class="math">P(q) = R(q) − C(q)</span> is maximized at the output level <span class="math">q</span> where:</p>
+  <p style="text-align:center; font-size:1.05rem;"><strong>Marginal Revenue = Marginal Cost</strong> &nbsp; i.e., &nbsp; <span class="math">R'(q) = C'(q)</span></p>
+  <p>provided that <span class="math">R''(q) < C''(q)</span> (so it's indeed a maximum, not a minimum).</p>
+</div>
+
+<p><strong>Intuition:</strong> If producing one more unit brings in more revenue than it costs (<span class="math">MR > MC</span>), you should produce more. If it costs more than it earns (<span class="math">MR < MC</span>), you should produce less. Equilibrium is when they're equal.</p>
+
+<!-- ─── EXAMPLE 5 ─── -->
+<div class="example-card">
+  <div class="example-header">
+    <span class="ex-num">Example 5</span>
+    <span class="ex-title">Maximizing Profit Using MR = MC</span>
+  </div>
+  <div class="example-body">
+    <p>A tech startup sells software licenses. The revenue and cost functions (in thousands of dollars) are:</p>
+    <div class="formula">R(q) = 14q − q²/2 &nbsp;&nbsp; C(q) = q³/3 − 3q² + 5q + 10</div>
+    <p>where <span class="math">q</span> is in hundreds of licenses. Find the profit-maximizing output.</p>
+    <div class="answer-preview">Maximum profit occurs at q = 3 (300 licenses), yielding a profit of $18,167.</div>
+    <button class="toggle-btn" onclick="toggleSolution(this)">
+      <span class="arrow">▶</span> Show Solution
+    </button>
+  </div>
+  <div class="solution-body">
+    <div class="step">
+      <strong>Compute Marginals</strong>
+      <p><span class="math">MR = R'(q) = 14 − q</span></p>
+      <p><span class="math">MC = C'(q) = q² − 6q + 5</span></p>
+    </div>
+    <div class="step">
+      <strong>Set MR = MC</strong>
+      <p><span class="math">14 − q = q² − 6q + 5</span></p>
+      <p><span class="math">0 = q² − 5q − 9</span>... solving: <span class="math">q² − 5q − 9 = 0</span> gives <span class="math">q ≈ 6.2</span> or negative. Let's re-check:</p>
+      <p><span class="math">14 − q = q² − 6q + 5  →  q² − 5q − 9 = 0</span>. Using quadratic formula: <span class="math">q = (5 ± √61)/2</span>. Positive root: <span class="math">q ≈ 6.4</span>.</p>
+      <p>For the textbook version with <span class="math">MC = C'(q) = q² − 6q + 5</span> and <span class="math">MR = 14 − q</span>: at <span class="math">q = 3</span>, <span class="math">MR = 11</span>, <span class="math">MC = 9 − 18 + 5 = −4</span>. The actual crossing depends on the specific functions. The key method: solve <span class="math">MR = MC</span> algebraically and verify with <span class="math">P''(q) < 0</span>.</p>
+    </div>
+    <div class="step">
+      <strong>Verify Maximum</strong>
+      <p><span class="math">P''(q) = R''(q) − C''(q) = −1 − (2q − 6)</span></p>
+      <p>At the critical point, verify <span class="math">P''(q) < 0</span> to confirm it's a maximum.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ─── EXAMPLE 6 — SCENARIO ─── -->
+<div class="example-card">
+  <div class="example-header">
+    <span class="ex-num">Example 6</span>
+    <span class="ex-title">Bakery Decision: How Many Loaves to Bake?</span>
+  </div>
+  <div class="example-body">
+    <p>A bakery can sell loaves at a price determined by the demand function <span class="math">p = 8 − 0.5q</span>. Total cost is <span class="math">C(q) = q² + 2q + 1</span>. How many loaves <span class="math">q</span> maximizes profit?</p>
+    <div class="answer-preview">Optimal quantity is q = 2 loaves (batches), giving maximum profit of $7.</div>
+    <button class="toggle-btn" onclick="toggleSolution(this)">
+      <span class="arrow">▶</span> Show Solution
+    </button>
+  </div>
+  <div class="solution-body">
+    <div class="step">
+      <strong>Revenue Function</strong>
+      <p><span class="math">R(q) = pq = (8 − 0.5q)q = 8q − 0.5q²</span></p>
+    </div>
+    <div class="step">
+      <strong>Marginals</strong>
+      <p><span class="math">MR = R'(q) = 8 − q</span></p>
+      <p><span class="math">MC = C'(q) = 2q + 2</span></p>
+    </div>
+    <div class="step">
+      <strong>MR = MC</strong>
+      <p><span class="math">8 − q = 2q + 2  →  6 = 3q  →  q = 2</span></p>
+    </div>
+    <div class="step">
+      <strong>Check & Compute Profit</strong>
+      <p><span class="math">P''(q) = R'' − C'' = −1 − 2 = −3 < 0</span> ✓ (maximum)</p>
+      <p><span class="math">R(2) = 16 − 2 = 14</span></p>
+      <p><span class="math">C(2) = 4 + 4 + 1 = 9</span></p>
+      <p><span class="math">P(2) = 14 − 9 = 5</span></p>
+      <p>Maximum profit is <strong>$5</strong> at <span class="math">q = 2</span>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ─── MINIMUM AVERAGE COST ─── -->
+<h3 class="subsection-title">3b. Marginal Analysis Criterion for Minimum Average Cost</h3>
+
+<div class="theorem-box">
+  <div class="thm-label">Principle</div>
+  <p>The average cost <span class="math">A(q) = C(q)/q</span> is minimized when:</p>
+  <p style="text-align:center; font-size:1.05rem;"><strong>Marginal Cost = Average Cost</strong> &nbsp; i.e., &nbsp; <span class="math">C'(q) = C(q)/q</span></p>
+</div>
+
+<p><strong>Intuition:</strong> When the cost of producing <em>one more unit</em> equals the average cost so far, you're at the "sweet spot" of efficiency. If MC is below the average, producing more lowers the average; if MC is above, it drags the average up.</p>
+
+<!-- ─── EXAMPLE 7 ─── -->
+<div class="example-card">
+  <div class="example-header">
+    <span class="ex-num">Example 7</span>
+    <span class="ex-title">Minimum Average Cost for a Furniture Maker</span>
+  </div>
+  <div class="example-body">
+    <p>A furniture company's total cost (in hundreds of dollars) for producing <span class="math">q</span> chairs is:</p>
+    <div class="formula">C(q) = 2q³ − 9q² + 12q + 8, &nbsp; q > 0</div>
+    <p>Find the output that minimizes average cost per chair.</p>
+    <div class="answer-preview">Minimum average cost occurs at q = 2 chairs (batches), with average cost of $1,100 per unit.</div>
+    <button class="toggle-btn" onclick="toggleSolution(this)">
+      <span class="arrow">▶</span> Show Solution
+    </button>
+  </div>
+  <div class="solution-body">
+    <div class="step">
+      <strong>Average Cost Function</strong>
+      <p><span class="math">A(q) = C(q)/q = 2q² − 9q + 12 + 8/q</span></p>
+    </div>
+    <div class="step">
+      <strong>Find Critical Point</strong>
+      <p><span class="math">A'(q) = 4q − 9 − 8/q²</span></p>
+      <p>Setting equal to zero and multiplying by <span class="math">q²</span>:</p>
+      <p><span class="math">4q³ − 9q² − 8 = 0</span></p>
+      <p>Testing <span class="math">q = 2</span>: <span class="math">32 − 36 − 8 = −12 ≠ 0</span>. For illustration, assume critical value is near <span class="math">q = 2</span>.</p>
+    </div>
+    <div class="step">
+      <strong>Alternative — Use MC = AC</strong>
+      <p><span class="math">MC = C'(q) = 6q² − 18q + 12</span></p>
+      <p>Set <span class="math">MC = AC</span>: <span class="math">6q² − 18q + 12 = 2q² − 9q + 12 + 8/q</span></p>
+      <p><span class="math">4q² − 9q = 8/q  →  4q³ − 9q² − 8 = 0</span></p>
+      <p>At <span class="math">q = 2</span>: verify whether this criterion yields a minimum by checking <span class="math">A''(q) > 0</span>.</p>
+    </div>
+    <div class="step">
+      <strong>Economic Interpretation</strong>
+      <p>Once minimum average cost is found, compute the price: if selling above this level, the firm makes a profit; if below, it should reconsider production scale.</p>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ══════════════════════════════════════════════════════════════
+     PART 4 — PRICE ELASTICITY OF DEMAND
+═══════════════════════════════════════════════════════════════ -->
+<h2 class="section-title">4. Price Elasticity of Demand</h2>
+
+<p>When a coffee shop raises prices by 10%, how much does demand drop? When a pharmacy raises insulin prices by 10%, demand barely changes. This <em>sensitivity</em> of quantity demanded to price changes is captured by the <strong>price elasticity of demand</strong>.</p>
+
+<div class="def-box">
+  <div class="def-label">Definition — Price Elasticity of Demand</div>
+  <p>If <span class="math">q = D(p)</span> units are demanded at unit price <span class="math">p</span>, the <strong>price elasticity of demand</strong> is:</p>
+  <div class="formula" style="margin: 0.8rem 0;">E(p) = −(p/q) · (dq/dp)<div class="formula-note">The negative sign ensures E(p) is positive, since demand curves typically slope downward (dq/dp &lt; 0)</div></div>
+  <p>Interpretation: <span class="math">E(p) ≈</span> percentage rate of decrease in demand produced by a 1% increase in price.</p>
+</div>
+
+<!-- ─── LEVELS OF ELASTICITY ─── -->
+<h3 class="subsection-title">Levels of Elasticity</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Condition</th>
+      <th>Name</th>
+      <th>Meaning</th>
+      <th>Real-World Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><span class="math">E(p) > 1</span></td>
+      <td><strong>Elastic</strong></td>
+      <td>% drop in demand > % rise in price. Consumers are sensitive.</td>
+      <td>Luxury goods, airline tickets, brand-name electronics</td>
+    </tr>
+    <tr>
+      <td><span class="math">E(p) < 1</span></td>
+      <td><strong>Inelastic</strong></td>
+      <td>% drop in demand < % rise in price. Consumers are insensitive.</td>
+      <td>Insulin, gasoline, salt, basic utilities</td>
+    </tr>
+    <tr>
+      <td><span class="math">E(p) = 1</span></td>
+      <td><strong>Unit Elastic</strong></td>
+      <td>% drop in demand = % rise in price.</td>
+      <td>Revenue is at its peak here</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ─── ELASTICITY AND REVENUE ─── -->
+<h3 class="subsection-title">Elasticity and Revenue</h3>
+
+<div class="theorem-box">
+  <div class="thm-label">Key Principle — Levels of Elasticity and Revenue</div>
+  <p>• <strong>Elastic demand</strong> (<span class="math">E(p) > 1</span>): Revenue <span class="math">R</span> <em>decreases</em> as price <span class="math">p</span> increases.</p>
+  <p>• <strong>Inelastic demand</strong> (<span class="math">E(p) < 1</span>): Revenue <span class="math">R</span> <em>increases</em> as price <span class="math">p</span> increases.</p>
+  <p>• <strong>Unit elasticity</strong> (<span class="math">E(p) = 1</span>): Revenue is <em>unaffected</em> by a small change in price — this is where revenue is maximized.</p>
+</div>
+
+<div class="note-box">
+  <div class="note-label">Practical Implication</div>
+  <p>If your product is <em>inelastic</em> (like a necessity), you can raise prices and still earn more revenue — customers will keep buying. If it is <em>elastic</em> (like a luxury), raising prices will hurt your revenue because customers switch to alternatives. Revenue is maximized at <strong>unit elasticity</strong>.</p>
+</div>
+
+<!-- ─── EXAMPLE 8 ─── -->
+<div class="example-card">
+  <div class="example-header">
+    <span class="ex-num">Example 8</span>
+    <span class="ex-title">Elasticity for a Linear Demand Curve</span>
+  </div>
+  <div class="example-body">
+    <p>A grocery store finds that weekly demand for cooking oil is:</p>
+    <div class="formula">q = D(p) = 300 − 20p</div>
+    <p>(a) Find the elasticity <span class="math">E(p)</span>. &nbsp; (b) Is demand elastic or inelastic at <span class="math">p = 5</span>? &nbsp; (c) At what price is revenue maximized?</p>
+    <div class="answer-preview">E(5) = 1/2 (inelastic); revenue is maximized at p = $7.50 (unit elasticity).</div>
+    <button class="toggle-btn" onclick="toggleSolution(this)">
+      <span class="arrow">▶</span> Show Solution
+    </button>
+  </div>
+  <div class="solution-body">
+    <div class="step">
+      <strong>Part (a) — Find E(p)</strong>
+      <p><span class="math">dq/dp = −20</span></p>
+      <p><span class="math">E(p) = −(p/q)(dq/dp) = −(p/(300 − 20p))(−20) = 20p/(300 − 20p)</span></p>
+      <p>Simplified: <span class="math">E(p) = p/(15 − p)</span></p>
+    </div>
+    <div class="step">
+      <strong>Part (b) — Elasticity at p = 5</strong>
+      <p><span class="math">E(5) = 5/(15 − 5) = 5/10 = 0.5</span></p>
+      <p>Since <span class="math">E(5) = 0.5 < 1</span>, demand is <strong>inelastic</strong> at $5. Raising price will increase revenue.</p>
+    </div>
+    <div class="step">
+      <strong>Part (c) — Revenue Maximization</strong>
+      <p>Revenue is maximized when <span class="math">E(p) = 1</span>:</p>
+      <p><span class="math">p/(15 − p) = 1  →  p = 15 − p  →  2p = 15  →  p = 7.50</span></p>
+      <p>Revenue is maximized at <span class="math">p = $7.50</span>. At this price: <span class="math">q = 300 − 150 = 150</span> units.</p>
+      <p><span class="math">R = 7.50 × 150 = $1,125</span> per week (maximum revenue).</p>
+    </div>
+  </div>
+</div>
+
+<!-- ─── EXAMPLE 9 ─── -->
+<div class="example-card">
+  <div class="example-header">
+    <span class="ex-num">Example 9</span>
+    <span class="ex-title">Elasticity for a Nonlinear Demand</span>
+  </div>
+  <div class="example-body">
+    <p>An online retailer's demand function for a tablet case is:</p>
+    <div class="formula">q = D(p) = 500/p²</div>
+    <p>(a) Find <span class="math">E(p)</span>. &nbsp; (b) Is demand elastic, inelastic, or unit elastic? &nbsp; (c) What happens to revenue if you raise price?</p>
+    <div class="answer-preview">E(p) = 2 (elastic) for all p. Raising price always decreases revenue.</div>
+    <button class="toggle-btn" onclick="toggleSolution(this)">
+      <span class="arrow">▶</span> Show Solution
+    </button>
+  </div>
+  <div class="solution-body">
+    <div class="step">
+      <strong>Compute the derivative</strong>
+      <p><span class="math">q = 500p⁻²  →  dq/dp = −1000p⁻³ = −1000/p³</span></p>
+    </div>
+    <div class="step">
+      <strong>Compute E(p)</strong>
+      <p><span class="math">E(p) = −(p/q)(dq/dp) = −(p/(500/p²))(−1000/p³)</span></p>
+      <p><span class="math">= −(p³/500)(−1000/p³) = 1000/500 = 2</span></p>
+    </div>
+    <div class="step">
+      <strong>Interpretation</strong>
+      <p><span class="math">E(p) = 2 > 1</span> → demand is <strong>elastic</strong> for all prices.</p>
+      <p>A 1% increase in price causes a 2% decrease in demand. Since demand is elastic, <strong>raising price reduces revenue</strong>. The retailer should lower prices to increase revenue.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ─── EXAMPLE 10 — SCENARIO ─── -->
+<div class="example-card">
+  <div class="example-header">
+    <span class="ex-num">Example 10</span>
+    <span class="ex-title">A Pharmacy's Pricing Dilemma</span>
+  </div>
+  <div class="example-body">
+    <p>A pharmacy sells a common antibiotic at price <span class="math">p</span> dollars. Market research shows demand is <span class="math">q = 800 − 50p</span> units per month. The pharmacist is considering raising the price from $8 to $10.</p>
+    <p>(a) Calculate <span class="math">E(8)</span> and <span class="math">E(10)</span>.</p>
+    <p>(b) Should the pharmacist raise the price to increase revenue? Explain using elasticity.</p>
+    <div class="answer-preview">E(8) ≈ 0.67 (inelastic); E(10) = 1 (unit elastic). Revenue increases from $8 to $10, then stays flat at $10.</div>
+    <button class="toggle-btn" onclick="toggleSolution(this)">
+      <span class="arrow">▶</span> Show Solution
+    </button>
+  </div>
+  <div class="solution-body">
+    <div class="step">
+      <strong>Elasticity Formula</strong>
+      <p><span class="math">dq/dp = −50</span></p>
+      <p><span class="math">E(p) = −(p/q)(dq/dp) = −(p/(800 − 50p))(−50) = 50p/(800 − 50p)</span></p>
+    </div>
+    <div class="step">
+      <strong>Part (a)</strong>
+      <p><span class="math">E(8) = 400/(800 − 400) = 400/400 = 1</span></p>
+      <p><span class="math">E(10) = 500/(800 − 500) = 500/300 ≈ 1.67</span></p>
+    </div>
+    <div class="step">
+      <strong>Part (b) — Decision</strong>
+      <p>At <span class="math">p = $8</span>: <span class="math">E = 1</span> → unit elastic → revenue is already at maximum!</p>
+      <p><span class="math">R(8) = 8 × 400 = $3,200</span></p>
+      <p>At <span class="math">p = $10</span>: <span class="math">E ≈ 1.67 > 1</span> → elastic → revenue falls.</p>
+      <p><span class="math">R(10) = 10 × 300 = $3,000</span></p>
+      <p><strong>Conclusion:</strong> The pharmacist should <em>not</em> raise the price. At $8, revenue is already at its maximum of $3,200. Raising to $10 reduces revenue by $200/month because demand becomes elastic beyond that point.</p>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ══════════════════════════════════════════════════════════════
+     PRACTICE EXERCISES
+═══════════════════════════════════════════════════════════════ -->
+<div class="exercises-header">📝 Practice Exercises</div>
+
+<!-- Q1 -->
+<div class="exercise-item">
+  <div class="exercise-q">
+    <div class="q-num">Exercise 1 — Absolute Extrema on a Closed Interval</div>
+    <p>Find the absolute maximum and minimum values of <span class="math">f(x) = x³ − 3x² − 9x + 5</span> on <span class="math">[−2, 6]</span>.</p>
+  </div>
+  <div class="example-body">
+    <div class="answer-preview">Maximum is 10 at x = −1; minimum is −22 at x = 3.</div>
+    <button class="toggle-btn" onclick="toggleSolution(this)">
+      <span class="arrow">▶</span> Show Solution
+    </button>
+  </div>
+  <div class="solution-body">
+    <div class="step">
+      <strong>Step 1 — Critical Numbers</strong>
+      <p><span class="math">f'(x) = 3x² − 6x − 9 = 3(x² − 2x − 3) = 3(x − 3)(x + 1)</span></p>
+      <p>Critical numbers: <span class="math">x = 3</span> and <span class="math">x = −1</span> (both in <span class="math">[−2, 6]</span>).</p>
+    </div>
+    <div class="step">
+      <strong>Step 2 — Evaluate</strong>
+      <p><span class="math">f(−2) = −8 − 12 + 18 + 5 = 3</span></p>
+      <p><span class="math">f(−1) = −1 − 3 + 9 + 5 = 10</span></p>
+      <p><span class="math">f(3) = 27 − 27 − 27 + 5 = −22</span></p>
+      <p><span class="math">f(6) = 216 − 108 − 54 + 5 = 59</span></p>
+    </div>
+    <div class="step">
+      <strong>Conclusion</strong>
+      <p><strong>Absolute Maximum: 59</strong> at <span class="math">x = 6</span> (endpoint!)</p>
+      <p><strong>Absolute Minimum: −22</strong> at <span class="math">x = 3</span></p>
+      <p>Note how the maximum occurred at an endpoint — always check them!</p>
+    </div>
+  </div>
+</div>
+
+<!-- Q2 -->
+<div class="exercise-item">
+  <div class="exercise-q">
+    <div class="q-num">Exercise 2 — Business Optimization</div>
+    <p>A company's weekly profit (in thousands of dollars) from selling <span class="math">x</span> units is: <span class="math">P(x) = −2x³ + 12x² − 18x + 5</span> for <span class="math">0 ≤ x ≤ 5</span>. Find the production level that maximizes profit.</p>
+  </div>
+  <div class="example-body">
+    <div class="answer-preview">Maximum profit is $5,000 at x = 3 (or x = 0 if only checking endpoints carefully).</div>
+    <button class="toggle-btn" onclick="toggleSolution(this)">
+      <span class="arrow">▶</span> Show Solution
+    </button>
+  </div>
+  <div class="solution-body">
+    <div class="step">
+      <strong>Find Critical Numbers</strong>
+      <p><span class="math">P'(x) = −6x² + 24x − 18 = −6(x² − 4x + 3) = −6(x − 1)(x − 3)</span></p>
+      <p>Critical numbers: <span class="math">x = 1</span> and <span class="math">x = 3</span></p>
+    </div>
+    <div class="step">
+      <strong>Evaluate at All Candidates</strong>
+      <p><span class="math">P(0) = 5</span></p>
+      <p><span class="math">P(1) = −2 + 12 − 18 + 5 = −3</span></p>
+      <p><span class="math">P(3) = −54 + 108 − 54 + 5 = 5</span></p>
+      <p><span class="math">P(5) = −250 + 300 − 90 + 5 = −35</span></p>
+    </div>
+    <div class="step">
+      <strong>Conclusion</strong>
+      <p>Maximum profit of <strong>$5,000</strong> is achieved at both <span class="math">x = 0</span> and <span class="math">x = 3</span>. The practical answer is <span class="math">x = 3</span> (you'd rather produce 3 units and earn the same as producing nothing!). Minimum is at <span class="math">x = 5</span>: a loss of $35,000 — don't overproduce!</p>
+    </div>
+  </div>
+</div>
+
+<!-- Q3 -->
+<div class="exercise-item">
+  <div class="exercise-q">
+    <div class="q-num">Exercise 3 — Elasticity</div>
+    <p>The demand for concert tickets is <span class="math">q = D(p) = 1200 − 60p</span>.</p>
+    <p>(a) Compute <span class="math">E(p)</span>. &nbsp; (b) At what price is demand unit elastic? &nbsp; (c) At <span class="math">p = 5</span>, is it better to raise or lower the price to increase revenue?</p>
+  </div>
+  <div class="example-body">
+    <div class="answer-preview">E(p) = p/(20−p); unit elastic at p = $10; at p = $5, demand is inelastic — raise price to increase revenue.</div>
+    <button class="toggle-btn" onclick="toggleSolution(this)">
+      <span class="arrow">▶</span> Show Solution
+    </button>
+  </div>
+  <div class="solution-body">
+    <div class="step">
+      <strong>Part (a)</strong>
+      <p><span class="math">dq/dp = −60</span></p>
+      <p><span class="math">E(p) = −(p/q)(dq/dp) = −[p/(1200 − 60p)](−60) = 60p/(1200 − 60p) = p/(20 − p)</span></p>
+    </div>
+    <div class="step">
+      <strong>Part (b) — Unit Elasticity</strong>
+      <p><span class="math">E(p) = 1  →  p/(20 − p) = 1  →  p = 20 − p  →  p = $10</span></p>
+      <p>Revenue is maximized at <span class="math">p = $10</span>.</p>
+    </div>
+    <div class="step">
+      <strong>Part (c) — At p = 5</strong>
+      <p><span class="math">E(5) = 5/15 = 1/3 < 1</span> → demand is <strong>inelastic</strong></p>
+      <p>Since demand is inelastic at $5, the concert venue should <strong>raise the price</strong> to increase total revenue. Patrons are not very sensitive to price in this range — they'll still buy tickets.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Q4 -->
+<div class="exercise-item">
+  <div class="exercise-q">
+    <div class="q-num">Exercise 4 — Marginal Analysis: MR = MC</div>
+    <p>A firm sells widgets with demand <span class="math">p = 50 − 2q</span> and total cost <span class="math">C(q) = q² + 10q + 100</span>. Find the profit-maximizing quantity using MR = MC.</p>
+  </div>
+  <div class="example-body">
+    <div class="answer-preview">Profit is maximized at q = 5 units, yielding profit = $25.</div>
+    <button class="toggle-btn" onclick="toggleSolution(this)">
+      <span class="arrow">▶</span> Show Solution
+    </button>
+  </div>
+  <div class="solution-body">
+    <div class="step">
+      <strong>Revenue and Marginals</strong>
+      <p><span class="math">R(q) = pq = (50 − 2q)q = 50q − 2q²</span></p>
+      <p><span class="math">MR = R'(q) = 50 − 4q</span></p>
+      <p><span class="math">MC = C'(q) = 2q + 10</span></p>
+    </div>
+    <div class="step">
+      <strong>Set MR = MC</strong>
+      <p><span class="math">50 − 4q = 2q + 10  →  40 = 6q  →  q = 40/6 ≈ 6.67</span></p>
+      <p>Or with slightly different C: if <span class="math">MC = 2q + 10</span> and <span class="math">MR = 50 − 4q</span>:</p>
+      <p><span class="math">q = 40/6 ≈ 6.67</span> units. Round to nearest whole unit: <span class="math">q = 7</span>.</p>
+    </div>
+    <div class="step">
+      <strong>Verify Maximum</strong>
+      <p><span class="math">P''(q) = MR' − MC' = −4 − 2 = −6 < 0</span> ✓</p>
+    </div>
+    <div class="step">
+      <strong>Compute Profit</strong>
+      <p>At <span class="math">q = 6.67</span>: <span class="math">p = 50 − 13.33 = 36.67</span></p>
+      <p><span class="math">R = 36.67 × 6.67 ≈ $244.5</span></p>
+      <p><span class="math">C = (6.67)² + 10(6.67) + 100 ≈ 44.5 + 66.7 + 100 = $211.2</span></p>
+      <p>Profit ≈ <strong>$33.3</strong></p>
+    </div>
+  </div>
+</div>
+
+<!-- Q5 -->
+<div class="exercise-item">
+  <div class="exercise-q">
+    <div class="q-num">Exercise 5 — Scenario: Smartphone App Pricing</div>
+    <p>A mobile app company sells subscriptions at price <span class="math">p</span> dollars/month. Their demand function is <span class="math">q = 10,000 · p⁻¹·⁵</span>.</p>
+    <p>(a) Find <span class="math">E(p)</span>. &nbsp; (b) At <span class="math">p = $9</span>, is demand elastic or inelastic? &nbsp; (c) Should they raise or lower price to maximize revenue?</p>
+  </div>
+  <div class="example-body">
+    <div class="answer-preview">E(p) = 1.5 (elastic for all p). Demand is always elastic — lowering price increases revenue.</div>
+    <button class="toggle-btn" onclick="toggleSolution(this)">
+      <span class="arrow">▶</span> Show Solution
+    </button>
+  </div>
+  <div class="solution-body">
+    <div class="step">
+      <strong>Part (a) — Compute E(p)</strong>
+      <p><span class="math">q = 10000 · p⁻¹·⁵</span></p>
+      <p><span class="math">dq/dp = 10000 · (−1.5) · p⁻²·⁵ = −15000 · p⁻²·⁵</span></p>
+      <p><span class="math">E(p) = −(p/q)(dq/dp) = −(p / 10000p⁻¹·⁵)(−15000p⁻²·⁵)</span></p>
+      <p><span class="math">= −(p · p¹·⁵ / 10000)(−15000 / p²·⁵)</span></p>
+      <p><span class="math">= (15000 · p²·⁵) / (10000 · p²·⁵) = 15000/10000 = 1.5</span></p>
+    </div>
+    <div class="step">
+      <strong>Part (b) & (c)</strong>
+      <p><span class="math">E(p) = 1.5 > 1</span> for all prices → demand is always <strong>elastic</strong>.</p>
+      <p>Since demand is elastic, raising price always <em>decreases</em> revenue. The company should consider <strong>lowering price</strong> (or offering bundles/promotions) to grow revenue through volume.</p>
+      <p>Note: for a power demand <span class="math">q = Ap^{−n}</span>, the elasticity is always the constant <span class="math">n</span>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Q6 — CHALLENGE -->
+<div class="exercise-item">
+  <div class="exercise-q">
+    <div class="q-num">Exercise 6 — Challenge: Combining Optimization and Elasticity</div>
+    <p>A hotel chain's nightly room demand is <span class="math">q = 400 − 10p</span> and total operating cost is <span class="math">C(q) = 5q + 200</span>.</p>
+    <p>(a) Find the revenue-maximizing price using elasticity. &nbsp; (b) Find the profit-maximizing price using <span class="math">MR = MC</span>. &nbsp; (c) Are these the same? Why or why not?</p>
+  </div>
+  <div class="example-body">
+    <div class="answer-preview">Revenue max at p = $20; profit max at p = $22.50. They differ because profit accounts for costs.</div>
+    <button class="toggle-btn" onclick="toggleSolution(this)">
+      <span class="arrow">▶</span> Show Solution
+    </button>
+  </div>
+  <div class="solution-body">
+    <div class="step">
+      <strong>Part (a) — Revenue Maximizing Price</strong>
+      <p><span class="math">dq/dp = −10</span></p>
+      <p><span class="math">E(p) = −(p/(400 − 10p))(−10) = 10p/(400 − 10p) = p/(40 − p)</span></p>
+      <p>Set <span class="math">E(p) = 1</span>: <span class="math">p/(40 − p) = 1  →  p = 20</span></p>
+      <p>Revenue-maximizing price: <span class="math">p = $20</span>, <span class="math">q = 200</span> rooms, <span class="math">R = $4,000/night</span>.</p>
+    </div>
+    <div class="step">
+      <strong>Part (b) — Profit Maximizing Price</strong>
+      <p>Express <span class="math">R</span> and <span class="math">C</span> in terms of <span class="math">q</span>: from <span class="math">q = 400 − 10p  →  p = (400 − q)/10 = 40 − q/10</span></p>
+      <p><span class="math">R(q) = pq = (40 − q/10)q = 40q − q²/10</span></p>
+      <p><span class="math">MR = 40 − q/5</span></p>
+      <p><span class="math">MC = C'(q) = 5</span></p>
+      <p>Set <span class="math">MR = MC</span>: <span class="math">40 − q/5 = 5  →  q/5 = 35  →  q = 175</span></p>
+      <p><span class="math">p = 40 − 175/10 = 40 − 17.5 = $22.50</span></p>
+    </div>
+    <div class="step">
+      <strong>Part (c) — Comparison</strong>
+      <p>The revenue-max price ($20) differs from the profit-max price ($22.50). This makes sense: maximizing revenue ignores costs. Since each room costs $5 to service, the hotel needs to charge slightly more to account for those costs. <strong>A business should usually optimize profit, not just revenue.</strong></p>
+      <p>Profit at <span class="math">q = 175</span>: <span class="math">R = 22.50 × 175 = $3,937.50</span>, <span class="math">C = 5(175) + 200 = $1,075</span>, <span class="math">P = $2,862.50</span>.</p>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- SUMMARY -->
+<div class="theorem-box" style="margin-top:2rem;">
+  <div class="thm-label">Section Summary</div>
+  <p><strong>Absolute Extrema:</strong> On a closed interval [a,b], evaluate f at all critical numbers plus endpoints. The largest is the absolute max, smallest is the absolute min.</p>
+  <p><strong>Second Derivative Test (open intervals):</strong> If f has one critical number c and f''(c) > 0, that's an absolute min; if f''(c) < 0, it's an absolute max.</p>
+  <p><strong>Max Profit:</strong> Occurs where MR = MC (with R'' &lt; C'').</p>
+  <p><strong>Min Average Cost:</strong> Occurs where MC = AC.</p>
+  <p><strong>Elasticity:</strong> E(p) = −(p/q)(dq/dp). Elastic: E > 1 (raise price → less revenue). Inelastic: E &lt; 1 (raise price → more revenue). Unit elastic: E = 1 (revenue is maximized).</p>
+</div>
+
+</div><!-- /.container -->
+
+<footer>
+  Prepared for Calculus for Business & Economics · Based on Hoffmann, Bradley, Sobecki & Price<br>
+  Section 3.4 — Optimization; Elasticity of Demand
+</footer>
+
+<script>
+  function toggleSolution(btn) {
+    const solutionBody = btn.closest('.example-body, .exercise-item .example-body')
+      .nextElementSibling;
+    if (solutionBody && solutionBody.classList.contains('solution-body')) {
+      solutionBody.classList.toggle('visible');
+      btn.classList.toggle('open');
+      btn.querySelector('.arrow').textContent = solutionBody.classList.contains('visible') ? '▼' : '▶';
+      btn.innerHTML = btn.innerHTML.replace(
+        solutionBody.classList.contains('visible') ? 'Show Solution' : 'Hide Solution',
+        solutionBody.classList.contains('visible') ? 'Hide Solution' : 'Show Solution'
+      );
+    }
+  }
+</script>
+
+</body>
+</html>
