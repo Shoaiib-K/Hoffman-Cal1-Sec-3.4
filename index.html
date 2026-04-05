@@ -34,26 +34,6 @@
     line-height: 1.85;
     font-size: 1.05rem;
   }
-
-  .cat-label {
-  display: inline-block;
-  background: var(--purple);
-  color: #fff;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.72rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  padding: 0.3rem 1rem;
-  border-radius: 50px;
-  margin: 2rem 0 1rem;
-}
-.exercise-card { border:1.5px solid var(--border); border-radius:10px; margin:1.8rem 0; overflow:hidden; box-shadow:0 2px 12px var(--shadow); }
-.exercise-header { background:var(--slate); color:#fff; padding:0.75rem 1.3rem; display:flex; flex-wrap:wrap; align-items:baseline; gap:0.7rem; }
-.exercise-header .ex-num { font-family:'JetBrains Mono',monospace; font-size:0.72rem; letter-spacing:0.15em; text-transform:uppercase; background:rgba(255,255,255,0.15); padding:0.15rem 0.6rem; border-radius:4px; }
-.exercise-header .ex-ref { font-family:'JetBrains Mono',monospace; font-size:0.68rem; color:rgba(255,255,255,0.6); letter-spacing:0.08em; }
-.exercise-header .ex-title { font-family:'Playfair Display',serif; font-size:1rem; font-weight:700; flex:1; }
-.solution-body .subpart { margin-bottom:0.8rem; padding-left:0.8rem; border-left:3px solid var(--purple); }
-.solution-body .subpart strong { display:block; color:var(--purple); font-family:'JetBrains Mono',monospace; font-size:0.75rem; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:0.2rem; }
   
   /* ─── HEADER ─── */
   header {
@@ -388,6 +368,86 @@
     margin-bottom: 0.2rem;
   }
 
+  /* ─── TEXTBOOK EXERCISE CARDS (Problems 43-51) ─── */
+.cat-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--teal);
+  border-bottom: 2px solid var(--teal);
+  padding-bottom: 0.4rem;
+  margin: 2.2rem 0 1rem;
+}
+
+.exercise-card {
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  margin: 1.6rem 0;
+  overflow: hidden;
+  box-shadow: 0 2px 12px var(--shadow);
+}
+
+.exercise-card .exercise-header {
+  background: var(--slate);
+  color: #fff;
+  padding: 0.75rem 1.3rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 1rem;
+}
+.exercise-card .exercise-header .ex-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  background: rgba(255,255,255,0.15);
+  padding: 0.15rem 0.6rem;
+  border-radius: 4px;
+  white-space: nowrap;
+  opacity: 1;
+}
+.exercise-card .exercise-header .ex-ref {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  color: rgba(255,255,255,0.55);
+  white-space: nowrap;
+}
+.exercise-card .exercise-header .ex-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  flex: 1 1 100%;
+  margin-top: 0.25rem;
+  color: #fff;
+}
+
+.exercise-body {
+  padding: 1.3rem 1.5rem;
+  background: #fff;
+}
+.exercise-body p { margin-bottom: 0.7rem; }
+
+.solution-body .subpart {
+  margin-bottom: 0.9rem;
+  padding-left: 1rem;
+  border-left: 3px solid var(--slate);
+}
+.solution-body .subpart > strong {
+  display: block;
+  color: var(--slate);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+}
+.solution-body .subpart ul { padding-left: 1.3rem; margin-top: 0.4rem; }
+.solution-body .subpart li { margin-bottom: 0.4rem; }
+
+  
   /* ─── FOOTER ─── */
   footer {
     text-align: center;
